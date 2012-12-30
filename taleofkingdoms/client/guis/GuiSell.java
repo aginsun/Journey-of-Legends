@@ -1,0 +1,63 @@
+package aginsun.taleofkingdoms.client.guis;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.src.*;
+import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
+import aginsun.taleofkingdoms.containers.ContainerSell;
+import aginsun.taleofkingdoms.core.GoldKeeper;
+import aginsun.taleofkingdoms.entities.TileEntitySell;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
+
+public class GuiSell extends GuiContainer
+{
+    private GoldKeeper gold;
+    private EntityPlayer entityplayer = FMLClientHandler.instance().getClient().thePlayer;
+    private World world;
+   
+
+    public GuiSell(InventoryPlayer player_inventory, TileEntitySell tileentitysell)
+    {
+        super(new ContainerSell(tileentitysell, player_inventory));
+    }
+    
+    @Override
+    protected void drawGuiContainerForegroundLayer(int i, int j)
+    {
+        fontRenderer.drawString("Total Money: ", 25, 40, 0x404040);
+        fontRenderer.drawString((new StringBuilder()).append(gold.getGoldTotal()).append(" Gold Coins").toString(), 30, 50, 0x404040);
+        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+        fontRenderer.drawString("Sell Menu", 25, 20, 0x404040);
+    }
+
+    protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+    {
+        int k = mc.renderEngine.getTexture("/aginsun/textures/guisell.png");
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        mc.renderEngine.bindTexture(k);
+        int l = (width - xSize) / 2;
+        int i1 = (height - ySize) / 2;
+        drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
+    }
+    
+    @Override
+    public void onGuiClosed()
+    {
+
+    }
+    
+    protected void keyTyped(char par1, int par2)
+    {
+        if (par2 == 1 || par2 == mc.gameSettings.keyBindInventory.keyCode)
+        {
+            mc.thePlayer.closeScreen();
+        }
+    }
+}
