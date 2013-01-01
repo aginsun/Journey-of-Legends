@@ -9,6 +9,7 @@ import aginsun.taleofkingdoms.blocks.InitBlocks;
 import aginsun.taleofkingdoms.client.core.ClientPacketHandler;
 import aginsun.taleofkingdoms.client.core.ClientTickHandler;
 import aginsun.taleofkingdoms.core.CommonProxy;
+import aginsun.taleofkingdoms.core.DataStorage;
 import aginsun.taleofkingdoms.core.GoldKeeper;
 import aginsun.taleofkingdoms.core.handlers.CommonPacketHandler;
 import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 
 @Mod(modid = "TaleOfKingdoms", version = "2.0.0 Alpha", name = "Tale of Kingdoms 2")
@@ -79,7 +81,8 @@ public class TaleOfKingdoms
 	public void serverStarting(FMLServerStartingEvent event){/*TODO:add main commands to protect from griefing + starting new world*/}
 	
 	@ServerStarted
-	public void serverStarted(FMLServerStartedEvent event){
-		
+	public void serverStarted(FMLServerStartedEvent event)
+	{
+		GameRegistry.registerPlayerTracker(new DataStorage());
 	}
 }
