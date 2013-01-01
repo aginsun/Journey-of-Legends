@@ -16,6 +16,8 @@ public class CommonTickHandler implements ITickHandler
 {
 	private World world;
 	int tdd = 0;
+	private SaveHandlerToK shtk;
+	public boolean hasRead = false;
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {}
 
@@ -49,6 +51,12 @@ public class CommonTickHandler implements ITickHandler
 			   wgg.CreateGuild();
 			   tdd = 1;
 			   System.out.println("Done!");
+		   }
+		   if(hasRead)
+		   {
+			   shtk.read();
+		   }else{
+			   shtk.write();
 		   }
 	   }
    }
