@@ -19,7 +19,11 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.ModLoader;
 
-
+/** File to save all the player data
+ *  Thanks to Dries007 for showing how to use
+ *  the IPlayerTracker class. 
+ *  He deserves all the credits!
+ */
 public class SaveHandlerToK implements IPlayerTracker
 {
 	public static int DataSaved = 1;
