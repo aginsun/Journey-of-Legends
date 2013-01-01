@@ -14,7 +14,6 @@ import net.minecraft.src.ModLoader;
  *  the IPlayerTracker class. 
  *  He deserves all the credits!
  */
-=======
 import cpw.mods.fml.common.IPlayerTracker;
 import aginsun.taleofkingdoms.core.GoldKeeper;
 
