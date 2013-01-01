@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-<<<<<<< HEAD
 import net.minecraft.src.ModLoader;
 
 /** File to save all the player data
@@ -19,7 +18,6 @@ import net.minecraft.src.ModLoader;
 import cpw.mods.fml.common.IPlayerTracker;
 import aginsun.taleofkingdoms.core.GoldKeeper;
 
->>>>>>> update to save handler
 public class SaveHandlerToK implements IPlayerTracker
 {
 	public static int DataSaved = 1;
