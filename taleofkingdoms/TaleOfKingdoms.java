@@ -34,8 +34,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 
-@Mod(modid = "TaleOfKingdoms", version = "2.0.0 Alpha", name = "Tale of Kingdoms 2")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false,
+@Mod(modid = "TaleOfKingdoms", version = "2.0.0", name = "Tale of Kingdoms 2")
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, versionBounds = "2.0.0",
 clientPacketHandlerSpec =
 @SidedPacketHandler(channels = {"TaleOfKingdoms" }, packetHandler = ClientPacketHandler.class),
 serverPacketHandlerSpec =
@@ -83,6 +83,6 @@ public class TaleOfKingdoms
 	@ServerStarted
 	public void serverStarted(FMLServerStartedEvent event)
 	{
-		GameRegistry.registerPlayerTracker(new DataStorage());
+		GameRegistry.registerPlayerTracker(new SaveHandlerToK());
 	}
 }

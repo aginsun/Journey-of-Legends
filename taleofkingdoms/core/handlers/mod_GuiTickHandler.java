@@ -14,7 +14,7 @@ public class mod_GuiTickHandler extends BaseMod
 {
 	public GoldKeeper gold;
 	@Override
-	public String getVersion(){return null;}
+	public String getVersion(){return "2.0.0";}
 
 	@Override
 	public void load()

@@ -2,6 +2,8 @@ package aginsun.taleofkingdoms.entities;
 
 import aginsun.taleofkingdoms.client.guis.GuiGuildMaster;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -15,7 +17,7 @@ public class EntityGuildMaster extends EntityCreature
 		super(par1World);
 		world = par1World;
 		texture = "";
-		moveSpeed = 0.0F; //because he stands still...
+		moveSpeed = 0.0F;
 		isImmuneToFire = false;
 		health = 25;
 	}
@@ -53,16 +55,14 @@ public class EntityGuildMaster extends EntityCreature
 		return true;
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public boolean interact(EntityPlayer player)
 	{
 		if(canInteractWith(player))
 		{
 			heal(25);
-			if(!world.isRemote)
-			{
-				player.addChatMessage("Guild Master: Welcome to the order, " + player.username + ".");
-			}
-			FMLCommonHandler.instance().showGuiScreen(new GuiGuildMaster());
+			player.addChatMessage("Guild Master: Welcome to the order, " + player.username + ".");
+			FMLCommonHandler.instance().showGuiScreen(new GuiGuildMaster(player, world));
 		}
 		return true;
 	}
