@@ -32,7 +32,7 @@ public class GuiSell extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int i, int j)
     {
         fontRenderer.drawString("Total Money: ", 25, 40, 0x404040);
-        fontRenderer.drawString((new StringBuilder()).append(gold.getGoldTotal()).append(" Gold Coins").toString(), 30, 50, 0x404040);
+        fontRenderer.drawString((new StringBuilder()).append(gold.getGoldTotal(entityplayer)).append(" Gold Coins").toString(), 30, 50, 0x404040);
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
         fontRenderer.drawString("Sell Menu", 25, 20, 0x404040);
     }

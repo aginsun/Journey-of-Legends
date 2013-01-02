@@ -6,12 +6,11 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import aginsun.taleofkingdoms.blocks.InitBlocks;
-import aginsun.taleofkingdoms.client.core.ClientPacketHandler;
 import aginsun.taleofkingdoms.client.core.ClientTickHandler;
 import aginsun.taleofkingdoms.core.CommonProxy;
 import aginsun.taleofkingdoms.core.DataStorage;
 import aginsun.taleofkingdoms.core.GoldKeeper;
-import aginsun.taleofkingdoms.core.handlers.CommonPacketHandler;
+import aginsun.taleofkingdoms.core.handlers.PacketHandler;
 import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
 import aginsun.taleofkingdoms.core.handlers.mod_GuiTickHandler;
 import aginsun.taleofkingdoms.core.handlers.SaveHandlerToK;
@@ -35,11 +34,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 
 @Mod(modid = "TaleOfKingdoms", version = "2.0.0", name = "Tale of Kingdoms 2")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, versionBounds = "2.0.0",
-clientPacketHandlerSpec =
-@SidedPacketHandler(channels = {"TaleOfKingdoms" }, packetHandler = ClientPacketHandler.class),
-serverPacketHandlerSpec =
-@SidedPacketHandler(channels = {"TaleOfKingdoms" }, packetHandler = CommonPacketHandler.class))
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, versionBounds = "2.0.0", packetHandler = PacketHandler.class)
 public class TaleOfKingdoms 
 {
 	@Instance ("TaleOfKingdoms")
@@ -83,6 +78,7 @@ public class TaleOfKingdoms
 	@ServerStarted
 	public void serverStarted(FMLServerStartedEvent event)
 	{
+		GameRegistry.registerPlayerTracker(new DataStorage());
 		GameRegistry.registerPlayerTracker(new SaveHandlerToK());
 	}
 }

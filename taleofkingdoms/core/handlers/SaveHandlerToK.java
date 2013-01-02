@@ -3,26 +3,27 @@ package aginsun.taleofkingdoms.core.handlers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.ModLoader;
-
-/** File to save all the player data
- *  Thanks to Dries007 for showing how to use
- *  the IPlayerTracker class. 
- *  He deserves all the credits!
- */
 import cpw.mods.fml.common.IPlayerTracker;
+import aginsun.taleofkingdoms.core.DataStorage;
 import aginsun.taleofkingdoms.core.GoldKeeper;
 
 public class SaveHandlerToK implements IPlayerTracker
 {
 	public static int DataSaved = 1;
+	private static SaveHandlerToK instance;
 	public static int Worthy;
 	private GoldKeeper gold;
 	private NBTTagCompound data;
+	
+	public SaveHandlerToK()
+	{
+		instance = this;
+	}
 	
 	@Override
 	public void onPlayerLogin(EntityPlayer receiver)
@@ -42,18 +43,19 @@ public class SaveHandlerToK implements IPlayerTracker
 	
 	public void SetData(EntityPlayer player)
 	{
-		data = player.getEntityData().getCompoundTag(player.PERSISTED_NBT_TAG);
+		data = DataStorage.instance().getData(player.username).getCompoundTag("ToKData");
 		data.setBoolean("mute", true);
-		data.setInteger("GoldTotal", gold.GoldTotal);
-		player.getEntityData().setCompoundTag(player.PERSISTED_NBT_TAG, data);
+		data.setInteger("GoldTotal", gold.getGoldTotal(player));
+		DataStorage.instance().setData(player.username, data);
 	}
 	
 	public void getData(EntityPlayer player)
 	{
-		data = player.getEntityData().getCompoundTag(player.PERSISTED_NBT_TAG);
+		data = DataStorage.instance().getData(player.username).getCompoundTag("TokData");
 		if(data.hasKey("GoldTotal"))
 		{
-			gold.GoldTotal = data.getInteger("GoldTotal");
+			int i = data.getInteger("GoldTotal");
+			gold.setGold(player, i);
 		}
 	}
 }

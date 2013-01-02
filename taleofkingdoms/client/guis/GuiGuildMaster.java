@@ -80,13 +80,13 @@ public class GuiGuildMaster extends GuiScreen
         
         if (guibutton.id == 2)
         {
-        	if (1500 <= gold.getGoldTotal())
+        	if (1500 <= gold.getGoldTotal(entityplayer))
         	{
             	//EntityLiving entityliving = new EntityHired(worldObj);
                 EntityList.createEntityByName("Hired", worldObj);
                 //entityliving.setLocationAndAngles(entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0F, 0.0F);
                 //worldObj.spawnEntityInWorld(entityliving);
-                gold.DecreaseGold(1500);
+                //gold.DecreaseGold(1500);
                 //TaleOfKingdoms.saveGold(gold.getGoldTotal(), gold.getHunterStatus());
         	}
         
@@ -178,11 +178,11 @@ public class GuiGuildMaster extends GuiScreen
         drawCenteredString(fontRenderer, "Path to Kingship", width / 2 + 100, 110, 0xaa44ff);
         if (goldchecker)
         {
-            drawCenteredString(fontRenderer, (new StringBuilder()).append("The Guild Order  Total Money: ").append(gold.getGoldTotal()).append(" Gold Coins - NOT ENOUGH GOLD").toString(), width / 2, 20, 0xffee00);
+            drawCenteredString(fontRenderer, (new StringBuilder()).append("The Guild Order  Total Money: ").append(gold.getGoldTotal(entityplayer)).append(" Gold Coins - NOT ENOUGH GOLD").toString(), width / 2, 20, 0xffee00);
         }
         else
         {
-            drawCenteredString(fontRenderer, (new StringBuilder()).append("The Guild Order  Total Money: ").append(gold.getGoldTotal()).append(" Gold Coins").toString(), width / 2, 0, 0xffee00);
+            drawCenteredString(fontRenderer, (new StringBuilder()).append("The Guild Order  Total Money: ").append(gold.getGoldTotal(entityplayer)).append(" Gold Coins").toString(), width / 2, 0, 0xffee00);
         }
         drawCenteredString(fontRenderer, "Note: Hiring Cost 1500 gold, Retiring will Refund 1000. Fixing the Guild need 64 wood.", width / 2, 10, 0xffee00);
         worthness.drawBar();

@@ -38,7 +38,7 @@ public class TileEntitySell extends TileEntity implements IInventory
                 Item item = inventory[i].getItem();
                 String s = item.getItemName();
                 j = gold.PriceItem(s);
-                gold.addGold(j);
+                //gold.addGold(player, j);
             }
             if (j != 0)
             {
