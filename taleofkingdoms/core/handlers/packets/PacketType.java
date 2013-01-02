@@ -9,7 +9,8 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 
 public enum PacketType 
 {
-	TILE(PacketTileUpdate.class);
+	TILE(PacketTileUpdate.class),
+	GOLD(PacketGold.class);
 	
 	private Class<? extends PacketToK> clazz;
 	
@@ -52,15 +53,15 @@ public enum PacketType
         return packet;
     }
 
-    public static Packet populatePacket(PacketToK packetEE) {
+    public static Packet populatePacket(PacketToK packetToK) {
 
-        byte[] data = packetEE.populate();
+        byte[] data = packetToK.populate();
 
         Packet250CustomPayload packet250 = new Packet250CustomPayload();
         packet250.channel = "TaleOfKingdoms";
         packet250.data = data;
         packet250.length = data.length;
-        packet250.isChunkDataPacket = packetEE.isChunkDataPacket;
+        packet250.isChunkDataPacket = packetToK.isChunkDataPacket;
 
         return packet250;
     }
