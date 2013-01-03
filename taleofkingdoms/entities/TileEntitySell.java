@@ -3,6 +3,8 @@ package aginsun.taleofkingdoms.entities;
 import aginsun.taleofkingdoms.core.GoldKeeper;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -15,6 +17,7 @@ public class TileEntitySell extends TileEntity implements IInventory
 	private ItemStack[] inventory;
     public GoldKeeper gold;
     public World world;
+    EntityPlayer player;
 
 	public TileEntitySell()
 	{
@@ -38,7 +41,7 @@ public class TileEntitySell extends TileEntity implements IInventory
                 Item item = inventory[i].getItem();
                 String s = item.getItemName();
                 j = gold.PriceItem(s);
-                //gold.addGold(player, j);
+                gold.addGold(setPlayerName(player), j);
             }
             if (j != 0)
             {
@@ -108,5 +111,10 @@ public class TileEntitySell extends TileEntity implements IInventory
 	public String getInvName()
 	{
 		return "TeSell";
+	}
+	
+	public EntityPlayer setPlayerName(EntityPlayer player)
+	{
+		return this.player = player;
 	}
 }

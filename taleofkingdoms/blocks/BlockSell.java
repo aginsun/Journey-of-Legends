@@ -39,12 +39,12 @@ public class BlockSell extends BlockContainer
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
-		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
+		TileEntitySell tile_entity = (TileEntitySell)world.getBlockTileEntity(x, y, z);
 		if(tile_entity == null || par5EntityPlayer.isSneaking())
 		{
 			return false;
 		}
-
+		tile_entity.setPlayerName(par5EntityPlayer);
 		par5EntityPlayer.openGui(TaleOfKingdoms.instance, 1, world, x, y, z);
 		return true;
     	

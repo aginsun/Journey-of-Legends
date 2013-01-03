@@ -34,7 +34,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 
 @Mod(modid = "TaleOfKingdoms", version = "2.0.0", name = "Tale of Kingdoms 2")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, versionBounds = "2.0.0", packetHandler = PacketHandler.class)
+@NetworkMod(channels = { "TaleOfKingdoms" },clientSideRequired = true, serverSideRequired = true, versionBounds = "2.0.0", packetHandler = PacketHandler.class)
 public class TaleOfKingdoms 
 {
 	@Instance ("TaleOfKingdoms")

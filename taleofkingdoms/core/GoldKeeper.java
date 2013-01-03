@@ -40,7 +40,7 @@ public class GoldKeeper
 		setGold(player, i);
 	}
 	
-	/*public static void DecreaseGold() //Might not be a use for this, but it is there in case people want to use it!
+	/*public static void DecreaseGold()
 	{
 		if(GoldTotal >= 1)
 		{
