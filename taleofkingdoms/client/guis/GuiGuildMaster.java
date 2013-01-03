@@ -1,7 +1,8 @@
 package aginsun.taleofkingdoms.client.guis;
 
 import aginsun.taleofkingdoms.TaleOfKingdoms;
-import aginsun.taleofkingdoms.core.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.relauncher.Side;
@@ -24,6 +25,7 @@ public class GuiGuildMaster extends GuiScreen
     boolean goldchecker;
     private GuiPriceBar worthness;
     private float worthyness;
+    public HunterKeeper hunter;
 
     public GuiGuildMaster(EntityPlayer entityplayer1, World world)
     {
@@ -35,16 +37,16 @@ public class GuiGuildMaster extends GuiScreen
     public void initGui()
     {
         String s;
-        /*if (gold.getHunterStatus() == 0)
+        if (!hunter.getHunterStatus(entityplayer))
         {
             s = "Sign up contract!";
         }
         else
         {
             s = "Cancel contract.";
-        }*/
+        }
         controlList.clear();
-        controlList.add(new GuiButton(1, width / 2 + 110, 140, 100, 20, "TROLL"));
+        controlList.add(new GuiButton(1, width / 2 + 110, 140, 100, 20, s));
         controlList.add(new GuiButton(2, width / 2 + 110, 160, 100, 20, "Hire Hunters"));
         controlList.add(new GuiButton(4, width / 2 + 110, 180, 100, 20, "Fix the Guild"));
         controlList.add(new GuiButton(5, width / 2 + 110, 200, 100, 20, "Retire Hunters"));
@@ -61,8 +63,7 @@ public class GuiGuildMaster extends GuiScreen
             {
                 entityplayer.addChatMessage("Guild Master: You are now one of us my friend. Kill monsters and you will soon be worthy of your title.");
             }
-            //gold.setHunterStatus(1);
-            //TaleOfKingdoms.saveGold(gold.getGoldTotal(), gold.getHunterStatus());
+            hunter.setHunterStatus(entityplayer, true);
             initGui();
         }
         else if (guibutton.id == 1)
@@ -71,32 +72,9 @@ public class GuiGuildMaster extends GuiScreen
         	{
         		entityplayer.addChatMessage("Guild Master: We will await your participation, hero.");
         	}	
-        //gold.setHunterStatus(0);
-        //TaleOfKingdoms.saveGold(gold.getGoldTotal(), gold.getHunterStatus());
+        hunter.setHunterStatus(entityplayer, false);
         initGui();
-        }
-        
-        goldchecker = false;
-        
-        if (guibutton.id == 2)
-        {
-        	if (1500 <= gold.getGoldTotal(entityplayer))
-        	{
-            	//EntityLiving entityliving = new EntityHired(worldObj);
-                EntityList.createEntityByName("Hired", worldObj);
-                //entityliving.setLocationAndAngles(entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0F, 0.0F);
-                //worldObj.spawnEntityInWorld(entityliving);
-                //gold.DecreaseGold(1500);
-                //TaleOfKingdoms.saveGold(gold.getGoldTotal(), gold.getHunterStatus());
-        	}
-        
-        	else
-        	{
-        		goldchecker = true;
-                //TaleOfKingdoms.saveGold(gold.getGoldTotal(), gold.getHunterStatus());
-        	}
-        }
-        
+        }       
 
         if (guibutton.id == 3)
         {
@@ -120,7 +98,6 @@ public class GuiGuildMaster extends GuiScreen
                     {
                         inventoryplayer.setInventorySlotContents(j, null);
                         flag = true;
-                        //CommonTickHandler.CreateGuild = 2;
                     }
                 }
             }
@@ -137,19 +114,6 @@ public class GuiGuildMaster extends GuiScreen
             	{
             		entityplayer.addChatMessage("Guild Master: The guild has been fixed. Thank you.");
             	}
-            }
-        }
-        if (guibutton.id == 5 && !worldObj.loadedEntityList.isEmpty())
-        {
-            for (int i = 0; i < worldObj.loadedEntityList.size(); i++)
-            {
-                Entity entity = (Entity)worldObj.loadedEntityList.get(i);
-                //if (entity instanceof EntityHired)
-                //{
-                //    EntityHired entityhired = (EntityHired)entity;
-                //    entityhired.setDead();
-                //    gold.addGold(1000);
-                //}
             }
         }
     }

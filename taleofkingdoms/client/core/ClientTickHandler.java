@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import org.lwjgl.util.Color;
 
 import aginsun.taleofkingdoms.TaleOfKingdoms;
-import aginsun.taleofkingdoms.core.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.handlers.SaveHandlerToK;
 
 import cpw.mods.fml.client.FMLClientHandler;

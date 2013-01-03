@@ -16,7 +16,7 @@ public class EntityGuildMaster extends EntityCreature
 	{
 		super(par1World);
 		world = par1World;
-		texture = "";
+		texture = "aginsun/textures/head.png";
 		moveSpeed = 0.0F;
 		isImmuneToFire = false;
 		health = 25;

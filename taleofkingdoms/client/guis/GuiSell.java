@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import aginsun.taleofkingdoms.containers.ContainerSell;
-import aginsun.taleofkingdoms.core.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.entities.TileEntitySell;
 
 import cpw.mods.fml.client.FMLClientHandler;

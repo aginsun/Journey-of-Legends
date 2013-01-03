@@ -4,7 +4,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import aginsun.taleofkingdoms.core.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
@@ -17,17 +19,21 @@ public class PacketGold extends PacketToK
 {
 	private String username;
 	private int GoldValue;
+	private int Worthy;
+	private boolean HunterStatus;
 	
 	public PacketGold() 
 	{
 		super(PacketType.GOLD, false);
 	}
 	
-	public PacketGold(String username, int GoldValue)
+	public PacketGold(String username, int GoldValue, int Worthy, boolean HunterStatus)
 	{
 		super(PacketType.GOLD, false);
 		this.username = username;
 		this.GoldValue = GoldValue;
+		this.Worthy = Worthy;
+		this.HunterStatus = HunterStatus;
 	}
 	
 	@Override
@@ -35,12 +41,16 @@ public class PacketGold extends PacketToK
 	{
 		this.username = data.readUTF();
 		this.GoldValue = data.readInt();
+		this.Worthy = data.readInt();
+		this.HunterStatus = data.readBoolean();
 	}
 	
 	public void writeData(DataOutputStream dos) throws IOException
 	{
 		dos.writeUTF(username);
 		dos.writeInt(GoldValue);
+		dos.writeInt(Worthy);
+		dos.writeBoolean(HunterStatus);
 	}
 	
 	public void execute(INetworkManager network, Player player)
@@ -55,5 +65,7 @@ public class PacketGold extends PacketToK
 	public void setGold(EntityPlayer player)
 	{
 		GoldKeeper.setGold(player, GoldValue);
+		WorthyKeeper.setWorthy(player, Worthy);
+		HunterKeeper.setHunterStatus(player, HunterStatus);
 	}
 }

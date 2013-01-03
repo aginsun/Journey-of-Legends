@@ -5,16 +5,19 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import aginsun.taleofkingdoms.blocks.InitBlocks;
 import aginsun.taleofkingdoms.client.core.ClientTickHandler;
 import aginsun.taleofkingdoms.core.CommonProxy;
 import aginsun.taleofkingdoms.core.DataStorage;
-import aginsun.taleofkingdoms.core.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.handlers.EntityLivingHandler;
 import aginsun.taleofkingdoms.core.handlers.PacketHandler;
 import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
 import aginsun.taleofkingdoms.core.handlers.mod_GuiTickHandler;
 import aginsun.taleofkingdoms.core.handlers.SaveHandlerToK;
 import aginsun.taleofkingdoms.entities.InitEntities;
+import aginsun.taleofkingdoms.items.InitItems;
 import aginsun.taleofkingdoms.worldgen.WorldGenGuild;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.Mod;
@@ -62,11 +65,15 @@ public class TaleOfKingdoms
 		
 		InitBlocks.Init();
 		
+		InitItems.Init();
+		
         NetworkRegistry.instance().registerGuiHandler(instance, proxy);
         
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		
+		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 	}
 	
 	@PostInit

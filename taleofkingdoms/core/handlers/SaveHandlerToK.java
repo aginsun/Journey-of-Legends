@@ -13,7 +13,9 @@ import cpw.mods.fml.common.IPlayerTracker;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import aginsun.taleofkingdoms.core.DataStorage;
-import aginsun.taleofkingdoms.core.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketToK;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
@@ -24,9 +26,11 @@ public class SaveHandlerToK implements IPlayerTracker
 	private static SaveHandlerToK instance;
 	public static int Worthy;
 	private GoldKeeper gold;
+	private WorthyKeeper worthy;
 	private EntityPlayer player;
 	private NBTTagCompound data;
 	public Player par1player;
+	public HunterKeeper hunter;
 	
 	public SaveHandlerToK()
 	{
@@ -38,7 +42,7 @@ public class SaveHandlerToK implements IPlayerTracker
 	{
 		this.par1player = (Player)receiver;
 		getData(receiver);
-		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(receiver.username, gold.getGoldTotal(receiver))), par1player);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(receiver.username, gold.getGoldTotal(receiver), worthy.getWorthy(receiver), hunter.getHunterStatus(receiver))), par1player);
 	}
 	
 	@Override
@@ -54,11 +58,9 @@ public class SaveHandlerToK implements IPlayerTracker
 	public void SetData(EntityPlayer player)
 	{
 		data = player.getEntityData().getCompoundTag(player.PERSISTED_NBT_TAG);
-		//data = DataStorage.instance().getData(player.username).getCompoundTag("ToKData");
-		data.setBoolean("mute", true);
 		data.setInteger("GoldTotal", gold.getGoldTotal(player));
+		data.setInteger("Worthy", worthy.getWorthy(player));
 		player.getEntityData().setCompoundTag(player.PERSISTED_NBT_TAG, data);
-		//DataStorage.instance().setData(player.username, data);
 	}
 	
 	public void getData(EntityPlayer player)
@@ -66,11 +68,15 @@ public class SaveHandlerToK implements IPlayerTracker
 		if(player != null)
 		{
 			data = player.getEntityData().getCompoundTag(player.PERSISTED_NBT_TAG);
-			//data = DataStorage.instance().getData(player.username).getCompoundTag("TokData");
 			if(data.hasKey("GoldTotal"))
 			{
 				int i = data.getInteger("GoldTotal");
 				gold.setGold(player, i);
+			}
+			if(data.hasKey("Worthy"));
+			{
+				int j = data.getInteger("Worthy");
+				worthy.setWorthy(player, j);
 			}
 		}
 	}
