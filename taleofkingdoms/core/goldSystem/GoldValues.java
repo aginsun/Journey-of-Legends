@@ -12,15 +12,15 @@ public class GoldValues
 	public static int PriceItem(String s)
 	{
 		if(s.equals("tile.dirt"))
-			return 0;
+			return 1;
 		if(s.equals("tile.cobblestone"))
 			return 0;
 		if(s.equals("tile.grass"))
 			return 0;
 		if(s.equals("tile.mycelium"))
 			return 0;
-		if(s.equals(""))
-			return 0;
+		if(s.equals("tile.sandstone"))
+			return 1;
 		
 		
 		return 0;

@@ -2,11 +2,19 @@ package aginsun.taleofkingdoms.entities;
 
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
+import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
+import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
+import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,8 +26,11 @@ public class TileEntitySell extends TileEntity implements IInventory
 	private ItemStack[] inventory;
     public GoldKeeper gold;
     public World world;
-    EntityPlayer player;
+    public EntityPlayer player;
     public GoldValues goldvalues;
+    public WorthyKeeper worthy;
+    public Player par1player;
+    public HunterKeeper hunter;
 
 	public TileEntitySell()
 	{
@@ -43,7 +54,10 @@ public class TileEntitySell extends TileEntity implements IInventory
                 Item item = inventory[i].getItem();
                 String s = item.getItemName();
                 j = goldvalues.PriceItem(s);
-                gold.addGold(setPlayerName(player), j);
+                if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+                	gold.addGold(setPlayerName(player), j);
+        		this.par1player = (Player)player;
+                PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(player.username, gold.getGoldTotal(player), worthy.getWorthy(player), hunter.getHunterStatus(player))), par1player);
             }
             if (j != 0)
             {

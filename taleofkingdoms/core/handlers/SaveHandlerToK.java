@@ -59,7 +59,7 @@ public class SaveHandlerToK implements IPlayerTracker
 	{
 		data = player.getEntityData().getCompoundTag(player.PERSISTED_NBT_TAG);
 		data.setInteger("GoldTotal", gold.getGoldTotal(player));
-		data.setInteger("Worthy", worthy.getWorthy(player));
+		data.setFloat("Worthy", worthy.getWorthy(player));
 		player.getEntityData().setCompoundTag(player.PERSISTED_NBT_TAG, data);
 	}
 	
@@ -75,7 +75,7 @@ public class SaveHandlerToK implements IPlayerTracker
 			}
 			if(data.hasKey("Worthy"));
 			{
-				int j = data.getInteger("Worthy");
+				float j = data.getInteger("Worthy");
 				worthy.setWorthy(player, j);
 			}
 		}

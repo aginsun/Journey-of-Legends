@@ -3,6 +3,7 @@ package aginsun.taleofkingdoms.client.guis;
 import aginsun.taleofkingdoms.TaleOfKingdoms;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.relauncher.Side;
@@ -26,12 +27,14 @@ public class GuiGuildMaster extends GuiScreen
     private GuiPriceBar worthness;
     private float worthyness;
     public HunterKeeper hunter;
+    public WorthyKeeper worthy;
 
     public GuiGuildMaster(EntityPlayer entityplayer1, World world)
     {
         goldchecker = false;
         entityplayer = entityplayer1;
         worldObj = world;
+        worthyness = worthy.getWorthy(entityplayer1);
     }
 
     public void initGui()
@@ -57,7 +60,7 @@ public class GuiGuildMaster extends GuiScreen
 
     protected void actionPerformed(GuiButton guibutton)
     {
-        if (guibutton.id == 1)
+        if (guibutton.id == 1 && !hunter.getHunterStatus(entityplayer))
         {
             if (!worldObj.isRemote)
             {
@@ -66,7 +69,7 @@ public class GuiGuildMaster extends GuiScreen
             hunter.setHunterStatus(entityplayer, true);
             initGui();
         }
-        else if (guibutton.id == 1)
+        else if (guibutton.id == 1 && hunter.getHunterStatus(entityplayer))
         {
         	if(!worldObj.isRemote)
         	{

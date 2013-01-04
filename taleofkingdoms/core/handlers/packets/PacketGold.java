@@ -19,7 +19,7 @@ public class PacketGold extends PacketToK
 {
 	private String username;
 	private int GoldValue;
-	private int Worthy;
+	private float Worthy;
 	private boolean HunterStatus;
 	
 	public PacketGold() 
@@ -27,7 +27,7 @@ public class PacketGold extends PacketToK
 		super(PacketType.GOLD, false);
 	}
 	
-	public PacketGold(String username, int GoldValue, int Worthy, boolean HunterStatus)
+	public PacketGold(String username, int GoldValue, float Worthy, boolean HunterStatus)
 	{
 		super(PacketType.GOLD, false);
 		this.username = username;
@@ -41,7 +41,7 @@ public class PacketGold extends PacketToK
 	{
 		this.username = data.readUTF();
 		this.GoldValue = data.readInt();
-		this.Worthy = data.readInt();
+		this.Worthy = data.readFloat();
 		this.HunterStatus = data.readBoolean();
 	}
 	
@@ -49,7 +49,7 @@ public class PacketGold extends PacketToK
 	{
 		dos.writeUTF(username);
 		dos.writeInt(GoldValue);
-		dos.writeInt(Worthy);
+		dos.writeFloat(Worthy);
 		dos.writeBoolean(HunterStatus);
 	}
 	
@@ -57,12 +57,12 @@ public class PacketGold extends PacketToK
 	{
 		EntityPlayer thePlayer = (EntityPlayer)player;
 		
-		setGold(thePlayer);
+		setValues(thePlayer);
 		
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public void setGold(EntityPlayer player)
+	public void setValues(EntityPlayer player)
 	{
 		GoldKeeper.setGold(player, GoldValue);
 		WorthyKeeper.setWorthy(player, Worthy);

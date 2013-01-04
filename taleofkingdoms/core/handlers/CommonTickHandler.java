@@ -2,9 +2,12 @@ package aginsun.taleofkingdoms.core.handlers;
 
 import java.util.EnumSet;
 
+import aginsun.taleofkingdoms.entities.EntityGuildMaster;
 import aginsun.taleofkingdoms.worldgen.WorldGenGuild;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -51,5 +54,21 @@ public class CommonTickHandler implements ITickHandler
 			   System.out.println("Done!");
 		   }
 	   }
+   }
+   
+   
+   public void spawnGuildMembers()
+   {
+	   world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
+       float f = world.getWorldInfo().getSpawnX() + 0.5F;
+       float f1 = world.getWorldInfo().getSpawnY();
+       float f2 = world.getWorldInfo().getSpawnZ() + 0.5F;
+       
+	   EntityLiving entityliving = new EntityGuildMaster(world);
+	   
+	   EntityList.createEntityByName("GuildMaster", world);
+       entityliving.setLocationAndAngles(f + 34F, f1 + 16F, f2 + 66F, 0.0F, 0.0F);
+       world.spawnEntityInWorld(entityliving);
+	   
    }
 }
