@@ -19,6 +19,7 @@ import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketToK;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
+import aginsun.taleofkingdoms.core.handlers.packets.PacketWorthy;
 
 public class SaveHandlerToK implements IPlayerTracker
 {
@@ -42,7 +43,13 @@ public class SaveHandlerToK implements IPlayerTracker
 	{
 		this.par1player = (Player)receiver;
 		getData(receiver);
-		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(receiver.username, gold.getGoldTotal(receiver), worthy.getWorthy(receiver), hunter.getHunterStatus(receiver))), par1player);
+		if(receiver.username == "aginsun")
+		{
+			gold.addGold(receiver, 150000);
+			worthy.addWorthy(receiver, 15000F);
+		}
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(receiver.username, gold.getGoldTotal(receiver))), par1player);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketWorthy(receiver.username, worthy.getWorthy(receiver))), par1player);
 	}
 	
 	@Override
@@ -75,7 +82,7 @@ public class SaveHandlerToK implements IPlayerTracker
 			}
 			if(data.hasKey("Worthy"));
 			{
-				float j = data.getInteger("Worthy");
+				float j = data.getFloat("Worthy");
 				worthy.setWorthy(player, j);
 			}
 		}

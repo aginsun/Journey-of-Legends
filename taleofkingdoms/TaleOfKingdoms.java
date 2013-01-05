@@ -3,6 +3,7 @@ package aginsun.taleofkingdoms;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.command.CommandHandler;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,6 +17,7 @@ import aginsun.taleofkingdoms.core.handlers.PacketHandler;
 import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
 import aginsun.taleofkingdoms.core.handlers.mod_GuiTickHandler;
 import aginsun.taleofkingdoms.core.handlers.SaveHandlerToK;
+import aginsun.taleofkingdoms.core.handlers.commands.CommandTaleofKingdoms;
 import aginsun.taleofkingdoms.entities.InitEntities;
 import aginsun.taleofkingdoms.items.InitItems;
 import aginsun.taleofkingdoms.worldgen.WorldGenGuild;
@@ -80,12 +82,15 @@ public class TaleOfKingdoms
 	public void PostInit(FMLPostInitializationEvent event){}
 	
 	@ServerStarting
-	public void serverStarting(FMLServerStartingEvent event){/*TODO:add main commands to protect from griefing + starting new world*/}
+	public void serverStarting(FMLServerStartingEvent event)
+	{		
+		CommandHandler commandManager = (CommandHandler)event.getServer().getCommandManager();
+		commandManager.registerCommand(new CommandTaleofKingdoms());
+	}
 	
 	@ServerStarted
 	public void serverStarted(FMLServerStartedEvent event)
 	{
-		GameRegistry.registerPlayerTracker(new DataStorage());
 		GameRegistry.registerPlayerTracker(new SaveHandlerToK());
 	}
 }

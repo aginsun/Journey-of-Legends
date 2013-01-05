@@ -10,7 +10,8 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 public enum PacketType 
 {
 	TILE(PacketTileUpdate.class),
-	GOLD(PacketGold.class);
+	GOLD(PacketGold.class),
+	WORTHY(PacketWorthy.class);
 	
 	private Class<? extends PacketToK> clazz;
 	

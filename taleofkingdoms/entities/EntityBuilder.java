@@ -1,31 +1,33 @@
 package aginsun.taleofkingdoms.entities;
 
-import aginsun.taleofkingdoms.client.guis.GuiGuildMaster;
+import aginsun.taleofkingdoms.client.guis.GuiKingdom;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityGuildMaster extends EntityCreature
+public class EntityBuilder extends EntityCreature
 {
-	public World world;
+	private World world;
+
 	
-	public EntityGuildMaster(World par1World) 
+	public EntityBuilder(World par1World) 
 	{
 		super(par1World);
-		world = par1World;
-		texture = "/aginsun/textures/head.png";
+		this.world = par1World;
+		texture = "/aginsun/textures/builder.png";
+		health = getMaxHealth();
 		moveSpeed = 0.0F;
 		isImmuneToFire = false;
-		health = 25;
 	}
 
 	@Override
 	public int getMaxHealth() 
 	{
-		return 25;
+		return 25200;
 	}
 	
 	protected boolean canDespawn()
@@ -61,8 +63,8 @@ public class EntityGuildMaster extends EntityCreature
 		if(canInteractWith(player))
 		{
 			heal(25);
-			player.addChatMessage("Guild Master: Welcome to the order, " + player.username + ".");
-			FMLCommonHandler.instance().showGuiScreen(new GuiGuildMaster(player, world));
+			player.addChatMessage("Builder: Greetings " + player.username + ", lets get starting.");
+			FMLCommonHandler.instance().showGuiScreen(new GuiKingdom(player, world));
 		}
 		return true;
 	}

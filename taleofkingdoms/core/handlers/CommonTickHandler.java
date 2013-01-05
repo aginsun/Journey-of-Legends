@@ -50,6 +50,7 @@ public class CommonTickHandler implements ITickHandler
 		   {
 			   WorldGenGuild wgg = new WorldGenGuild(world, world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ(), world.getWorldInfo().getSpawnY());
 			   wgg.CreateGuild();
+			   spawnGuildMembers();
 			   tdd = 1;
 			   System.out.println("Done!");
 		   }

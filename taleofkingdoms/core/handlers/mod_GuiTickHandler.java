@@ -65,7 +65,7 @@ public class mod_GuiTickHandler extends BaseMod
             gold.addGold(player, 2);
     		this.par1player = (Player)player;
             WorthyKeeper.addWorthy(player);
-    		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(player.username, gold.getGoldTotal(player), worthy.getWorthy(player), hunter.getHunterStatus(player))), par1player);
+    		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(player.username, gold.getGoldTotal(player))), par1player);
         }
     }
 

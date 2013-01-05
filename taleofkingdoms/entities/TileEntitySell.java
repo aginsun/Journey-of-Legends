@@ -53,11 +53,12 @@ public class TileEntitySell extends TileEntity implements IInventory
             {
                 Item item = inventory[i].getItem();
                 String s = item.getItemName();
+                FMLLog.fine(s);
                 j = goldvalues.PriceItem(s);
                 if(FMLCommonHandler.instance().getEffectiveSide().isServer())
                 	gold.addGold(setPlayerName(player), j);
         		this.par1player = (Player)player;
-                PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(player.username, gold.getGoldTotal(player), worthy.getWorthy(player), hunter.getHunterStatus(player))), par1player);
+                PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(player.username, gold.getGoldTotal(player))), par1player);
             }
             if (j != 0)
             {

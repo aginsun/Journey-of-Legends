@@ -4,58 +4,52 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.INetworkManager;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-
-public class PacketGold extends PacketToK
+public class PacketWorthy extends PacketToK
 {
+	private float Worthy;
 	private String username;
-	private int GoldValue;
-	
-	public PacketGold() 
+	public PacketWorthy() 
 	{
-		super(PacketType.GOLD, false);
+		super(PacketType.WORTHY, false);
 	}
 	
-	public PacketGold(String username, int GoldValue)
+	public PacketWorthy(String username, float Worthy)
 	{
-		super(PacketType.GOLD, false);
+		super(PacketType.WORTHY, false);
 		this.username = username;
-		this.GoldValue = GoldValue;
+		this.Worthy = Worthy;
 	}
 	
-	@Override
 	public void readData(DataInputStream data) throws IOException
 	{
 		this.username = data.readUTF();
-		this.GoldValue = data.readInt();
+		this.Worthy = data.readFloat();
 	}
 	
 	public void writeData(DataOutputStream dos) throws IOException
 	{
 		dos.writeUTF(username);
-		dos.writeInt(GoldValue);
+		dos.writeFloat(Worthy);
 	}
 	
 	public void execute(INetworkManager network, Player player)
 	{
 		EntityPlayer thePlayer = (EntityPlayer)player;
 		
-		setValues(thePlayer);
-		
+		setWorthy(thePlayer);	
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public void setValues(EntityPlayer player)
+	public void setWorthy(EntityPlayer player)
 	{
-		GoldKeeper.setGold(player, GoldValue);
+		WorthyKeeper.setWorthy(player, Worthy);
 	}
 }
