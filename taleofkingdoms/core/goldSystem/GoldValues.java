@@ -259,14 +259,27 @@ public class GoldValues
 		if(s.equals("tile.tripWireSource"))
 			return 0;
 		
+		if(s.equals("tile.blockEmerald"))
+			return 0;
+		
+		if(s.equals("tile.stairsWoodSpruce"))
+			return 0;
+		
+		if(s.equals("tile.stairsWoodBirch"))
+			return 0;
+		
+		if(s.equals("tile.beacon"))
+			return 0;
+		
+		if(s.equals("tile.cobbleWall"))
+			return 0;
+
+		if(s.equals("tile.anvil"))
+			return 0;
+
 		//Tools
 		
-		//if(s.equals("tile.sandStone"))
-		//	return 0;
-		
-		
-		
-		
+
 
 		
 	return 0;
