@@ -6,8 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 
-
-
 /**sets all the gold values for the vanilla items
  * and also any mod items that I want to be added.
  * might change int to a Float.
@@ -19,8 +17,7 @@ public class GoldValues
 {
 
 	public static int PriceItem(String s)
-	{
-		
+	{	
 		if(s.equals("tile.stone"))
 			return 0;
 		
@@ -51,7 +48,6 @@ public class GoldValues
 		if(s.equals("tile.log"))
 			return 4;
 
-		
 		if(s.equals("tile.leaves"))
 			return 0;
 		
@@ -77,7 +73,7 @@ public class GoldValues
 			return 0;
 		
 		if(s.equals("tile.detectorRail"))
-			return 0;//Sticky Piston 
+			return 0;
 		
 		if(s.equals("tile.pistonStickyBase"))
 			return 0;
@@ -89,19 +85,19 @@ public class GoldValues
 			return 0;
 		
 		if(s.equals("tile.deadbush"))
-			return 0;// Piston 
+			return 0;
 		
 		if(s.equals("tile.pistonBase"))
-			return 0; //Wool
+			return 0;
 		
 		if(s.equals("tile.cloth"))
-			return 0;// Yellow Flower
+			return 0;
 		
 		if(s.equals("tile.flower"))
-			return 0;// Red Flower
+			return 0;
 		
 		if(s.equals("tile.rose"))
-			return 0;//
+			return 0;
 		
 		if(s.equals("tile.mushroom"))
 			return 0;
@@ -276,12 +272,7 @@ public class GoldValues
 
 		if(s.equals("tile.anvil"))
 			return 0;
-
-		//Tools
 		
-
-
-		
-	return 0;
+		return 0;
 	}
 }

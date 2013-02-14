@@ -91,6 +91,7 @@ public class TaleOfKingdoms
 	@ServerStarted
 	public void serverStarted(FMLServerStartedEvent event)
 	{
+		GameRegistry.registerPlayerTracker(new DataStorage());
 		GameRegistry.registerPlayerTracker(new SaveHandlerToK());
 	}
 }

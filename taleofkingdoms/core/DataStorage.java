@@ -27,7 +27,7 @@ public class DataStorage implements IPlayerTracker
 	private boolean workSafe = true;
 	private static DataStorage instance;
 	
-	private File folder = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation();
+	private File folder = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation()).append("\\").append("ToK2Saves").toString());
 	private HashMap<String, NBTTagCompound> dataMap = new HashMap<String, NBTTagCompound>();
 	
 	public DataStorage()

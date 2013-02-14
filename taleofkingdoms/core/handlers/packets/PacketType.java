@@ -11,7 +11,8 @@ public enum PacketType
 {
 	TILE(PacketTileUpdate.class),
 	GOLD(PacketGold.class),
-	WORTHY(PacketWorthy.class);
+	WORTHY(PacketWorthy.class),
+	STATS(PacketStats.class);
 	
 	private Class<? extends PacketToK> clazz;
 	
