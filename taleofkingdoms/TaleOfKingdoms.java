@@ -10,17 +10,21 @@ import net.minecraftforge.common.MinecraftForge;
 import aginsun.taleofkingdoms.blocks.InitBlocks;
 import aginsun.taleofkingdoms.client.core.ClientTickHandler;
 import aginsun.taleofkingdoms.core.CommonProxy;
+import aginsun.taleofkingdoms.core.ConfigFileToK;
 import aginsun.taleofkingdoms.core.DataStorage;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.handlers.EntityLivingHandler;
+import aginsun.taleofkingdoms.core.handlers.KeyBindingHandler;
 import aginsun.taleofkingdoms.core.handlers.PacketHandler;
 import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
+import aginsun.taleofkingdoms.core.handlers.WorldSaveToKHandler;
 import aginsun.taleofkingdoms.core.handlers.mod_GuiTickHandler;
 import aginsun.taleofkingdoms.core.handlers.SaveHandlerToK;
 import aginsun.taleofkingdoms.core.handlers.commands.CommandTaleofKingdoms;
 import aginsun.taleofkingdoms.entities.InitEntities;
 import aginsun.taleofkingdoms.items.InitItems;
 import aginsun.taleofkingdoms.worldgen.WorldGenGuild;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -31,6 +35,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
@@ -39,7 +44,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 
 @Mod(modid = "TaleOfKingdoms", version = "2.0.0", name = "Tale of Kingdoms 2")
-@NetworkMod(channels = { "TaleOfKingdoms" },clientSideRequired = true, serverSideRequired = true, versionBounds = "2.0.0", packetHandler = PacketHandler.class)
+@NetworkMod(channels = { "TaleOfKingdoms" },clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TaleOfKingdoms 
 {
 	@Instance ("TaleOfKingdoms")
@@ -51,16 +56,14 @@ public class TaleOfKingdoms
 	@PreInit
 	public void PreInit(FMLPreInitializationEvent event)
 	{
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-		
-		config.load();
-		//TODO Setup File to change it!
-		config.save();
+		ConfigFileToK.config(event);
 	}
 	
 	@Init
 	public void load(FMLInitializationEvent event)
 	{
+		proxy.RegisterRenderers();
+		
 		proxy.Init();
 		
 		InitEntities.Init();
@@ -84,14 +87,19 @@ public class TaleOfKingdoms
 	@ServerStarting
 	public void serverStarting(FMLServerStartingEvent event)
 	{		
-		CommandHandler commandManager = (CommandHandler)event.getServer().getCommandManager();
-		commandManager.registerCommand(new CommandTaleofKingdoms());
+		//CommandHandler commandManager = (CommandHandler)event.getServer().getCommandManager();
+		//commandManager.registerCommand(new CommandTaleofKingdoms());
 	}
 	
 	@ServerStarted
 	public void serverStarted(FMLServerStartedEvent event)
 	{
-		GameRegistry.registerPlayerTracker(new DataStorage());
 		GameRegistry.registerPlayerTracker(new SaveHandlerToK());
+	}
+	
+	@ServerStopping
+	public void serverStopping(FMLServerStoppingEvent event)
+	{
+		WorldSaveToKHandler.writeData();
 	}
 }

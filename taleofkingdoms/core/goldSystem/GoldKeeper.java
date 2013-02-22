@@ -38,4 +38,11 @@ public class GoldKeeper
 		i += amount;
 		setGold(player, i);
 	}
+	
+	public static void removeGold(EntityPlayer player, int amount)
+	{
+		int i = getGoldTotal(player);
+		i -= amount;
+		setGold(player, i);
+	}
 }

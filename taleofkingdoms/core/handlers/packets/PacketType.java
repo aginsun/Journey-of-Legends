@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.lang.ref.Reference;
 
+import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
+
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 
@@ -12,7 +14,8 @@ public enum PacketType
 	TILE(PacketTileUpdate.class),
 	GOLD(PacketGold.class),
 	WORTHY(PacketWorthy.class),
-	STATS(PacketStats.class);
+	STATS(PacketStats.class),
+	LEVEL(PacketCurrentLevel.class);
 	
 	private Class<? extends PacketToK> clazz;
 	

@@ -67,10 +67,10 @@ public class PacketStats extends PacketToK
 	@SideOnly(Side.CLIENT)
 	public void setStats(EntityPlayer player)
 	{
-		StatKeeper.setStatPoints(player, "STR", strength);
-		StatKeeper.setStatPoints(player, "DEX", dexterity);
-		StatKeeper.setStatPoints(player, "INT", intelligence);
-		StatKeeper.setStatPoints(player, "LUK", luck);
-		StatKeeper.setStatPoints(player, "LVL", level);
+		StatKeeper.setStrengthPoints(player, strength);
+		StatKeeper.setDexerityPoints(player, dexterity);
+		StatKeeper.setIntelligencePoints(player, intelligence);
+		StatKeeper.setLuckPoints(player, luck);
+		StatKeeper.setLevel(player, level);
 	}
 }

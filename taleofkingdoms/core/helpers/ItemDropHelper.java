@@ -24,7 +24,6 @@ public class ItemDropHelper
             (entity instanceof EntityPigZombie) ||
             (entity instanceof EntitySilverfish) ||
             (entity instanceof EntitySkeleton) ||
-            (entity instanceof EntitySlime) ||
             (entity instanceof EntitySpider) ||
             (entity instanceof EntityWitch) ||
             (entity instanceof EntityWither) || 
@@ -41,34 +40,11 @@ public class ItemDropHelper
 	public static void dropCoins(EntityPlayer player, EntityLiving entity) 
 	{
 			if (isHostileEntity(entity) && !world.isRemote) 
-			{				
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-				entity.dropItem(InitItems.ItemCoins.shiftedIndex, 1);
-
+			{
+				for(int i = 0; i < 15; i++)
+				{
+					entity.dropItem(InitItems.ItemCoins.itemID, 1);
+				}
 			}
 		}
 }

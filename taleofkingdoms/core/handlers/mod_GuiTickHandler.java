@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
@@ -39,6 +40,8 @@ public class mod_GuiTickHandler extends BaseMod
 	public WorthyKeeper worthy;
 	public HunterKeeper hunter;
 	public StatKeeper stats;
+	public LevelKeeper level;
+	public LevelXPToK x;
 	@Override
 	public String getVersion(){return "2.0.0";}
 
@@ -58,41 +61,8 @@ public class mod_GuiTickHandler extends BaseMod
             ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
             int i = scaledresolution.getScaledWidth() + 8;
             int j = scaledresolution.getScaledHeight();
-            mc.fontRenderer.drawString((new StringBuilder()).append("Level: ").append(stats.getStatPoints(entityplayer, "LVL")).toString(), 0, 0, x);
+            mc.fontRenderer.drawString((new StringBuilder()).append("Level: ").append(stats.getLevel(entityplayer)).toString(), 0, 0, x);
             mc.fontRenderer.drawString((new StringBuilder()).append("Gold Coins: ").append(gold.getGoldTotal(entityplayer)).toString(), 0, 10, x);
-            
-        }
-        else if(guiscreen instanceof GuiInventory || guiscreen instanceof GuiContainerCreative)
-        {
-        	mc.fontRenderer.drawString((new StringBuilder()).append("Strength: ").append(stats.getStatPoints(entityplayer, "STR")).toString(), 0, 0, x);
-        	mc.fontRenderer.drawString((new StringBuilder()).append("Dexeterity: ").append(stats.getStatPoints(entityplayer, "DEX")).toString(), 0, 15, x);
-        	mc.fontRenderer.drawString((new StringBuilder()).append("Intelligence: ").append(stats.getStatPoints(entityplayer, "INT")).toString(), 0, 30, x);
-        	mc.fontRenderer.drawString((new StringBuilder()).append("Luck: ").append(stats.getStatPoints(entityplayer, "LUK")).toString(), 0, 45, x);
-        	/*ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
-            int i = scaledresolution.getScaledWidth() + 8;
-            int j = scaledresolution.getScaledHeight();
-            byte byte0 = 100;
-            byte byte1 = 100;
-            byte byte2 = 10;
-            int l = j - 34;
-            int j1 = 0;
-            int k1 = 0;
-            float f4 = 0.00390625F;
-            float f5 = 0.00390625F;
-            float f6 = 0.0F;
-            byte byte3 = byte0;
-            byte byte4 = byte1;
-            guiscreen.drawRect(byte2 - 1, l - 1, byte2 + byte3 + 1, l + byte4 + 1, Color.DARK_GRAY.getRGB());
-            int l1 = mc.renderEngine.getTexture("/aginsun/textures/crafting.png");
-            GL11.glColor4f(0.85F, 0.85F, 0.85F, 0.85F);
-            mc.renderEngine.bindTexture(l1);
-            Tessellator tessellator = Tessellator.instance;
-            tessellator.startDrawingQuads();
-            tessellator.addVertexWithUV(byte2 + 0, l + byte4, f6, (float)(j1 + 10) * f4, (float)(k1 + byte4) * f5);
-            tessellator.addVertexWithUV(byte2 + byte3, l + byte4, f6, (float)(j1 + byte3) * f4, (float)(k1 + byte4) * f5);
-            tessellator.addVertexWithUV(byte2 + byte3, l + 0, f6, (float)(j1 + byte3) * f4, (float)(k1 + 0) * f5);
-            tessellator.addVertexWithUV(byte2 + 0, l + 0, f6, (float)(j1 + 10) * f4, (float)(k1 + 0) * f5);
-            tessellator.draw();*/
         }
 		return true;	
 	}
@@ -100,15 +70,90 @@ public class mod_GuiTickHandler extends BaseMod
 	@Override
     public void onItemPickup(EntityPlayer player, ItemStack itemstack)
     {
-        if (itemstack.itemID == InitItems.ItemCoins.shiftedIndex)
+        if (itemstack.itemID == InitItems.ItemCoins.itemID)
         {
             InventoryPlayer inventoryplayer = player.inventory;
             inventoryplayer.consumeInventoryItem(itemstack.itemID);
-            gold.addGold(player, 2);
+            gold.addGold(player);
     		this.par1player = (Player)player;
-            WorthyKeeper.addWorthy(player);
+            worthy.addWorthy(player);
     		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(player.username, gold.getGoldTotal(player))), par1player);
+    		setLevel(player);
+    		checkLevelUps(player);
         }
     }
+	
+	public void setLevel(EntityPlayer player)
+	{
+		if(worthy.getWorthy(player) >= x.Level2 && worthy.getWorthy(player) < x.Level3)
+			stats.setLevel(player, 2);
+		if(worthy.getWorthy(player) >= x.Level3 && worthy.getWorthy(player) < x.Level4)
+			stats.setLevel(player, 3);
+		if(worthy.getWorthy(player) >= x.Level4 && worthy.getWorthy(player) < x.Level5)
+			stats.setLevel(player, 4);
+		if(worthy.getWorthy(player) >= x.Level5 && worthy.getWorthy(player) < x.Level6)
+			stats.setLevel(player, 5);
+		if(worthy.getWorthy(player) >= x.Level6 && worthy.getWorthy(player) < x.Level7)
+			stats.setLevel(player, 6);
+		if(worthy.getWorthy(player) >= x.Level7 && worthy.getWorthy(player) < x.Level8)
+			stats.setLevel(player, 7);
+		if(worthy.getWorthy(player) >= x.Level8 && worthy.getWorthy(player) < x.Level9)
+			stats.setLevel(player, 8);
+		if(worthy.getWorthy(player) >= x.Level9 && worthy.getWorthy(player) < x.Level10)
+			stats.setLevel(player, 9);
+		if(worthy.getWorthy(player) >= x.Level10 && worthy.getWorthy(player) < x.Level11)
+			stats.setLevel(player, 10);
+		if(worthy.getWorthy(player) >= x.Level11 && worthy.getWorthy(player) < x.Level12)
+			stats.setLevel(player, 11);
+		if(worthy.getWorthy(player) >= x.Level12 && worthy.getWorthy(player) < x.Level13)
+			stats.setLevel(player, 12);
+		if(worthy.getWorthy(player) >= x.Level13 && worthy.getWorthy(player) < x.Level14)
+			stats.setLevel(player, 13);
+		if(worthy.getWorthy(player) >= x.Level14 && worthy.getWorthy(player) < x.Level15)
+			stats.setLevel(player, 14);
+		if(worthy.getWorthy(player) >= x.Level15 && worthy.getWorthy(player) < x.Level16)
+			stats.setLevel(player, 15);
+		if(worthy.getWorthy(player) >= x.Level16 && worthy.getWorthy(player) < x.Level17)
+			stats.setLevel(player, 16);
+		if(worthy.getWorthy(player) >= x.Level17 && worthy.getWorthy(player) < x.Level18)
+			stats.setLevel(player, 17);
+		if(worthy.getWorthy(player) >= x.Level18 && worthy.getWorthy(player) < x.Level19)
+			stats.setLevel(player, 18);
+		if(worthy.getWorthy(player) >= x.Level19 && worthy.getWorthy(player) < x.Level20)
+			stats.setLevel(player, 19);
+		if(worthy.getWorthy(player) >= x.Level20 && worthy.getWorthy(player) < x.Level21)
+			stats.setLevel(player, 20);
+		if(worthy.getWorthy(player) >= x.Level21 && worthy.getWorthy(player) < x.Level22)
+			stats.setLevel(player, 21);
+		if(worthy.getWorthy(player) >= x.Level22 && worthy.getWorthy(player) < x.Level23)
+			stats.setLevel(player, 22);
+		if(worthy.getWorthy(player) >= x.Level23 && worthy.getWorthy(player) < x.Level24)
+			stats.setLevel(player, 23);
+		if(worthy.getWorthy(player) >= x.Level24 && worthy.getWorthy(player) < x.Level25)
+			stats.setLevel(player, 24);
+		if(worthy.getWorthy(player) >= x.Level25 && worthy.getWorthy(player) < x.Level26)
+			stats.setLevel(player, 25);
+		if(worthy.getWorthy(player) >= x.Level26 && worthy.getWorthy(player) < x.Level27)
+			stats.setLevel(player, 26);
+		if(worthy.getWorthy(player) >= x.Level27 && worthy.getWorthy(player) < x.Level28)
+			stats.setLevel(player, 27);
+		if(worthy.getWorthy(player) >= x.Level28 && worthy.getWorthy(player) < x.Level29)
+			stats.setLevel(player, 28);
+		if(worthy.getWorthy(player) >= x.Level29 && worthy.getWorthy(player) < x.Level30)
+			stats.setLevel(player, 29);
+		if(worthy.getWorthy(player) >= x.Level30 && worthy.getWorthy(player) < x.Level31)
+			stats.setLevel(player, 30);
 
+
+	}
+	
+	public void checkLevelUps(EntityPlayer player)
+	{
+		if(level.getCurrentLevel(player) != stats.getLevel(player))
+		{
+			level.addLevelUps(player, 1);
+			level.addLevelPoints(player, 5);
+			level.setCurrentLevel(player, stats.getLevel(player));
+		}
+	}
 }

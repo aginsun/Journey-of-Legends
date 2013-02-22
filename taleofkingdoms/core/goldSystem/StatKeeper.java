@@ -11,69 +11,131 @@ public class StatKeeper
 	public static HashMap<String, Integer> LuckMap = new HashMap<String, Integer>();
 	public static HashMap<String, Integer> LevelMap = new HashMap<String, Integer>();
 	
-	public static int getStatPoints(EntityPlayer player, String Stat)
+	public static int getStrengthPoints(EntityPlayer player)
 	{
-		if(Stat.equals("STR"))
+		if(!StrengthMap.containsKey(player.username))
 		{
-			if(!StrengthMap.containsKey(player.username))
-			{
-				return 4;
-			}
+			return 4;
+		}
+		else if(StrengthMap.get(player.username) == 0)
+		{
+			return 4;
+		}
+		else
+		{
 			return StrengthMap.get(player.username);
 		}
-		if(Stat.equals("DEX"))
+	}
+	public static int getDexerityPoints(EntityPlayer player)
+	{
+		if(!DexeterityMap.containsKey(player.username))
 		{
-			if(!DexeterityMap.containsKey(player.username))
-			{
-				return 4;
-			}
+			return 4;
+		}
+		else if (DexeterityMap.get(player.username) == 0)
+		{
+			return 4;
+		}
+		else
+		{
 			return DexeterityMap.get(player.username);
 		}
-		if(Stat.equals("INT"))
+	}
+	public static int getIntelligencePoints(EntityPlayer player)
+	{
+		if(!IntelligenceMap.containsKey(player.username))
 		{
-			if(!IntelligenceMap.containsKey(player.username))
-			{
-				return 4;
-			}
+			return 4;
+		}
+		else if(IntelligenceMap.get(player.username) == 0)
+		{
+			return 4;
+		}
+		else
+		{
 			return IntelligenceMap.get(player.username);
 		}
-		if(Stat.equals("LUK"))
+	}
+	public static int getLuckPoints(EntityPlayer player)
+	{
+		if(!LuckMap.containsKey(player.username))
 		{
-			if(!LuckMap.containsKey(player.username))
-			{
-				return 4;
-			}
+			return 4;
+		}
+		else if(LuckMap.get(player.username) == 0)
+		{
+			return 4;
+		}
+		else
+		{
 			return LuckMap.get(player.username);
 		}
-		if(Stat.equals("LVL"))
+	}
+	public static int getLevel(EntityPlayer player)
+	{
+		if(!LevelMap.containsKey(player.username))
 		{
-			if(!LevelMap.containsKey(player.username))
-			{
-				return 1;
-			}
+			return 1;
+		}
+		else if(LevelMap.get(player.username) == 0)
+		{
+			return 1;
+		}
+		else
+		{
 			return LevelMap.get(player.username);
 		}
-		return 0;
 	}
 	
-	public static void setStatPoints(EntityPlayer player,String Stat, int amount)
+	public static void setStrengthPoints(EntityPlayer player, int amount)
 	{
-		if(Stat.equals("STR"))
-			StrengthMap.put(player.username, amount);
-		if(Stat.equals("DEX"))
-			DexeterityMap.put(player.username, amount);
-		if(Stat.equals("INT"))
-			IntelligenceMap.put(player.username, amount);
-		if(Stat.equals("LUK"))
-			LuckMap.put(player.username, amount);
-		if(Stat.equals("LVL"))
-			LevelMap.put(player.username, amount);
+		StrengthMap.put(player.username, amount);
+	}
+	public static void setDexerityPoints(EntityPlayer player, int amount)
+	{
+		DexeterityMap.put(player.username, amount);
+	}
+	public static void setIntelligencePoints(EntityPlayer player, int amount)
+	{
+		IntelligenceMap.put(player.username, amount);
+	}
+	public static void setLuckPoints(EntityPlayer player, int amount)
+	{
+		LuckMap.put(player.username, amount);
+	}
+	public static void setLevel(EntityPlayer player, int amount)
+	{
+		LevelMap.put(player.username, amount);
 	}
 	
-	public static void addStatPoints(EntityPlayer player, String Stat, int amount) 
+	public static void addStrengthPoints(EntityPlayer player, int amount) 
 	{
-		int i = getStatPoints(player, Stat);
+		int i = getStrengthPoints(player);
 		i += amount;
-		setStatPoints(player, Stat, i);
+		setStrengthPoints(player, i);
+	}
+	public static void addDexPoints(EntityPlayer player, int amount)
+	{
+		int j = getDexerityPoints(player);
+		j += amount;
+		setDexerityPoints(player, j);
+	}
+	public static void addIntPoints(EntityPlayer player, int amount)
+	{
+		int j = getIntelligencePoints(player);
+		j += amount;
+		setIntelligencePoints(player, j);
+	}	
+	public static void addLukPoints(EntityPlayer player, int amount)
+	{
+		int j = getLuckPoints(player);
+		j += amount;
+		setLuckPoints(player, j);
+	}	
+	public static void addLvlPoints(EntityPlayer player, int amount)
+	{
+		int j = getLevel(player);
+		j += amount;
+		setLevel(player, j);
 	}
 }

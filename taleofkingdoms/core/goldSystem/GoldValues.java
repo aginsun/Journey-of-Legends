@@ -31,7 +31,7 @@ public class GoldValues
 			return 0;
 		
 		if(s.equals("tile.wood"))
-			return 1;
+			return 4;
 		
 		if(s.equals("tile.sapling"))
 			return 0;
@@ -46,7 +46,7 @@ public class GoldValues
 			return 0;
 		
 		if(s.equals("tile.log"))
-			return 4;
+			return 16;
 
 		if(s.equals("tile.leaves"))
 			return 0;
@@ -272,6 +272,21 @@ public class GoldValues
 
 		if(s.equals("tile.anvil"))
 			return 0;
+		
+        if (s.equals("item.swordWood"))
+            return 10;
+        
+        if (s.equals("item.shovelWood"))
+            return 8;
+        
+        if (s.equals("item.pickaxeWood"))
+            return 16;
+        
+        if (s.equals("item.hatchetWood"))
+            return 16;
+        
+        if(s.equals("item.excalibur"))
+        	return 100000;
 		
 		return 0;
 	}
