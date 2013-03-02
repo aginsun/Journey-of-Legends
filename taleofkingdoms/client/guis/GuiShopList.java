@@ -19,7 +19,7 @@ import cpw.mods.fml.common.network.Player;
 
 public class GuiShopList extends GuiScreen
 {
-    public World worldObj = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
+    public World worldObj;
     public EntityPlayer entityplayer;
     public GoldKeeper gold;
     public StringTranslate st;

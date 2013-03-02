@@ -2,6 +2,7 @@ package aginsun.taleofkingdoms.client.core;
 
 import java.util.EnumSet;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
 import aginsun.taleofkingdoms.TaleOfKingdoms;
@@ -71,5 +72,6 @@ public class ClientTickHandler implements ITickHandler
 
     public void onTickInGame()
     {
+    	
     }
 }

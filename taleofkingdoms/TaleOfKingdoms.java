@@ -15,6 +15,7 @@ import aginsun.taleofkingdoms.core.DataStorage;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.handlers.EntityLivingHandler;
 import aginsun.taleofkingdoms.core.handlers.KeyBindingHandler;
+import aginsun.taleofkingdoms.core.handlers.LivingAttackEventHandler;
 import aginsun.taleofkingdoms.core.handlers.PacketHandler;
 import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
 import aginsun.taleofkingdoms.core.handlers.WorldSaveToKHandler;
@@ -79,6 +80,8 @@ public class TaleOfKingdoms
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 		
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		
+		MinecraftForge.EVENT_BUS.register(new LivingAttackEventHandler());
 	}
 	
 	@PostInit
@@ -87,19 +90,13 @@ public class TaleOfKingdoms
 	@ServerStarting
 	public void serverStarting(FMLServerStartingEvent event)
 	{		
-		//CommandHandler commandManager = (CommandHandler)event.getServer().getCommandManager();
-		//commandManager.registerCommand(new CommandTaleofKingdoms());
+		CommandHandler commandManager = (CommandHandler)event.getServer().getCommandManager();
+		commandManager.registerCommand(new CommandTaleofKingdoms());
 	}
 	
 	@ServerStarted
 	public void serverStarted(FMLServerStartedEvent event)
 	{
 		GameRegistry.registerPlayerTracker(new SaveHandlerToK());
-	}
-	
-	@ServerStopping
-	public void serverStopping(FMLServerStoppingEvent event)
-	{
-		WorldSaveToKHandler.writeData();
 	}
 }

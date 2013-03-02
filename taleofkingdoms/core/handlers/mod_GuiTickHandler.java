@@ -22,6 +22,7 @@ import aginsun.taleofkingdoms.items.InitItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -56,13 +57,15 @@ public class mod_GuiTickHandler extends BaseMod
 		entityplayer = FMLClientHandler.instance().getClient().thePlayer;
 		GoldKeeper gold = new GoldKeeper();
 		int x = (255 << 16);
-        if (guiscreen == null)
+		if (guiscreen == null || guiscreen instanceof GuiChat)
         {
             ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
             int i = scaledresolution.getScaledWidth() + 8;
             int j = scaledresolution.getScaledHeight();
             mc.fontRenderer.drawString((new StringBuilder()).append("Level: ").append(stats.getLevel(entityplayer)).toString(), 0, 0, x);
             mc.fontRenderer.drawString((new StringBuilder()).append("Gold Coins: ").append(gold.getGoldTotal(entityplayer)).toString(), 0, 10, x);
+            Tessellator.instance.setColorOpaque_F(1F, 1F, 1F);
+            GL11.glColor4f(1F, 1F, 1F, 1F);
         }
 		return true;	
 	}

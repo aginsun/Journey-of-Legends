@@ -24,9 +24,9 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 public class CommonTickHandler implements ITickHandler
 {
 	private World world;
-	int tdd;
 	boolean dataRead;
 	public ConfigFileToK x;
+	public WorldSaveToKHandler td;
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {}
 
@@ -54,7 +54,13 @@ public class CommonTickHandler implements ITickHandler
 	   world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
 	   if(world != null)
 	   {
-		   if(tdd == 0 && !ConfigFileToK.GuildSpawning)
+		   if(!dataRead)
+		   {
+			   WorldSaveToKHandler.readData();
+			   this.dataRead = true;
+		   }
+		   
+		   if(td.tdd == 0 && !ConfigFileToK.GuildSpawning && dataRead)
 		   {
 			   if(x.xLocation == 0 && x.yLocation == 0 && x.zLocation == 0)
 			   {
@@ -66,7 +72,8 @@ public class CommonTickHandler implements ITickHandler
 				   wgg.CreateGuild();
 				   spawnGuildMembers(x.xLocation, x.yLocation, x.zLocation);
 			   }
-			   tdd = 1;
+			   td.tdd = 1;
+			   WorldSaveToKHandler.writeData();
 		   }
 	   }
    }   

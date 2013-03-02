@@ -45,6 +45,10 @@ public class GuiGuildMaster extends GuiScreen
         {
             s = "Sign up contract!";
         }
+        else if(stats.getLevel(entityplayer) >= 10)
+        {
+        	s = "Choose your Class!";
+        }
         else if(stats.getLevel(entityplayer) >= 30)
         {
         	s = "Claim your Kingdom!";

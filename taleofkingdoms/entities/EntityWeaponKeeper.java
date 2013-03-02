@@ -78,7 +78,6 @@ public class EntityWeaponKeeper extends EntityCreature
         if (canInteractWith(entityplayer))
         {
             heal(100);
-            Minecraft minecraft = ModLoader.getMinecraftInstance();
             int i = 0;
             int j = 0;
             boolean flag = false;
@@ -135,8 +134,8 @@ public class EntityWeaponKeeper extends EntityCreature
                     i++;
                 }
             }
-
-            FMLCommonHandler.instance().showGuiScreen(new GuiShopList(entityplayer, worldObj, itemget));
+            if(FMLCommonHandler.instance().getEffectiveSide().isClient())
+            	FMLCommonHandler.instance().showGuiScreen(new GuiShopList(entityplayer, worldObj, itemget));
         }
         return true;
     }

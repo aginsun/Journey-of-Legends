@@ -14,22 +14,16 @@ public class ItemDropHelper
 	public static World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
     public static boolean isHostileEntity(EntityLiving entity) 
     {
-        if ((entity instanceof EntityBlaze) || 
-            (entity instanceof EntityCaveSpider) ||
-            (entity instanceof EntityCreeper) ||
-            (entity instanceof EntityDragon) ||
-            (entity instanceof EntityEnderman) ||
-            (entity instanceof EntityGhast) ||
-            (entity instanceof EntityMagmaCube) ||
-            (entity instanceof EntityPigZombie) ||
-            (entity instanceof EntitySilverfish) ||
-            (entity instanceof EntitySkeleton) ||
-            (entity instanceof EntitySpider) ||
-            (entity instanceof EntityWitch) ||
-            (entity instanceof EntityWither) || 
-            (entity instanceof EntityZombie)) 
+        if ((entity instanceof IMob)) 
         {
-            return true;
+        	if((entity instanceof EntitySlime))
+        	{
+        		return false;
+        	}
+        	else
+        	{
+        		return true;
+        	}
         }
         else 
         {
@@ -37,7 +31,7 @@ public class ItemDropHelper
         }
     }
         
-	public static void dropCoins(EntityPlayer player, EntityLiving entity) 
+	public static void dropCoins(EntityLiving entity) 
 	{
 			if (isHostileEntity(entity) && !world.isRemote) 
 			{

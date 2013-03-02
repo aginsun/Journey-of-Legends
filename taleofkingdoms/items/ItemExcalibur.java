@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
@@ -20,13 +21,14 @@ public class ItemExcalibur extends ItemSword
 {
 	private EntityPlayer player;
 	private StatKeeper stats;
-	private static int weaponDamageEx = 500;
-	private static EnumToolMaterial ExcaliburEnum = EnumHelper.addToolMaterial("ExcaliburEnum", 0, -1, 0, weaponDamageEx, 1);
+	private static int weaponDamage;
+	public static EnumToolMaterial Ex = EnumHelper.addToolMaterial("Ex", 0, -1, 0, weaponDamage, 10);
 	
 	public ItemExcalibur(int par1) 
 	{
-		super(par1, ExcaliburEnum);
-        this.weaponDamageEx = 500;
+		super(par1, Ex);
+		this.maxStackSize = 1;
+		this.setMaxDamage(-1);
 		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
 	
@@ -36,9 +38,15 @@ public class ItemExcalibur extends ItemSword
     	return "/aginsun/textures/items.png";
     }
     
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public int getDamageVsEntity(Entity par1Entity)
     {
-    	this.setIconIndex(2);
-		return true;
+    	System.out.println(weaponDamage);
+        return this.weaponDamage;
+    }
+    
+    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
+    {
+    	this.weaponDamage = Math.round(stats.getStrengthPoints(player) / 2);
+        return false;
     }
 }

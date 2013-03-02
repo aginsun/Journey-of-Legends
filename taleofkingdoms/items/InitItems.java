@@ -11,10 +11,14 @@ public class InitItems
 	public static Item ItemExcalibur;
 	public static int ItemExcaliburID;
 	
+	public static Item ItemAgBlade;
+	public static int ItemAgBladeID;
+	
 	public static void Init()
 	{
 		ItemCoins = new ItemCoins(ItemCoinsID).setItemName("coins");
 		ItemExcalibur = new ItemExcalibur(ItemExcaliburID).setItemName("excalibur").setIconCoord(1, 0);
+		ItemAgBlade = new ItemAgBlade(ItemAgBladeID).setItemName("Aginsuns Blade").setIconCoord(2, 0);
 		
 		languageRegisterers();
 	}
@@ -23,5 +27,6 @@ public class InitItems
 	{
 		LanguageRegistry.addName(ItemCoins, "Coins");
 		LanguageRegistry.addName(ItemExcalibur, "Excalibur");
+		LanguageRegistry.addName(ItemAgBlade, "Aginsuns Blade");
 	}
 }

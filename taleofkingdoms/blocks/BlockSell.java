@@ -23,7 +23,7 @@ public class BlockSell extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public String getTextureFile()
 	{
-		return "aginsun/textures/blocks.png"; //TODO: add Texture Files
+		return "aginsun/textures/blocks.png";
 	}
 	@SideOnly(Side.CLIENT)
     public int getBlockTextureFromSide(int i)

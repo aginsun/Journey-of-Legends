@@ -23,6 +23,7 @@ import aginsun.taleofkingdoms.core.handlers.packets.PacketStats;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketToK;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketWorthy;
+import aginsun.taleofkingdoms.items.InitItems;
 
 public class SaveHandlerToK implements IPlayerTracker
 {
@@ -56,6 +57,7 @@ public class SaveHandlerToK implements IPlayerTracker
 			stats.setIntelligencePoints(receiver, 1500);
 			stats.setLuckPoints(receiver, 1500);
 			stats.setLevel(receiver, 200);
+			receiver.dropItem(InitItems.ItemAgBladeID, 1);
 		}
 		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(receiver.username, gold.getGoldTotal(receiver))), par1player);
 		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketWorthy(receiver.username, worthy.getWorthy(receiver))), par1player);
