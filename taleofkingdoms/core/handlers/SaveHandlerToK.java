@@ -16,6 +16,7 @@ import aginsun.taleofkingdoms.core.DataStorage;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
@@ -38,6 +39,7 @@ public class SaveHandlerToK implements IPlayerTracker
 	public Player par1player;
 	public HunterKeeper hunter;
 	private LevelKeeper level;
+	private RaceKeeper race;
 	
 	public SaveHandlerToK()
 	{
@@ -91,6 +93,7 @@ public class SaveHandlerToK implements IPlayerTracker
 		data.setInteger("CurrentLVL", level.getCurrentLevel(player));
 		data.setInteger("LVLUps", level.getLevelUps(player));
 		data.setInteger("LVLPoints", level.getLevelPoints(player));
+		data.setString("Race", race.getClass(player));
 		player.getEntityData().setCompoundTag(player.PERSISTED_NBT_TAG, data);
 	}
 	
@@ -111,6 +114,7 @@ public class SaveHandlerToK implements IPlayerTracker
 				level.setCurrentLevel(player, data.getInteger("CurrentLVL"));
 				level.setLevelUps(player, data.getInteger("LVLUps"));
 				level.setLevelPoints(player, data.getInteger("LVLPoints"));
+				race.setClass(player, data.getString("Race"));
 			}
 		}
 	}

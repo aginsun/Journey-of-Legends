@@ -15,7 +15,8 @@ public enum PacketType
 	GOLD(PacketGold.class),
 	WORTHY(PacketWorthy.class),
 	STATS(PacketStats.class),
-	LEVEL(PacketCurrentLevel.class);
+	LEVEL(PacketCurrentLevel.class),
+	RACE(PacketRace.class);
 	
 	private Class<? extends PacketToK> clazz;
 	

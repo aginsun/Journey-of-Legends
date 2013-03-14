@@ -1,5 +1,8 @@
 package aginsun.taleofkingdoms.items;
 
+import java.util.List;
+
+import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -17,14 +20,14 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumHelper;
 
-public class ItemExcalibur extends ItemSword
+public class ItemExcaliburSword extends ItemSword
 {
 	private EntityPlayer player;
 	private StatKeeper stats;
 	private static int weaponDamage;
 	public static EnumToolMaterial Ex = EnumHelper.addToolMaterial("Ex", 0, -1, 0, weaponDamage, 10);
 	
-	public ItemExcalibur(int par1) 
+	public ItemExcaliburSword(int par1) 
 	{
 		super(par1, Ex);
 		this.maxStackSize = 1;
@@ -38,15 +41,21 @@ public class ItemExcalibur extends ItemSword
     	return "/aginsun/textures/items.png";
     }
     
-    public int getDamageVsEntity(Entity par1Entity)
-    {
-    	System.out.println(weaponDamage);
-        return this.weaponDamage;
-    }
-    
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
     {
-    	this.weaponDamage = Math.round(stats.getStrengthPoints(player) / 2);
-        return false;
+    	if(stats.getLevel(player) >= 15)
+    		return false;
+    	else
+    		return true;
+    }
+    
+    public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4) 
+    {
+    	list.add(1, "Level Required: 15");
+    	list.add(2, "Class Required: Warrior");
+    	if(stats.getLevel(player) >= 15 && RaceKeeper.getClass(player).equals("Warrior"))
+    		list.add(3, "Damage Dealt: " + ((StatKeeper.getStrengthPoints(player) / 4) + weaponDamage));
+    	else
+    		list.add(3, "Damage Dealt: 0");
     }
 }

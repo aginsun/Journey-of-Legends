@@ -13,10 +13,12 @@ import org.lwjgl.opengl.GL11;
 public class GuiButtonShop extends GuiButton
 {
     private GuiShopList gui;
+    private GuiRaceSelect gui1;
     private Item item;
     private Integer itemID;
     private boolean isSword;
     private int selected;
+    private Integer ClassSelected;
     private String name;
     protected int width;
     protected int height;
@@ -143,17 +145,7 @@ public class GuiButtonShop extends GuiButton
                 k = 1;
             }
         }
-        /*if (gui2 != null)
-        {
-            if (gui2.itemSelected == item)
-            {
-                k = 2;
-            }
-            else
-            {
-                k = 1;
-            }
-        }
+        /*
         if (gui3 != null)
         {
             if (selected == TaleOfKingdoms.Excalibur.shiftedIndex)

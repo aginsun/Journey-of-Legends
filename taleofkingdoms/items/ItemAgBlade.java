@@ -2,7 +2,10 @@ package aginsun.taleofkingdoms.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.EnumHelper;
 
@@ -20,5 +23,12 @@ public class ItemAgBlade extends ItemSword
 	{
     	return "/aginsun/textures/items.png";
 	}
-
+	
+    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
+    {
+    	if(player.username.equals("aginsun"))
+    		return false;
+    	else
+    		return true;
+    }
 }

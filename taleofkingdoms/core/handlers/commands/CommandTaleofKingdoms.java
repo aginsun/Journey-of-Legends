@@ -1,6 +1,9 @@
 package aginsun.taleofkingdoms.core.handlers.commands;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import aginsun.taleofkingdoms.client.guis.GuiRaceSelect;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -22,10 +25,49 @@ public class CommandTaleofKingdoms extends CommandBase
 	{
 		if(args[0].matches("stats"))
 		{
-			if(args.length >= 2)
+			if(args[1].matches("Level"))
 			{
-				int i = parseIntWithMin(sender, args[1], 1);
-				stats.setStrengthPoints((EntityPlayer)sender, i);
+				if(args.length >= 3)
+				{
+					int i = parseIntWithMin(sender, args[2], 1);
+					stats.setLevel((EntityPlayer)sender, i);
+				}
+			}
+			if(args[1].matches("Strength"))
+			{
+				if(args.length >= 3)
+				{
+					int i = parseIntWithMin(sender, args[2], 1);
+					stats.setStrengthPoints((EntityPlayer)sender, i);
+				}
+			}
+			if(args[1].matches("Dexerity"))
+			{
+				if(args.length >= 3)
+				{
+					int i = parseIntWithMin(sender, args[2], 1);
+					stats.setDexerityPoints((EntityPlayer)sender, i);
+				}
+			}
+			if(args[1].matches("Intelligence"))
+			{
+				if(args.length >= 3)
+				{
+					int i = parseIntWithMin(sender, args[2], 1);
+					stats.setIntelligencePoints((EntityPlayer)sender, i);
+				}
+			}
+		}
+		
+		if(args[0].matches("Reset"))
+		{
+			RaceKeeper.Race.clear();
+		}
+		if(args[0].matches("guis"))
+		{
+			if(args[1].matches("Race"))
+			{
+				FMLCommonHandler.instance().showGuiScreen(new GuiRaceSelect());
 			}
 		}
 	}

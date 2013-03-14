@@ -5,11 +5,13 @@ import java.awt.Color;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import aginsun.taleofkingdoms.client.guis.GuiRaceSelect;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
@@ -156,6 +158,11 @@ public class mod_GuiTickHandler extends BaseMod
 		{
 			level.addLevelUps(player, 1);
 			level.addLevelPoints(player, 5);
+			if(stats.getLevel(player) == 10 && level.getCurrentLevel(player) == 9)
+			{
+				//TODO: open up gui, with class choice!
+				FMLCommonHandler.instance().showGuiScreen(new GuiRaceSelect(player));
+			}
 			level.setCurrentLevel(player, stats.getLevel(player));
 		}
 	}

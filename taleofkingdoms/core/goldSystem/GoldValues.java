@@ -286,7 +286,7 @@ public class GoldValues
             return 16;
         
         if(s.equals("item.excalibur"))
-        	return 100000;
+        	return 8000;
 		
 		return 0;
 	}

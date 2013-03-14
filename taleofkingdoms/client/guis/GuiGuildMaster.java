@@ -3,6 +3,7 @@ package aginsun.taleofkingdoms.client.guis;
 import aginsun.taleofkingdoms.TaleOfKingdoms;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 public class GuiGuildMaster extends GuiScreen
 {
     private World worldObj;
-    public EntityPlayer entityplayer;
+    public EntityPlayer player;
     private GoldKeeper gold;
     private StatKeeper stats;
     boolean goldchecker;
@@ -34,22 +35,22 @@ public class GuiGuildMaster extends GuiScreen
     public GuiGuildMaster(EntityPlayer entityplayer1, World world)
     {
         goldchecker = false;
-        entityplayer = entityplayer1;
+        player = entityplayer1;
         worldObj = world;
     }
 
     public void initGui()
     {
         String s;
-        if (!hunter.getHunterStatus(entityplayer))
+        if (!hunter.getHunterStatus(player))
         {
             s = "Sign up contract!";
         }
-        else if(stats.getLevel(entityplayer) >= 10)
+        else if(stats.getLevel(player) >= 10)
         {
         	s = "Choose your Class!";
         }
-        else if(stats.getLevel(entityplayer) >= 30)
+        else if(stats.getLevel(player) >= 30)
         {
         	s = "Claim your Kingdom!";
         }       
@@ -67,32 +68,28 @@ public class GuiGuildMaster extends GuiScreen
 
     protected void actionPerformed(GuiButton guibutton)
     {
-        if (guibutton.id == 1 && !hunter.getHunterStatus(entityplayer))
+        if (guibutton.id == 1 && !hunter.getHunterStatus(player))
         {
             if (!worldObj.isRemote)
             {
-                entityplayer.addChatMessage("Guild Master: You are now one of us my friend. Kill monsters and you will soon be worthy of your title.");
+                player.addChatMessage("Guild Master: You are now one of us my friend. Kill monsters and you will soon be worthy of your title.");
             }
-            hunter.setHunterStatus(entityplayer, true);
+            hunter.setHunterStatus(player, true);
             initGui();
         }
-        else if (guibutton.id == 1 && hunter.getHunterStatus(entityplayer))
+        else if (guibutton.id == 1 && hunter.getHunterStatus(player) && stats.getLevel(player) >= 10 && stats.getLevel(player) < 30 && RaceKeeper.getClass(player).equals("Beginner"))
         {
-        	if(!worldObj.isRemote)
-        	{
-        		entityplayer.addChatMessage("Guild Master: We will await your participation, hero.");
-        	}	
-        	hunter.setHunterStatus(entityplayer, false);
-        	initGui();
+        	FMLCommonHandler.instance().showGuiScreen(null);
+        	FMLCommonHandler.instance().showGuiScreen(new GuiRaceSelect(player));
         }
         
         if(guibutton.id == 2)
         {
         	if(!worldObj.isRemote)
         	{
-        		entityplayer.addChatMessage("Guild Master: You will need to get to level 30.");
-        		entityplayer.addChatMessage("Guild Master: If so, you will be able to get your own kingdom! (needs to be added)");
-        		entityplayer.addChatMessage("Aginsun: More information will be added in the future!");
+        		player.addChatMessage("Guild Master: You will need to get to level 30.");
+        		player.addChatMessage("Guild Master: If so, you will be able to get your own kingdom! (needs to be added)");
+        		player.addChatMessage("Aginsun: More information will be added in the future!");
         	}
         }
 
@@ -116,7 +113,7 @@ public class GuiGuildMaster extends GuiScreen
     {
     	if(!worldObj.isRemote)
     	{
-    		entityplayer.addChatMessage("Guild Master: Good Hunting.");
+    		player.addChatMessage("Guild Master: Good Hunting.");
     	}
     }
 
@@ -130,11 +127,11 @@ public class GuiGuildMaster extends GuiScreen
 
         if (goldchecker)
         {
-            drawCenteredString(fontRenderer, (new StringBuilder()).append("The Guild Order  Total Money: ").append(gold.getGoldTotal(entityplayer)).append(" Gold Coins - NOT ENOUGH GOLD").toString(), width / 2, 20, 0xffee00);
+            drawCenteredString(fontRenderer, (new StringBuilder()).append("The Guild Order  Total Money: ").append(gold.getGoldTotal(player)).append(" Gold Coins - NOT ENOUGH GOLD").toString(), width / 2, 20, 0xffee00);
         }
         else
         {
-            drawCenteredString(fontRenderer, (new StringBuilder()).append("The Guild Order  Total Money: ").append(gold.getGoldTotal(entityplayer)).append(" Gold Coins").toString(), width / 2, 0, 0xffee00);
+            drawCenteredString(fontRenderer, (new StringBuilder()).append("The Guild Order  Total Money: ").append(gold.getGoldTotal(player)).append(" Gold Coins").toString(), width / 2, 0, 0xffee00);
         }
         drawCenteredString(fontRenderer, "Note: Hiring Cost 1500 gold, Retiring will Refund 1000. Fixing the Guild need 64 wood.", width / 2, 10, 0xffee00);
     }
