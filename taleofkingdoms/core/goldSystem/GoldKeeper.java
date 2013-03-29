@@ -4,9 +4,6 @@ import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class GoldKeeper
 {
 	private static HashMap<String, Integer> GoldValues = new HashMap<String, Integer>();

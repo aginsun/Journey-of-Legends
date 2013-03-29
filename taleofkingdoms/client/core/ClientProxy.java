@@ -1,7 +1,5 @@
 package aginsun.taleofkingdoms.client.core;
 
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import aginsun.taleofkingdoms.core.CommonProxy;
@@ -11,6 +9,8 @@ import aginsun.taleofkingdoms.entities.EntityFarmerKeeper;
 import aginsun.taleofkingdoms.entities.EntityGuildMaster;
 import aginsun.taleofkingdoms.entities.EntityGuildMember;
 import aginsun.taleofkingdoms.entities.EntityWeaponKeeper;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {

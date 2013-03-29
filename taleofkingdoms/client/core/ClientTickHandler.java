@@ -2,21 +2,12 @@ package aginsun.taleofkingdoms.client.core;
 
 import java.util.EnumSet;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.Color;
-
-import aginsun.taleofkingdoms.TaleOfKingdoms;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.handlers.SaveHandlerToK;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.world.World;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import cpw.mods.fml.common.ITickHandler;
+import cpw.mods.fml.common.TickType;
 
 
 public class ClientTickHandler implements ITickHandler
@@ -37,7 +28,7 @@ public class ClientTickHandler implements ITickHandler
         }
         else if (type.equals(EnumSet.of(TickType.CLIENT)))
         {
-            GuiScreen guiscreen = mc.getMinecraft().currentScreen;
+            GuiScreen guiscreen = Minecraft.getMinecraft().currentScreen;
             if(guiscreen != null)
             {
                 onTickInGUI(guiscreen);

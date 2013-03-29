@@ -1,14 +1,13 @@
 package aginsun.taleofkingdoms.client.guis;
 
-import org.lwjgl.opengl.GL11;
-
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-
-import cpw.mods.fml.client.FMLClientHandler;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+
+import org.lwjgl.opengl.GL11;
+
+import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class GuiRaceSelect extends GuiScreen
 {
@@ -28,17 +27,17 @@ public class GuiRaceSelect extends GuiScreen
 	
 	public void initGui()
 	{
-		controlList.clear();
+		buttonList.clear();
 		
-        controlList.add(new GuiButton(1, width / 2 - 20, 15, 120, 20, "Warrior"));
-        controlList.add(new GuiButton(2, width / 2 - 20, 35, 120, 20, "Hunter"));
-        controlList.add(new GuiButton(3, width / 2 - 20, 55, 120, 20, "Mage"));
-        controlList.add(new GuiButton(4, width / 2 - 20, 75, 120, 20, "Thief"));
+        buttonList.add(new GuiButton(1, width / 2 - 20, 15, 120, 20, "Warrior"));
+        buttonList.add(new GuiButton(2, width / 2 - 20, 35, 120, 20, "Hunter"));
+        buttonList.add(new GuiButton(3, width / 2 - 20, 55, 120, 20, "Mage"));
+        buttonList.add(new GuiButton(4, width / 2 - 20, 75, 120, 20, "Thief"));
         
         if(buttonSelected > 0)
         {
-            controlList.add(new GuiButton(5, width / 2 - 20, 105, 120, 20, "Yes"));
-            controlList.add(new GuiButton(6, width / 2 - 20, 125, 120, 20, "No"));
+            buttonList.add(new GuiButton(5, width / 2 - 20, 105, 120, 20, "Yes"));
+            buttonList.add(new GuiButton(6, width / 2 - 20, 125, 120, 20, "No"));
         }
 	}
 	
@@ -78,16 +77,15 @@ public class GuiRaceSelect extends GuiScreen
 	
     public void drawScreen(int i, int j, float f)
 	{
-    	int k = mc.renderEngine.getTexture("/aginsun/textures/crafting.png");
     	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     	char c = '\377';
     	char c1 = '\377';
-    	mc.renderEngine.bindTexture(k);
+    	mc.renderEngine.bindTexture("/aginsun/textures/crafting.png");
     	int i1 = (width - c) / 2;
     	drawTexturedModalRect(i1, 0, 0, 0, c, c1);
-        for (int m = 0; m < controlList.size(); m++)
+        for (int m = 0; m < buttonList.size(); m++)
         {
-            GuiButton guibutton = (GuiButton)controlList.get(m);
+            GuiButton guibutton = (GuiButton)buttonList.get(m);
             guibutton.drawButton(mc, i, j);
         }
         super.drawScreen(i, j, f);

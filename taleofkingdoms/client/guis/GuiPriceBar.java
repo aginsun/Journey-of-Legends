@@ -1,9 +1,9 @@
 package aginsun.taleofkingdoms.client.guis;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiPriceBar extends Gui
 {

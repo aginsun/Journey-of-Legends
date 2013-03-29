@@ -1,13 +1,11 @@
 package aginsun.taleofkingdoms.core.helpers;
 
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.world.World;
 import aginsun.taleofkingdoms.items.InitItems;
 import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 
 public class ItemDropHelper 
 {

@@ -1,20 +1,14 @@
 package aginsun.taleofkingdoms.core.handlers;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-import aginsun.taleofkingdoms.core.helpers.ItemDropHelper;
-import aginsun.taleofkingdoms.items.InitItems;
 import aginsun.taleofkingdoms.items.ItemClaw;
-import aginsun.taleofkingdoms.items.ItemExcaliburSword;
 import aginsun.taleofkingdoms.items.ItemWand;
 
 public class LivingAttackEventHandler 

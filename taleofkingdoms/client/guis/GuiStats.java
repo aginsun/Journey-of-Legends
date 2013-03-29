@@ -1,15 +1,14 @@
 package aginsun.taleofkingdoms.client.guis;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-
-import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+
+import org.lwjgl.opengl.GL11;
+
+import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class GuiStats extends GuiScreen
 {
@@ -19,14 +18,14 @@ public class GuiStats extends GuiScreen
 	
 	public void initGui()
 	{
-        controlList.clear();
+        buttonList.clear();
 
 		if(level.getLevelUps(player) > 0)
 		{
-			controlList.add(new GuiButton(1, width / 2 - 20, 15, 120, 20, "Upgrade Strength"));
-			controlList.add(new GuiButton(2, width / 2 - 20, 75, 120, 20, "Upgrade Dexerity"));
-			controlList.add(new GuiButton(3, width / 2 - 20, 135, 120, 20, "Upgrade Intelligence"));
-			controlList.add(new GuiButton(4, width / 2 - 20, 195, 120, 20, "Upgrade Luck"));
+			buttonList.add(new GuiButton(1, width / 2 - 20, 15, 120, 20, "Upgrade Strength"));
+			buttonList.add(new GuiButton(2, width / 2 - 20, 75, 120, 20, "Upgrade Dexerity"));
+			buttonList.add(new GuiButton(3, width / 2 - 20, 135, 120, 20, "Upgrade Intelligence"));
+			buttonList.add(new GuiButton(4, width / 2 - 20, 195, 120, 20, "Upgrade Luck"));
 		}
 	}
 	
@@ -85,11 +84,10 @@ public class GuiStats extends GuiScreen
     
     public void drawScreen(int i, int j, float f)
 	{
-    	int k = mc.renderEngine.getTexture("/aginsun/textures/crafting.png");
     	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     	char c = '\377';
     	char c1 = '\377';
-    	mc.renderEngine.bindTexture(k);
+    	mc.renderEngine.bindTexture("/aginsun/textures/crafting.png");
     	int i1 = (width - c) / 2;
     	drawTexturedModalRect(i1, 0, 0, 0, c, c1);
     	drawString(fontRenderer, new StringBuilder("Strength: ").append(stats.getStrengthPoints(player)).toString(), width / 2 - 100, 20, 0xffcc00);
@@ -97,9 +95,9 @@ public class GuiStats extends GuiScreen
     	drawString(fontRenderer, new StringBuilder("Intelligence: ").append(stats.getIntelligencePoints(player)).toString(), width / 2 - 100, 140, 0xffcc00);
     	drawString(fontRenderer, new StringBuilder("Luck: ").append(stats.getLuckPoints(player)).toString(), width / 2 - 100, 200, 0xffcc00);
 
-        for (int m = 0; m < controlList.size(); m++)
+        for (int m = 0; m < buttonList.size(); m++)
         {
-            GuiButton guibutton = (GuiButton)controlList.get(m);
+            GuiButton guibutton = (GuiButton)buttonList.get(m);
             guibutton.drawButton(mc, i, j);
         }
         super.drawScreen(i, j, f);

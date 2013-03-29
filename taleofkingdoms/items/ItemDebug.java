@@ -2,16 +2,14 @@ package aginsun.taleofkingdoms.items;
 
 import java.util.List;
 
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
 
 public class ItemDebug extends Item
 {

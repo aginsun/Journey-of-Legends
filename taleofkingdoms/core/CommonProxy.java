@@ -3,27 +3,17 @@ package aginsun.taleofkingdoms.core;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import aginsun.taleofkingdoms.client.core.ClientTickHandler;
 import aginsun.taleofkingdoms.client.guis.GuiSell;
 import aginsun.taleofkingdoms.containers.ContainerSell;
-import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
 import aginsun.taleofkingdoms.core.helpers.GuiIds;
 import aginsun.taleofkingdoms.entities.TileEntitySell;
-
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy implements IGuiHandler
 {
 	public void RegisterRenderers()
 	{
 		
-	}
-	
-	public static void Init()
-	{
-
 	}
 
     @Override

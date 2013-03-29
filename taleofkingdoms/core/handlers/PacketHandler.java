@@ -1,14 +1,9 @@
 package aginsun.taleofkingdoms.core.handlers;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-
-import aginsun.taleofkingdoms.core.handlers.packets.PacketToK;
-import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
-
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import aginsun.taleofkingdoms.core.handlers.packets.PacketToK;
+import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 

@@ -1,10 +1,5 @@
 package aginsun.taleofkingdoms.entities;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import aginsun.taleofkingdoms.client.guis.GuiShopList;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,9 +8,12 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
-import net.minecraft.src.*;
 import net.minecraft.util.StringTranslate;
 import net.minecraft.world.World;
+import aginsun.taleofkingdoms.client.guis.GuiShopList;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class EntityWeaponKeeper extends EntityCreature
 {
@@ -111,13 +109,13 @@ public class EntityWeaponKeeper extends EntityCreature
                 }
                 if (item != null)
                 {
-                    s = item.getItemName();
+                    s = item.getUnlocalizedName();
                 }
                 if (s != null)
                 {
                     j = gold1.PriceItem(s);
                 }
-                String s1 = (new StringBuilder(String.valueOf(item.getItemName()))).append(".name").toString();
+                String s1 = (new StringBuilder(String.valueOf(item.getUnlocalizedName()))).append(".name").toString();
                 String s2 = st.translateKey(s1);
                 int l = itemstack.itemID;
                 if (l == 261 || l == 262)

@@ -1,13 +1,13 @@
 package aginsun.taleofkingdoms.core.handlers.commands;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 import aginsun.taleofkingdoms.client.guis.GuiRaceSelect;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class CommandTaleofKingdoms extends CommandBase
 {

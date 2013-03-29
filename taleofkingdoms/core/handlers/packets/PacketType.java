@@ -2,9 +2,6 @@ package aginsun.taleofkingdoms.core.handlers.packets;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.lang.ref.Reference;
-
-import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
 
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;

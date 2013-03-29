@@ -5,7 +5,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.*;
 
 import org.lwjgl.opengl.GL11;
 
@@ -130,7 +129,7 @@ public class GuiButtonShop extends GuiButton
             return;
         }
         FontRenderer fontrenderer = minecraft.fontRenderer;
-        GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, minecraft.renderEngine.getTexture("/aginsun/textures/gui.png"));
+        minecraft.renderEngine.bindTexture("/aginsun/textures/gui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         boolean flag = i >= xPosition && j >= yPosition && i < xPosition + width && j < yPosition + height;
         int k = getHoverState(flag);

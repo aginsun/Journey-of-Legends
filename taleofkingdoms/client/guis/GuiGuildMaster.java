@@ -1,23 +1,17 @@
 package aginsun.taleofkingdoms.client.guis;
 
-import aginsun.taleofkingdoms.TaleOfKingdoms;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiGuildMaster extends GuiScreen
@@ -58,12 +52,12 @@ public class GuiGuildMaster extends GuiScreen
         {
             s = "Cancel contract.";
         }
-        controlList.clear();
-        controlList.add(new GuiButton(1, width / 2 + 110, 140, 100, 20, s));
-        controlList.add(new GuiButton(2, width / 2 + 110, 160, 100, 20, "Information"));
-        controlList.add(new GuiButton(4, width / 2 + 110, 180, 100, 20, "Fix the Guild"));
-        controlList.add(new GuiButton(5, width / 2 + 110, 200, 100, 20, "Retire Hunters"));
-        controlList.add(new GuiButton(3, width / 2 + 110, 220, 100, 20, "Exit"));
+        buttonList.clear();
+        buttonList.add(new GuiButton(1, width / 2 + 110, 140, 100, 20, s));
+        buttonList.add(new GuiButton(2, width / 2 + 110, 160, 100, 20, "Information"));
+        buttonList.add(new GuiButton(4, width / 2 + 110, 180, 100, 20, "Fix the Guild"));
+        buttonList.add(new GuiButton(5, width / 2 + 110, 200, 100, 20, "Retire Hunters"));
+        buttonList.add(new GuiButton(3, width / 2 + 110, 220, 100, 20, "Exit"));
     }
 
     protected void actionPerformed(GuiButton guibutton)
@@ -119,9 +113,9 @@ public class GuiGuildMaster extends GuiScreen
 
     public void drawScreen(int i, int j, float f)
     {
-        for (int k = 0; k < controlList.size(); k++)
+        for (int k = 0; k < buttonList.size(); k++)
         {
-            GuiButton guibutton = (GuiButton)controlList.get(k);
+            GuiButton guibutton = (GuiButton)buttonList.get(k);
             guibutton.drawButton(mc, i, j);
         }
 

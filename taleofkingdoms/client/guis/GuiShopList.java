@@ -1,10 +1,5 @@
 package aginsun.taleofkingdoms.client.guis;
 
-import org.lwjgl.opengl.GL11;
-
-import aginsun.taleofkingdoms.TaleOfKingdoms;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
@@ -14,7 +9,12 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StringTranslate;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLCommonHandler;
+
+import org.lwjgl.opengl.GL11;
+
+import aginsun.taleofkingdoms.TaleOfKingdoms;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
 import cpw.mods.fml.common.network.Player;
 
 public class GuiShopList extends GuiScreen
@@ -84,125 +84,125 @@ public class GuiShopList extends GuiScreen
 
     public void initGui()
     {
-        controlList.clear();
+        buttonList.clear();
         if (item[1] != null)
         {
             Item item1 = (new ItemStack(item[1].intValue(), 1, 0)).getItem();
-            String s = (new StringBuilder(String.valueOf(item1.getItemName()))).append(".name").toString();
+            String s = (new StringBuilder(String.valueOf(item1.getUnlocalizedName()))).append(".name").toString();
             s = st.translateKey(s);
-            controlList.add(new GuiButtonShop(item[1], this, 0, width / 2 - 90, 40, 90, 20, s));
+            buttonList.add(new GuiButtonShop(item[1], this, 0, width / 2 - 90, 40, 90, 20, s));
         }
         if (item[2] != null)
         {
             Item item2 = (new ItemStack(item[2].intValue(), 1, 0)).getItem();
-            String s1 = (new StringBuilder(String.valueOf(item2.getItemName()))).append(".name").toString();
+            String s1 = (new StringBuilder(String.valueOf(item2.getUnlocalizedName()))).append(".name").toString();
             s1 = st.translateKey(s1);
-            controlList.add(new GuiButtonShop(item[2], this, 1, width / 2 - 90, 60, 90, 20, s1));
+            buttonList.add(new GuiButtonShop(item[2], this, 1, width / 2 - 90, 60, 90, 20, s1));
         }
         if (item[3] != null)
         {
             Item item3 = (new ItemStack(item[3].intValue(), 1, 0)).getItem();
-            String s2 = (new StringBuilder(String.valueOf(item3.getItemName()))).append(".name").toString();
+            String s2 = (new StringBuilder(String.valueOf(item3.getUnlocalizedName()))).append(".name").toString();
             s2 = st.translateKey(s2);
-            controlList.add(new GuiButtonShop(item[3], this, 2, width / 2 - 90, 80, 90, 20, s2));
+            buttonList.add(new GuiButtonShop(item[3], this, 2, width / 2 - 90, 80, 90, 20, s2));
         }
         if (item[4] != null)
         {
             Item item4 = (new ItemStack(item[4].intValue(), 1, 0)).getItem();
-            String s3 = (new StringBuilder(String.valueOf(item4.getItemName()))).append(".name").toString();
+            String s3 = (new StringBuilder(String.valueOf(item4.getUnlocalizedName()))).append(".name").toString();
             s3 = st.translateKey(s3);
-            controlList.add(new GuiButtonShop(item[4], this, 3, width / 2 - 90, 100, 90, 20, s3));
+            buttonList.add(new GuiButtonShop(item[4], this, 3, width / 2 - 90, 100, 90, 20, s3));
         }
         if (item[5] != null)
         {
             Item item5 = (new ItemStack(item[5].intValue(), 1, 0)).getItem();
-            String s4 = (new StringBuilder(String.valueOf(item5.getItemName()))).append(".name").toString();
+            String s4 = (new StringBuilder(String.valueOf(item5.getUnlocalizedName()))).append(".name").toString();
             s4 = st.translateKey(s4);
-            controlList.add(new GuiButtonShop(item[5], this, 4, width / 2 - 90, 120, 90, 20, s4));
+            buttonList.add(new GuiButtonShop(item[5], this, 4, width / 2 - 90, 120, 90, 20, s4));
         }
         if (item[6] != null)
         {
             Item item6 = (new ItemStack(item[6].intValue(), 1, 0)).getItem();
-            String s5 = (new StringBuilder(String.valueOf(item6.getItemName()))).append(".name").toString();
+            String s5 = (new StringBuilder(String.valueOf(item6.getUnlocalizedName()))).append(".name").toString();
             s5 = st.translateKey(s5);
-            controlList.add(new GuiButtonShop(item[6], this, 5, width / 2 - 90, 140, 90, 20, s5));
+            buttonList.add(new GuiButtonShop(item[6], this, 5, width / 2 - 90, 140, 90, 20, s5));
         }
         if (item[7] != null)
         {
             Item item7 = (new ItemStack(item[7].intValue(), 1, 0)).getItem();
-            String s6 = (new StringBuilder(String.valueOf(item7.getItemName()))).append(".name").toString();
+            String s6 = (new StringBuilder(String.valueOf(item7.getUnlocalizedName()))).append(".name").toString();
             s6 = st.translateKey(s6);
-            controlList.add(new GuiButtonShop(item[7], this, 6, width / 2 - 90, 160, 90, 20, s6));
+            buttonList.add(new GuiButtonShop(item[7], this, 6, width / 2 - 90, 160, 90, 20, s6));
         }
         if (item[8] != null)
         {
             Item item8 = (new ItemStack(item[8].intValue(), 1, 0)).getItem();
-            String s7 = (new StringBuilder(String.valueOf(item8.getItemName()))).append(".name").toString();
+            String s7 = (new StringBuilder(String.valueOf(item8.getUnlocalizedName()))).append(".name").toString();
             s7 = st.translateKey(s7);
-            controlList.add(new GuiButtonShop(item[8], this, 7, width / 2 - 90, 180, 90, 20, s7));
+            buttonList.add(new GuiButtonShop(item[8], this, 7, width / 2 - 90, 180, 90, 20, s7));
         }
         if (item[9] != null)
         {
             Item item9 = (new ItemStack(item[9].intValue(), 1, 0)).getItem();
-            String s8 = (new StringBuilder(String.valueOf(item9.getItemName()))).append(".name").toString();
+            String s8 = (new StringBuilder(String.valueOf(item9.getUnlocalizedName()))).append(".name").toString();
             s8 = st.translateKey(s8);
-            controlList.add(new GuiButtonShop(item[9], this, 8, width / 2 + 20, 40, 90, 20, s8));
+            buttonList.add(new GuiButtonShop(item[9], this, 8, width / 2 + 20, 40, 90, 20, s8));
         }
         if (item[10] != null)
         {
             Item item10 = (new ItemStack(item[10].intValue(), 1, 0)).getItem();
-            String s9 = (new StringBuilder(String.valueOf(item10.getItemName()))).append(".name").toString();
+            String s9 = (new StringBuilder(String.valueOf(item10.getUnlocalizedName()))).append(".name").toString();
             s9 = st.translateKey(s9);
-            controlList.add(new GuiButtonShop(item[10], this, 9, width / 2 + 20, 60, 90, 20, s9));
+            buttonList.add(new GuiButtonShop(item[10], this, 9, width / 2 + 20, 60, 90, 20, s9));
         }
         if (item[11] != null)
         {
             Item item11 = (new ItemStack(item[11].intValue(), 1, 0)).getItem();
-            String s10 = (new StringBuilder(String.valueOf(item11.getItemName()))).append(".name").toString();
+            String s10 = (new StringBuilder(String.valueOf(item11.getUnlocalizedName()))).append(".name").toString();
             s10 = st.translateKey(s10);
-            controlList.add(new GuiButtonShop(item[11], this, 10, width / 2 + 20, 80, 90, 20, s10));
+            buttonList.add(new GuiButtonShop(item[11], this, 10, width / 2 + 20, 80, 90, 20, s10));
         }
         if (item[12] != null)
         {
             Item item12 = (new ItemStack(item[12].intValue(), 1, 0)).getItem();
-            String s11 = (new StringBuilder(String.valueOf(item12.getItemName()))).append(".name").toString();
+            String s11 = (new StringBuilder(String.valueOf(item12.getUnlocalizedName()))).append(".name").toString();
             s11 = st.translateKey(s11);
-            controlList.add(new GuiButtonShop(item[12], this, 11, width / 2 + 20, 100, 90, 20, s11));
+            buttonList.add(new GuiButtonShop(item[12], this, 11, width / 2 + 20, 100, 90, 20, s11));
         }
         if (item[13] != null)
         {
             Item item13 = (new ItemStack(item[13].intValue(), 1, 0)).getItem();
-            String s12 = (new StringBuilder(String.valueOf(item13.getItemName()))).append(".name").toString();
+            String s12 = (new StringBuilder(String.valueOf(item13.getUnlocalizedName()))).append(".name").toString();
             s12 = st.translateKey(s12);
-            controlList.add(new GuiButtonShop(item[13], this, 12, width / 2 + 20, 120, 90, 20, s12));
+            buttonList.add(new GuiButtonShop(item[13], this, 12, width / 2 + 20, 120, 90, 20, s12));
         }
         if (item[14] != null)
         {
             Item item14 = (new ItemStack(item[14].intValue(), 1, 0)).getItem();
-            String s13 = (new StringBuilder(String.valueOf(item14.getItemName()))).append(".name").toString();
+            String s13 = (new StringBuilder(String.valueOf(item14.getUnlocalizedName()))).append(".name").toString();
             s13 = st.translateKey(s13);
-            controlList.add(new GuiButtonShop(item[14], this, 13, width / 2 + 20, 140, 90, 20, s13));
+            buttonList.add(new GuiButtonShop(item[14], this, 13, width / 2 + 20, 140, 90, 20, s13));
         }
         if (item[15] != null)
         {
             Item item15 = (new ItemStack(item[15].intValue(), 1, 0)).getItem();
-            String s14 = (new StringBuilder(String.valueOf(item15.getItemName()))).append(".name").toString();
+            String s14 = (new StringBuilder(String.valueOf(item15.getUnlocalizedName()))).append(".name").toString();
             s14 = st.translateKey(s14);
-            controlList.add(new GuiButtonShop(item[15], this, 14, width / 2 + 20, 160, 90, 20, s14));
+            buttonList.add(new GuiButtonShop(item[15], this, 14, width / 2 + 20, 160, 90, 20, s14));
         }
         if (item[16] != null)
         {
             Item item16 = (new ItemStack(item[16].intValue(), 1, 0)).getItem();
-            String s15 = (new StringBuilder(String.valueOf(item16.getItemName()))).append(".name").toString();
+            String s15 = (new StringBuilder(String.valueOf(item16.getUnlocalizedName()))).append(".name").toString();
             s15 = st.translateKey(s15);
-            controlList.add(new GuiButtonShop(item[16], this, 15, width / 2 + 20, 180, 90, 20, s15));
+            buttonList.add(new GuiButtonShop(item[16], this, 15, width / 2 + 20, 180, 90, 20, s15));
         }
-        controlList.add(new GuiButton(17, width / 2 - 120, 220, 70, 20, "Back"));
-        controlList.add(new GuiButton(16, width / 2 - 120, 200, 70, 20, "Next"));
-        controlList.add(new GuiButton(18, width / 2 - 35, 200, 70, 20, "Buy Item"));
-        controlList.add(new GuiButton(19, width / 2 + 50, 220, 70, 20, "Exit"));
-        //controlList.add(new GuiButton(20, width / 2 + 50, 200, 70, 20, "Sell Item"));
-        controlList.add(new GuiButton(21, width / 2 - 35, 220, 70, 20, "Buy 16 Items"));
+        buttonList.add(new GuiButton(17, width / 2 - 120, 220, 70, 20, "Back"));
+        buttonList.add(new GuiButton(16, width / 2 - 120, 200, 70, 20, "Next"));
+        buttonList.add(new GuiButton(18, width / 2 - 35, 200, 70, 20, "Buy Item"));
+        buttonList.add(new GuiButton(19, width / 2 + 50, 220, 70, 20, "Exit"));
+        //buttonList.add(new GuiButton(20, width / 2 + 50, 200, 70, 20, "Sell Item"));
+        buttonList.add(new GuiButton(21, width / 2 - 35, 220, 70, 20, "Buy 16 Items"));
     }
 
     public boolean doesGuiPauseGame()
@@ -227,12 +227,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item1 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item1.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item1.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item1.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item1.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item1 instanceof ItemFood)
                 {
@@ -247,12 +247,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item2 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item2.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item2.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item2.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item2.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item2 instanceof ItemFood)
                 {
@@ -267,12 +267,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item3 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item3.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item3.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item3.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item3.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item3 instanceof ItemFood)
                 {
@@ -287,12 +287,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item4 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item4.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item4.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item4.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item4.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item4 instanceof ItemFood)
                 {
@@ -307,12 +307,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item5 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item5.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item5.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item5.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item5.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item5 instanceof ItemFood)
                 {
@@ -327,12 +327,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item6 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item6.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item6.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item6.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item6.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item6 instanceof ItemFood)
                 {
@@ -347,12 +347,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item7 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item7.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item7.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item7.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item7.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item7 instanceof ItemFood)
                 {
@@ -367,12 +367,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item8 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item8.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item8.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item8.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item8.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item8 instanceof ItemFood)
                 {
@@ -387,12 +387,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item9 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item9.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item9.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item9.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item9.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item9 instanceof ItemFood)
                 {
@@ -407,12 +407,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item10 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item10.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item10.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item10.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item10.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item10 instanceof ItemFood)
                 {
@@ -427,12 +427,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item11 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item11.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item11.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item11.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item11.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item11 instanceof ItemFood)
                 {
@@ -447,12 +447,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item12 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item12.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item12.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item12.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item12.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item12 instanceof ItemFood)
                 {
@@ -467,12 +467,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item13 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item13.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item13.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item13.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item13.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item13 instanceof ItemFood)
                 {
@@ -487,12 +487,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item14 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item14.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item14.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item14.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item14.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item14 instanceof ItemFood)
                 {
@@ -507,12 +507,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item15 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item15.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item15.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item15.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item15.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item15 instanceof ItemFood)
                 {
@@ -527,12 +527,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item16 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item16.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item16.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item16.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item16.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item16 instanceof ItemFood)
                 {
@@ -551,12 +551,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item17 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item17.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item17.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item17.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item17.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item17 instanceof ItemFood)
                 {
@@ -575,12 +575,12 @@ public class GuiShopList extends GuiScreen
             if (itemSelected != null)
             {
                 Item item18 = (new ItemStack(itemSelected.intValue(), 1, 0)).getItem();
-                stringGet = (new StringBuilder(String.valueOf(item18.getItemName()))).append(".name").toString();
+                stringGet = (new StringBuilder(String.valueOf(item18.getUnlocalizedName()))).append(".name").toString();
                 if (stringGet != null)
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item18.getItemName()));
+                price = GoldValues.PriceItem(String.valueOf(item18.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item18 instanceof ItemFood)
                 {
@@ -592,7 +592,7 @@ public class GuiShopList extends GuiScreen
         {
             ItemStack itemstack = new ItemStack(itemSelected.intValue(), 1, 0);
             Item item19 = itemstack.getItem();	
-            String s = item19.getItemName();
+            String s = item19.getUnlocalizedName();
             int i = GoldValues.PriceItem(s);
             i = (int)((double)i + (double)i * 0.80000000000000004D);
             if (item19 instanceof ItemFood)
@@ -614,7 +614,7 @@ public class GuiShopList extends GuiScreen
         {
             ItemStack itemstack1 = new ItemStack(itemSelected.intValue(), 1, 0);
             Item item20 = itemstack1.getItem();
-            String s1 = item20.getItemName();
+            String s1 = item20.getUnlocalizedName();
             int j = GoldValues.PriceItem(s1);
             j = (int)((double)j + (double)j * 0.80000000000000004D);
             if (item20 instanceof ItemFood)
@@ -650,7 +650,7 @@ public class GuiShopList extends GuiScreen
         {
             ItemStack itemstack = new ItemStack(itemSelected.intValue(), 1, 0);
             Item item1 = itemstack.getItem();
-            String s = item1.getItemName();
+            String s = item1.getUnlocalizedName();
             int i1 = GoldValues.PriceItem(s);
             i1 = (int)((double)i1 + (double)i1 * 0.80000000000000004D);
             if (item1 instanceof ItemFood)
@@ -666,23 +666,22 @@ public class GuiShopList extends GuiScreen
             shopcounter++;
         }
         drawDefaultBackground();
-        int k = mc.renderEngine.getTexture("/aginsun/textures/crafting.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         char c = '\377';
         char c1 = '\377';
-        mc.renderEngine.bindTexture(k);
+        mc.renderEngine.bindTexture("/aginsun/textures/crafting.png");
         int j1 = (width - c) / 2;
         drawTexturedModalRect(j1, 0, 0, 0, c, c1);
-        for (int l = 0; l < controlList.size(); l++)
+        for (int l = 0; l < buttonList.size(); l++)
         {
-            if (controlList.get(l) instanceof GuiButtonShop)
+            if (buttonList.get(l) instanceof GuiButtonShop)
             {
-                GuiButtonShop guibuttonshop = (GuiButtonShop)controlList.get(l);
+                GuiButtonShop guibuttonshop = (GuiButtonShop)buttonList.get(l);
                 guibuttonshop.drawButton(mc, i, j);
             }
-            if (controlList.get(l) instanceof GuiButton)
+            if (buttonList.get(l) instanceof GuiButton)
             {
-                GuiButton guibutton = (GuiButton)controlList.get(l);
+                GuiButton guibutton = (GuiButton)buttonList.get(l);
                 guibutton.drawButton(mc, i, j);
             }
         }

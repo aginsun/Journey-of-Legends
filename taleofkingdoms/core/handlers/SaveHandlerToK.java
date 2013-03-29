@@ -1,18 +1,7 @@
 package aginsun.taleofkingdoms.core.handlers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.IPlayerTracker;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-import aginsun.taleofkingdoms.core.DataStorage;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
@@ -21,10 +10,12 @@ import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketStats;
-import aginsun.taleofkingdoms.core.handlers.packets.PacketToK;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketWorthy;
 import aginsun.taleofkingdoms.items.InitItems;
+import cpw.mods.fml.common.IPlayerTracker;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 public class SaveHandlerToK implements IPlayerTracker
 {

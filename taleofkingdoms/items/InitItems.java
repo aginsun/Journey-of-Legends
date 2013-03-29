@@ -1,10 +1,12 @@
 package aginsun.taleofkingdoms.items;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.Item;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class InitItems 
 {
+	public static String ModID = "TaleOfKingdoms";
+	
 	public static Item ItemCoins;
 	public static int ItemCoinsID;
 	
@@ -22,11 +24,11 @@ public class InitItems
 	
 	public static void Init()
 	{
-		ItemCoins = new ItemCoins(ItemCoinsID).setItemName("coins");
-		ItemExcalibur = new ItemExcaliburSword(ItemExcaliburID).setItemName("excalibur").setIconCoord(1, 0);
-		ItemAgBlade = new ItemAgBlade(ItemAgBladeID).setItemName("Aginsuns Blade").setIconCoord(2, 0);
-		ItemExcaliburMace = new ItemExcaliburMace(ItemExcaliburMaceID).setItemName("ExcaliburMace").setIconCoord(3, 0);
-		ItemDebug = new ItemDebug(ItemDebugID).setTextureFile("/aginsun/textures/items.png").setIconCoord(4, 0).setItemName("DebugToK");
+		ItemCoins = new ItemCoins(ItemCoinsID).setUnlocalizedName(ModID+":"+"Coins");
+		ItemExcalibur = new ItemExcaliburSword(ItemExcaliburID).setUnlocalizedName(ModID+":"+"ExcaliburSword");
+		ItemAgBlade = new ItemAgBlade(ItemAgBladeID).setUnlocalizedName(ModID+":"+"AginsunsBlade");
+		ItemExcaliburMace = new ItemExcaliburMace(ItemExcaliburMaceID).setUnlocalizedName(ModID+":"+"ExcaliburMace");
+		ItemDebug = new ItemDebug(ItemDebugID).setUnlocalizedName(ModID+":"+"DebugToK");
 		
 		languageRegisterers();
 	}

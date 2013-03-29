@@ -1,8 +1,8 @@
 package aginsun.taleofkingdoms.core;
 
+import net.minecraftforge.common.Configuration;
 import aginsun.taleofkingdoms.blocks.InitBlocks;
 import aginsun.taleofkingdoms.items.InitItems;
-import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ConfigFileToK 

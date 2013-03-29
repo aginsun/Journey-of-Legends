@@ -6,7 +6,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.network.INetworkManager;
-
 import cpw.mods.fml.common.network.Player;
 
 public class PacketToK 

@@ -1,15 +1,12 @@
 package aginsun.taleofkingdoms.entities;
 
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.*;
 import net.minecraft.world.World;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 
 public class EntityFarmerKeeper extends EntityCreature
 {

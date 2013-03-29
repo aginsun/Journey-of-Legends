@@ -2,10 +2,6 @@ package aginsun.taleofkingdoms.items;
 
 import java.util.List;
 
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +9,10 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.EnumHelper;
+import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemExcaliburMace extends ItemSword
 {

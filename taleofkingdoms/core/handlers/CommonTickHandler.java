@@ -2,24 +2,18 @@ package aginsun.taleofkingdoms.core.handlers;
 
 import java.util.EnumSet;
 
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.world.World;
 import aginsun.taleofkingdoms.core.ConfigFileToK;
 import aginsun.taleofkingdoms.entities.EntityFarmerKeeper;
 import aginsun.taleofkingdoms.entities.EntityGuildMaster;
 import aginsun.taleofkingdoms.entities.EntityGuildMember;
 import aginsun.taleofkingdoms.entities.EntityWeaponKeeper;
 import aginsun.taleofkingdoms.worldgen.WorldGenGuild;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.LoaderState.ModState;
 import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 
 public class CommonTickHandler implements ITickHandler
 {

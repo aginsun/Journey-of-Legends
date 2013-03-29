@@ -1,10 +1,5 @@
 package aginsun.taleofkingdoms.core.goldSystem;
 
-import net.minecraft.block.Block;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 
 /**sets all the gold values for the vanilla items
  * and also any mod items that I want to be added.

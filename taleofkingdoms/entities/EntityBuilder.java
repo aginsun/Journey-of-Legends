@@ -1,13 +1,12 @@
 package aginsun.taleofkingdoms.entities;
 
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import aginsun.taleofkingdoms.client.guis.GuiKingdom;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
 public class EntityBuilder extends EntityCreature
 {

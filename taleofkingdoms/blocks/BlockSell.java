@@ -1,35 +1,23 @@
 package aginsun.taleofkingdoms.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import aginsun.taleofkingdoms.TaleOfKingdoms;
-import aginsun.taleofkingdoms.entities.TileEntitySell;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import aginsun.taleofkingdoms.TaleOfKingdoms;
+import aginsun.taleofkingdoms.entities.TileEntitySell;
 
 public class BlockSell extends BlockContainer
 {
 	protected BlockSell(int blockId)
 	{	
 		super(blockId, Material.rock);
-		setBlockName("BlockSell");
+		this.setUnlocalizedName("BlockSell");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
-	
-	@SideOnly(Side.CLIENT)
-	public String getTextureFile()
-	{
-		return "aginsun/textures/blocks.png";
-	}
-	@SideOnly(Side.CLIENT)
-    public int getBlockTextureFromSide(int i)
-    { 
-    	return 0;
-    }
 	
 	@Override
 	public TileEntity createNewTileEntity(World var1) 
@@ -50,4 +38,8 @@ public class BlockSell extends BlockContainer
     	
     }
     
+    public void registerIcons(IconRegister par1IconRegister)
+    {
+        this.blockIcon = par1IconRegister.registerIcon("TaleOfKingdoms:BlockSell");
+    }
 }

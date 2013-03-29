@@ -2,23 +2,17 @@ package aginsun.taleofkingdoms.items;
 
 import java.util.List;
 
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.world.World;
 import net.minecraftforge.common.EnumHelper;
+import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemExcaliburSword extends ItemSword
 {

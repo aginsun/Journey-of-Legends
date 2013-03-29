@@ -1,25 +1,21 @@
 package aginsun.taleofkingdoms.entities;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
 import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 public class TileEntitySell extends TileEntity implements IInventory
 {
@@ -52,7 +48,7 @@ public class TileEntitySell extends TileEntity implements IInventory
             for (int k = 0; k < inventory[i].stackSize; k++)
             {
                 Item item = inventory[i].getItem();
-                String s = item.getItemName();
+                String s = item.getUnlocalizedName();
                 FMLLog.fine(s);
                 j = goldvalues.PriceItem(s);
                 if(FMLCommonHandler.instance().getEffectiveSide().isServer())
@@ -133,5 +129,16 @@ public class TileEntitySell extends TileEntity implements IInventory
 	public EntityPlayer setPlayerName(EntityPlayer player)
 	{
 		return this.player = player;
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		return false;
+	}
+
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
 	}
 }
