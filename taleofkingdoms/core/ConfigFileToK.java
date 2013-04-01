@@ -18,8 +18,10 @@ public class ConfigFileToK
 		
 		config.load();
 		
-		InitItems.ItemCoinsID = config.getItem("Coins", 22125).getInt();
 		InitBlocks.BlockSellID = config.getBlock("SellBlock", 1750).getInt();
+		InitBlocks.BlockKingdomID = config.getBlock("KingdomBlock", 1751).getInt();
+		
+		InitItems.ItemCoinsID = config.getItem("Coins", 22125).getInt();
 		InitItems.ItemExcaliburID = config.getItem("Excalibur", 22126).getInt();
 		InitItems.ItemAgBladeID = config.getItem("Aginsuns Blade", 22127).getInt();
 		InitItems.ItemExcaliburMaceID = config.getItem("Excalibur Mace", 22128).getInt();

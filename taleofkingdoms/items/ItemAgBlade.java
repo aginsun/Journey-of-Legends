@@ -18,12 +18,6 @@ public class ItemAgBlade extends ItemSword
 		this.setCreativeTab(null);
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public String getTextureFile()
-	{
-    	return "/aginsun/textures/items.png";
-	}
-	
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
     {
     	if(player.username.equals("aginsun"))

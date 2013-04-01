@@ -24,11 +24,13 @@ import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import aginsun.taleofkingdoms.items.InitItems;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+@Mod(modid = "TaleOfKingdoms|Gui",name = "Tale of Kingdoms 2 Gui Expansion", dependencies = "TaleOfKingdoms@[2.0,)", version = "2.0.0")
 public class mod_GuiTickHandler extends BaseMod
 {
 	public GoldKeeper gold;

@@ -7415,7 +7415,7 @@ public class WorldGenGuild
         world.setBlock(i + 16, k + 3, j + 60, 98);
         world1.setBlockWithMetadata(i + 16, k + 3, j + 61, 86, 2);
         world.setBlock(i + 16, k + 3, j + 66, 85);
-        world.setBlock(i + 16, k + 3, j + 67, InitBlocks.BlockSell.blockID);
+        //world.setBlock(i + 16, k + 3, j + 67, InitBlocks.BlockSell.blockID);
         world.setBlock(i + 16, k + 3, j + 68, 58);
         world.setBlock(i + 16, k + 3, j + 69, 58);
         world.setBlock(i + 16, k + 3, j + 70, 58);
@@ -25809,7 +25809,7 @@ public class WorldGenGuild
         world.setBlock(i + 51, k + 3, j + 21, 4);
         world.setBlock(i + 51, k + 3, j + 22, 4);
         world.setBlock(i + 51, k + 3, j + 23, 48);
-        world.setBlock(i + 51, k + 3, j + 26, InitBlocks.BlockSell.blockID);
+        //world.setBlock(i + 51, k + 3, j + 26, InitBlocks.BlockSell.blockID);
         world.setBlock(i + 51, k + 3, j + 28, 85);
         world.setBlock(i + 51, k + 3, j + 54, 2);
         world.setBlock(i + 51, k + 3, j + 55, 2);

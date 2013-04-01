@@ -602,7 +602,8 @@ public class GuiShopList extends GuiScreen
             if (i <= gold.getGoldTotal(entityplayer))
             {
                 EntityItem entityitem = new EntityItem(worldObj, entityplayer.posX, entityplayer.posY, entityplayer.posZ, itemstack);
-                worldObj.spawnEntityInWorld(entityitem);
+                if(!worldObj.isRemote)
+                	worldObj.spawnEntityInWorld(entityitem);
                 gold.removeGold(entityplayer, i);
             }
             else
