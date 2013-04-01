@@ -9,14 +9,14 @@ import aginsun.taleofkingdoms.entities.TileEntityKingdom;
 
 public class ContainerKingdom extends Container
 {
-	private TileEntityKingdom kingdom;
+	protected TileEntityKingdom kingdom;
 	
 	public ContainerKingdom(TileEntityKingdom tileEntity, InventoryPlayer inventory) 
 	{
 		this.kingdom = tileEntity;
-		addSlotToContainer(new Slot(inventory, 0, 305, 119));
-		addSlotToContainer(new Slot(inventory, 1, 305, 83));		
-		addSlotToContainer(new Slot(inventory, 2, 305, 47));
+		addSlotToContainer(new Slot(tileEntity, 0, 305, 119));
+		addSlotToContainer(new Slot(tileEntity, 1, 305, 83));		
+		addSlotToContainer(new Slot(tileEntity, 2, 305, 47));
 		bindPlayerInventory(inventory);
 	}
 

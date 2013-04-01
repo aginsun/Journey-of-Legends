@@ -14,6 +14,11 @@ public class TileEntityKingdom extends TileEntity implements IInventory
 		inventory = new ItemStack[3];
 	}
 	
+	public void updateEntity()
+	{
+		
+	}
+	
 	@Override
 	public int getSizeInventory()
 	{
