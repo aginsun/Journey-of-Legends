@@ -16,9 +16,20 @@ public class GuiKingdom extends GuiContainer
 		super(new ContainerKingdom(tileEntity, inventory));
 	}
 	
+	@Override
+	public void initGui() {
+		super.initGui();
+		
+		xSize = 256 * 3;
+		ySize = 256 * 2 + 80;
+	}
+	
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        
+        int xSize = 176;
+        int ySize = 166;
         
         ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         int Width = scaledresolution.getScaledWidth() + 8;
@@ -28,12 +39,12 @@ public class GuiKingdom extends GuiContainer
         	mc.renderEngine.bindTexture("/mods/TaleOfKingdoms/textures/guis/GuiKingdomBackGround.png");
         	int l = (width - xSize) / 2;
         	int k = (height - ySize) / 2;
-        	drawTexturedModalRect(l, k, 0, 0, this.xSize, this.ySize);
-        	drawTexturedModalRect(l + xSize, k, 0, 0, this.xSize, this.ySize);
-        	drawTexturedModalRect(l - xSize, k, 0, 0, this.xSize, this.ySize);
-        	drawTexturedModalRect(l + xSize, k - ySize, 0, 0, this.xSize, this.ySize);
-        	drawTexturedModalRect(l, k - ySize, 0, 0, this.xSize, this.ySize);
-        	drawTexturedModalRect(l - xSize, k - ySize, 0, 0, this.xSize, this.ySize);
+        	drawTexturedModalRect(l, k, 0, 0, xSize, ySize);
+        	drawTexturedModalRect(l + xSize, k, 0, 0, xSize, ySize);
+        	drawTexturedModalRect(l - xSize, k, 0, 0, xSize, ySize);
+        	drawTexturedModalRect(l + xSize, k - ySize, 0, 0, xSize, ySize);
+        	drawTexturedModalRect(l, k - ySize, 0, 0, xSize, ySize);
+        	drawTexturedModalRect(l - xSize, k - ySize, 0, 0, xSize, ySize);
 
         }
         mc.renderEngine.resetBoundTexture();
