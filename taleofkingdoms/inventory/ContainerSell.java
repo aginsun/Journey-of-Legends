@@ -1,44 +1,42 @@
-package aginsun.taleofkingdoms.containers;
+package aginsun.taleofkingdoms.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import aginsun.taleofkingdoms.entities.TileEntityKingdom;
+import aginsun.taleofkingdoms.entities.TileEntitySell;
 
-public class ContainerKingdom extends Container
+public class ContainerSell extends Container
 {
-	protected TileEntityKingdom kingdom;
-	
-	public ContainerKingdom(TileEntityKingdom tileEntity, InventoryPlayer inventory) 
+	protected TileEntitySell tile_entity;
+
+	public ContainerSell(TileEntitySell tile_entity, InventoryPlayer player_inventory)
 	{
-		this.kingdom = tileEntity;
-		addSlotToContainer(new Slot(tileEntity, 0, 305, 119));
-		addSlotToContainer(new Slot(tileEntity, 1, 305, 83));		
-		addSlotToContainer(new Slot(tileEntity, 2, 305, 47));
-		bindPlayerInventory(inventory);
+		this.tile_entity = tile_entity;
+		addSlotToContainer(new Slot(tile_entity, 0, 116, 35));
+		bindPlayerInventory(player_inventory);
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
-		return kingdom.isUseableByPlayer(player);
+		return tile_entity.isUseableByPlayer(player);
 	}
-	
+
 	protected void bindPlayerInventory(InventoryPlayer player_inventory)
 	{
 		for(int i = 0; i < 3; i++)
 		{
 			for(int j = 0; j < 9; j++)
 			{
-				addSlotToContainer(new Slot(player_inventory, j + i * 9 + 9, 4 + j * 18, 168 + i * 18));
+				addSlotToContainer(new Slot(player_inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 
 		for(int i = 0; i < 9; i++)	
 		{
-			addSlotToContainer(new Slot(player_inventory, i, 4 + i * 18, 226));
+			addSlotToContainer(new Slot(player_inventory, i, 8 + i * 18, 142));
 		}
 	}
 	
@@ -68,8 +66,7 @@ public class ContainerKingdom extends Container
 			if(stack_in_slot.stackSize == 0)
 			{
 				slot_object.putStack(null);
-			} 
-			else
+			} else
 			{
 				slot_object.onSlotChanged();
 			}

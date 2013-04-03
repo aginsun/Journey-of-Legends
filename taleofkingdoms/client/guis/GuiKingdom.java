@@ -6,8 +6,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.opengl.GL11;
 
-import aginsun.taleofkingdoms.containers.ContainerKingdom;
 import aginsun.taleofkingdoms.entities.TileEntityKingdom;
+import aginsun.taleofkingdoms.inventory.ContainerKingdom;
 
 public class GuiKingdom extends GuiContainer
 {

@@ -14,7 +14,7 @@ public class ItemAgBlade extends ItemSword
 	public static EnumToolMaterial AgBlade = EnumHelper.addToolMaterial("AgBlade", 3, -1, 50.0F, 10000, 22);
 	public ItemAgBlade(int par1) 
 	{
-		super(par1, AgBlade);
+		super(par1, EnumToolMaterial.EMERALD);
 		this.setCreativeTab(null);
 	}
 	

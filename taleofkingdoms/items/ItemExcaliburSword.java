@@ -18,22 +18,16 @@ public class ItemExcaliburSword extends ItemSword
 {
 	private EntityPlayer player;
 	private StatKeeper stats;
-	private static int weaponDamage;
-	public static EnumToolMaterial Ex = EnumHelper.addToolMaterial("Ex", 0, -1, 0, weaponDamage, 10);
+	public static int weaponDamage = 0;
+	public static EnumToolMaterial Ex = EnumHelper.addToolMaterial("Ex", 0, 1500, 0, weaponDamage, 10);
 	
 	public ItemExcaliburSword(int par1) 
 	{
-		super(par1, Ex);
+		super(par1, EnumToolMaterial.EMERALD);
 		this.maxStackSize = 1;
 		this.setMaxDamage(-1);
 		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
-	
-    @SideOnly(Side.CLIENT)
-    public String getTextureFile()
-    {
-    	return "/aginsun/textures/items.png";
-    }
     
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
     {

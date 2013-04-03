@@ -23,18 +23,12 @@ public class ItemExcaliburMace extends ItemSword
 	
 	public ItemExcaliburMace(int par1) 
 	{
-		super(par1, Ex);
+		super(par1, EnumToolMaterial.EMERALD);
 		this.maxStackSize = 1;
 		this.weaponDamage = 5;
 		this.setMaxDamage(-1);
 		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
-	
-    @SideOnly(Side.CLIENT)
-    public String getTextureFile()
-    {
-    	return "/aginsun/textures/items.png";
-    }
     
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
     {

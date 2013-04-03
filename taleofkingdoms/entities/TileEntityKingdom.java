@@ -1,14 +1,29 @@
 package aginsun.taleofkingdoms.entities;
 
+
+import java.util.HashMap;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class TileEntityKingdom extends TileEntity implements IInventory 
 {
-	private ItemStack[] inventory;	
+	private ItemStack[] inventory;
+	private EntityPlayer player;
+	private HashMap<Item, Integer> ItemList = new HashMap<Item, Integer>();
+	private List<Integer> itemList;
+	private NBTTagCompound nbttagcompound = new NBTTagCompound();
+	
 	public TileEntityKingdom()
 	{
 		inventory = new ItemStack[3];
@@ -16,7 +31,29 @@ public class TileEntityKingdom extends TileEntity implements IInventory
 	
 	public void updateEntity()
 	{
+		int GoldValue = 0;
 		
+		/* Sell Slot */
+		if(this.getStackInSlot(0) != null)
+		{
+			String itemName = this.getStackInSlot(0).getItemName(); //Returns Unlocalized name!
+			GoldValue = GoldValues.PriceItem(itemName);
+			if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+				GoldKeeper.addGold(player, GoldValue);
+			this.decrStackSize(0, 1);
+		}
+		
+		if(this.getStackInSlot(1) != null)
+		{
+			int i = nbttagcompound.getInteger(this.getStackInSlot(1).getItem().getUnlocalizedName());
+			i++;
+			if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+			{
+				System.out.println("Current items: " + i);
+				System.out.println("ItemName: " + this.getStackInSlot(i).getItem().getUnlocalizedName());
+			}
+			nbttagcompound.setInteger(this.getStackInSlot(1).getItem().getUnlocalizedName(), i);
+		}
 	}
 	
 	@Override
@@ -110,11 +147,18 @@ public class TileEntityKingdom extends TileEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
+		nbt.setTag("ItemList", nbttagcompound);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
+		nbttagcompound = (NBTTagCompound) nbt.getTag("ItemList");
+	}
+	
+	public EntityPlayer setPlayerName(EntityPlayer player)
+	{
+		return this.player = player;
 	}
 }

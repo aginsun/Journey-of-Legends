@@ -31,6 +31,7 @@ public class BlockKingdom extends BlockContainer
 		{
 			return false;
 		}
+		tile_entity.setPlayerName(player);
 		player.openGui(TaleOfKingdoms.instance, GuiIds.GUI_KINGDOM, world, x, y, z);
 		return true;   	
     }

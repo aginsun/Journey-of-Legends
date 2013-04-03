@@ -5,11 +5,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import aginsun.taleofkingdoms.client.guis.GuiKingdom;
 import aginsun.taleofkingdoms.client.guis.GuiSell;
-import aginsun.taleofkingdoms.containers.ContainerKingdom;
-import aginsun.taleofkingdoms.containers.ContainerSell;
 import aginsun.taleofkingdoms.core.helpers.GuiIds;
 import aginsun.taleofkingdoms.entities.TileEntityKingdom;
 import aginsun.taleofkingdoms.entities.TileEntitySell;
+import aginsun.taleofkingdoms.inventory.ContainerKingdom;
+import aginsun.taleofkingdoms.inventory.ContainerSell;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler
