@@ -49,7 +49,6 @@ public class TileEntitySell extends TileEntity implements IInventory
             {
                 Item item = inventory[i].getItem();
                 String s = item.getUnlocalizedName();
-                FMLLog.fine(s);
                 j = goldvalues.PriceItem(s);
                 if(FMLCommonHandler.instance().getEffectiveSide().isServer())
                 	gold.addGold(setPlayerName(player), j);

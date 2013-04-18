@@ -13,14 +13,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class PacketWorthy extends PacketToK
 {
-	private float Worthy;
+	private int Worthy;
 	private String username;
 	public PacketWorthy() 
 	{
 		super(PacketType.WORTHY, false);
 	}
 	
-	public PacketWorthy(String username, float Worthy)
+	public PacketWorthy(String username, int Worthy)
 	{
 		super(PacketType.WORTHY, false);
 		this.username = username;
@@ -30,13 +30,13 @@ public class PacketWorthy extends PacketToK
 	public void readData(DataInputStream data) throws IOException
 	{
 		this.username = data.readUTF();
-		this.Worthy = data.readFloat();
+		this.Worthy = data.readInt();
 	}
 	
 	public void writeData(DataOutputStream dos) throws IOException
 	{
 		dos.writeUTF(username);
-		dos.writeFloat(Worthy);
+		dos.writeInt(Worthy);
 	}
 	
 	public void execute(INetworkManager network, Player player)

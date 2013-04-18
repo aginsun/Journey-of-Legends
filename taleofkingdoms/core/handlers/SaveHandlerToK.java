@@ -75,7 +75,7 @@ public class SaveHandlerToK implements IPlayerTracker
 	{
 		data =  player.getEntityData().getCompoundTag(player.PERSISTED_NBT_TAG);
 		data.setInteger("GoldTotal", gold.getGoldTotal(player));
-		data.setFloat("Worthy", worthy.getWorthy(player));
+		data.setInteger("Worthy", worthy.getWorthy(player));
 		data.setInteger("Strength", stats.getStrengthPoints(player));
 		data.setInteger("DEX", stats.getDexerityPoints(player));
 		data.setInteger("INT", stats.getIntelligencePoints(player));
@@ -96,7 +96,7 @@ public class SaveHandlerToK implements IPlayerTracker
 			if(data != null)
 			{
 				gold.setGold(player, data.getInteger("GoldTotal"));
-				worthy.setWorthy(player, data.getFloat("Worthy"));
+				worthy.setWorthy(player, data.getInteger("Worthy"));
 				stats.setStrengthPoints(player, data.getInteger("Strength"));
 				stats.setDexerityPoints(player, data.getInteger("DEX"));
 				stats.setIntelligencePoints(player, data.getInteger("INT"));

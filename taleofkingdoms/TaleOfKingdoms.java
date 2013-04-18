@@ -1,5 +1,6 @@
 package aginsun.taleofkingdoms;
 
+import net.minecraft.block.Block;
 import net.minecraft.command.CommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import aginsun.taleofkingdoms.blocks.InitBlocks;
@@ -10,10 +11,12 @@ import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
 import aginsun.taleofkingdoms.core.handlers.EntityLivingHandler;
 import aginsun.taleofkingdoms.core.handlers.LivingAttackEventHandler;
 import aginsun.taleofkingdoms.core.handlers.PacketHandler;
+import aginsun.taleofkingdoms.core.handlers.PickupHandler;
 import aginsun.taleofkingdoms.core.handlers.SaveHandlerToK;
 import aginsun.taleofkingdoms.core.handlers.commands.CommandTaleofKingdoms;
 import aginsun.taleofkingdoms.entities.InitEntities;
 import aginsun.taleofkingdoms.items.InitItems;
+import aginsun.taleofkingdoms.worldgen.WorldgenChests;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -42,7 +45,7 @@ public class TaleOfKingdoms
 	
 	@SidedProxy(clientSide="aginsun.taleofkingdoms.client.core.ClientProxy",serverSide="aginsun.taleofkingdoms.core.CommonProxy")
 	public static CommonProxy proxy;
-	
+		
 	@PreInit
 	public void PreInit(FMLPreInitializationEvent event)
 	{
@@ -69,6 +72,10 @@ public class TaleOfKingdoms
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 		
 		MinecraftForge.EVENT_BUS.register(new LivingAttackEventHandler());
+		
+		MinecraftForge.EVENT_BUS.register(new PickupHandler());
+		
+		WorldgenChests.Init();
 	}
 	
 	@PostInit

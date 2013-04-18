@@ -1,5 +1,6 @@
 package aginsun.taleofkingdoms.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -27,7 +28,7 @@ public class BlockSell extends BlockContainer
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
-		TileEntitySell tile_entity = (TileEntitySell)world.getBlockTileEntity(x, y, z);
+    	TileEntitySell tile_entity = (TileEntitySell)world.getBlockTileEntity(x, y, z);
 		if(tile_entity == null || par5EntityPlayer.isSneaking())
 		{
 			return false;

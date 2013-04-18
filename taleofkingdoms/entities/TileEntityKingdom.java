@@ -8,13 +8,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
+import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
+import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 public class TileEntityKingdom extends TileEntity implements IInventory 
 {
@@ -22,7 +24,9 @@ public class TileEntityKingdom extends TileEntity implements IInventory
 	private EntityPlayer player;
 	private HashMap<Item, Integer> ItemList = new HashMap<Item, Integer>();
 	private List<Integer> itemList;
-	private NBTTagCompound nbttagcompound = new NBTTagCompound();
+	private Player par1player;
+	public NBTTagCompound nbttagcompound = new NBTTagCompound();
+	private GoldKeeper gold;
 	
 	public TileEntityKingdom()
 	{
@@ -31,28 +35,12 @@ public class TileEntityKingdom extends TileEntity implements IInventory
 	
 	public void updateEntity()
 	{
-		int GoldValue = 0;
-		
-		/* Sell Slot */
-		if(this.getStackInSlot(0) != null)
-		{
-			String itemName = this.getStackInSlot(0).getItemName(); //Returns Unlocalized name!
-			GoldValue = GoldValues.PriceItem(itemName);
-			if(FMLCommonHandler.instance().getEffectiveSide().isServer())
-				GoldKeeper.addGold(player, GoldValue);
-			this.decrStackSize(0, 1);
-		}
-		
 		if(this.getStackInSlot(1) != null)
 		{
 			int i = nbttagcompound.getInteger(this.getStackInSlot(1).getItem().getUnlocalizedName());
 			i++;
-			if(FMLCommonHandler.instance().getEffectiveSide().isServer())
-			{
-				System.out.println("Current items: " + i);
-				System.out.println("ItemName: " + this.getStackInSlot(i).getItem().getUnlocalizedName());
-			}
 			nbttagcompound.setInteger(this.getStackInSlot(1).getItem().getUnlocalizedName(), i);
+			decrStackSize(1, 1);
 		}
 	}
 	
@@ -65,6 +53,24 @@ public class TileEntityKingdom extends TileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
+        int j = 0;
+        if (inventory[0] != null)
+        {
+            for (int k = 0; k < inventory[0].stackSize; k++)
+            {
+                Item item = inventory[0].getItem();
+                String s = item.getUnlocalizedName();
+                j = GoldValues.PriceItem(s);
+                if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+                	gold.addGold(setPlayerName(player), j);
+        		this.par1player = (Player)player;
+                PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(player.username, gold.getGoldTotal(player))), par1player);
+            }
+            if (j != 0)
+            {
+                inventory[0] = null;
+            }
+        }
 		return inventory[i];
 	}
 	

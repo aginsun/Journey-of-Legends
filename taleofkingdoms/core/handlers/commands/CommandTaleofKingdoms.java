@@ -3,16 +3,22 @@ package aginsun.taleofkingdoms.core.handlers.commands;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import aginsun.taleofkingdoms.client.guis.GuiRaceSelect;
 import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
 import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
+import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
+import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
+import aginsun.taleofkingdoms.entities.TileEntityKingdom;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class CommandTaleofKingdoms extends CommandBase
 {
 	private GoldKeeper gold;
 	private StatKeeper stats;
+	private World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
 	
 	@Override
 	public String getCommandName() 
@@ -25,12 +31,12 @@ public class CommandTaleofKingdoms extends CommandBase
 	{
 		if(args[0].matches("stats"))
 		{
-			if(args[1].matches("Level"))
+			if(args[1].matches("Worthy"))
 			{
 				if(args.length >= 3)
 				{
 					int i = parseIntWithMin(sender, args[2], 1);
-					stats.setLevel((EntityPlayer)sender, i);
+					WorthyKeeper.setWorthy((EntityPlayer)sender, i);
 				}
 			}
 			if(args[1].matches("Strength"))
@@ -59,6 +65,23 @@ public class CommandTaleofKingdoms extends CommandBase
 			}
 		}
 		
+		if(args[0].matches("TileEntityCheck"))
+		{
+			int x = parseInt(sender, args[1]);
+			int y = parseInt(sender, args[2]);
+			int z = parseInt(sender, args[3]);
+			TileEntityKingdom tileentity = (TileEntityKingdom)world.getBlockTileEntity(x, y, z);
+			int BlockID = parseIntWithMin(sender, args[4], 1);
+			int MetaData = 0;
+			if(args.length >= 5)
+			{
+				MetaData = parseInt(sender, args[5]);
+			}
+			ItemStack item = new ItemStack(BlockID, 1, MetaData);
+			int LALA = tileentity.nbttagcompound.getInteger(item.getItem().getUnlocalizedName());
+			sender.sendChatToPlayer(new StringBuilder().append(LALA).toString());
+		}
+		
 		if(args[0].matches("Reset"))
 		{
 			RaceKeeper.Race.clear();
@@ -70,6 +93,9 @@ public class CommandTaleofKingdoms extends CommandBase
 				FMLCommonHandler.instance().showGuiScreen(new GuiRaceSelect());
 			}
 		}
+		if(args[0].matches("Kingdom"))
+		{
+			CommonTickHandler.ks = true;
+		}
 	}
-
 }

@@ -6,28 +6,28 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class WorthyKeeper
 {
-	private static HashMap<String, Float> WorthyMap = new HashMap<String, Float>();
+	private static HashMap<String, Integer> WorthyMap = new HashMap<String, Integer>();
 	
 	public static void addWorthy(EntityPlayer player)
 	{
-		float Worthy = getWorthy(player);
+		int Worthy = getWorthy(player);
 		Worthy++;
 		setWorthy(player, Worthy);
 	}
 	
-	public static void addWorthy(EntityPlayer player, float Worthy)
+	public static void addWorthy(EntityPlayer player, int Worthy)
 	{
-		float worthy = getWorthy(player);
+		int worthy = getWorthy(player);
 		worthy += Worthy;
 		setWorthy(player, worthy);
 	}
 	
-	public static void setWorthy(EntityPlayer player, float worthy)
+	public static void setWorthy(EntityPlayer player, int worthy)
 	{
 		WorthyMap.put(player.username, worthy);
 	}
 	
-	public static float getWorthy(EntityPlayer player)
+	public static int getWorthy(EntityPlayer player)
 	{
 		if(!WorthyMap.containsKey(player.username))
 		{

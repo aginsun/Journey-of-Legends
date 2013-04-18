@@ -31,7 +31,7 @@ public class EntityGuildMember extends EntityCreature
     public EntityGuildMember(World world)
     {
         super(world);
-        defaultHeldItem = new ItemStack(Item.swordSteel, 1);
+        defaultHeldItem = new ItemStack(Item.swordIron, 1);
         fight = false;
         counter = 0;
         worldObj = world;
@@ -139,7 +139,7 @@ public class EntityGuildMember extends EntityCreature
                 }
                 else if ((entity instanceof EntityMob))
                 {
-                	defaultHeldItem = new ItemStack(Item.swordSteel, 1);
+                	defaultHeldItem = new ItemStack(Item.swordIron, 1);
                     entityToAttack = entity;          
                 }
             }

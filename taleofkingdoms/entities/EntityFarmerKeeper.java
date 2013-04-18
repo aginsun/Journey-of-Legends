@@ -19,7 +19,7 @@ public class EntityFarmerKeeper extends EntityCreature
     {
         super(world);
         freebread = true;
-        defaultHeldItem = new ItemStack(Item.hoeSteel, 1);
+        defaultHeldItem = new ItemStack(Item.hoeIron, 1);
         worldObj = world;
         texture = "/aginsun/textures/inn.png";
         moveSpeed = 1.2F;

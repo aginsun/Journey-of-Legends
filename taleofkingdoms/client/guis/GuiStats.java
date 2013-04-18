@@ -20,7 +20,7 @@ public class GuiStats extends GuiScreen
 	{
         buttonList.clear();
 
-		if(level.getLevelUps(player) > 0)
+		if(level.getLevelPoints(player) > 0)
 		{
 			buttonList.add(new GuiButton(1, width / 2 - 20, 15, 120, 20, "Upgrade Strength"));
 			buttonList.add(new GuiButton(2, width / 2 - 20, 75, 120, 20, "Upgrade Dexerity"));
@@ -94,7 +94,7 @@ public class GuiStats extends GuiScreen
     	drawString(fontRenderer, new StringBuilder("Dexerity: ").append(stats.getDexerityPoints(player)).toString(), width / 2 - 100, 80, 0xffcc00);
     	drawString(fontRenderer, new StringBuilder("Intelligence: ").append(stats.getIntelligencePoints(player)).toString(), width / 2 - 100, 140, 0xffcc00);
     	drawString(fontRenderer, new StringBuilder("Luck: ").append(stats.getLuckPoints(player)).toString(), width / 2 - 100, 200, 0xffcc00);
-
+    	drawString(fontRenderer, new StringBuilder("Luck: ").append(LevelKeeper.getLevelPoints(player)).toString(), width / 2 - 100, 220, 0xffcc00);
         for (int m = 0; m < buttonList.size(); m++)
         {
             GuiButton guibutton = (GuiButton)buttonList.get(m);
