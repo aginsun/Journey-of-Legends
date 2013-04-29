@@ -1,5 +1,7 @@
 package aginsun.taleofkingdoms.client.guis;
 
+import java.awt.Color;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -10,7 +12,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
+import aginsun.taleofkingdoms.api.GoldKeeper;
 import aginsun.taleofkingdoms.entities.TileEntityKingdom;
 import aginsun.taleofkingdoms.inventory.ContainerKingdom;
 import aginsun.taleofkingdoms.worldgen.WorldGenBuildingsPart1;
@@ -48,11 +50,11 @@ public class GuiKingdom extends GuiContainer
 		ySize = 256 * 2 + 80;
 		{
 			this.buttonList.clear();
-			this.buttonList.add(buttonYes = new GuiButton(1, width / 2, height / 2 + 30, 60, 20, "Yes"));
-			this.buttonList.add(buttonNo = new GuiButton(2, width / 2, height / 2 + 60, 60, 20, "No"));
-			this.buttonList.add(buttonSelectPart = new GuiButton(3, width / 2, height / 2 + 90, 150, 20, "Different part of Kingdom"));
-			this.buttonList.add(buttonPriceList = new GuiButton(4, width / 2, height / 2 + 120, 60, 20, "PriceList"));
-			this.buttonList.add(buttonSelectBuild = new GuiButton(5, width / 2, height / 2, 60, 20, "Building"));
+			//this.buttonList.add(buttonYes = new GuiButton(1, width / 2, height / 2 + 30, 60, 20, "Yes"));
+			//this.buttonList.add(buttonNo = new GuiButton(2, width / 2, height / 2 + 60, 60, 20, "No"));
+			//this.buttonList.add(buttonSelectPart = new GuiButton(3, width / 2, height / 2 + 90, 150, 20, "Different part of Kingdom"));
+			//this.buttonList.add(buttonPriceList = new GuiButton(4, width / 2, height / 2 + 120, 60, 20, "PriceList"));
+			//this.buttonList.add(buttonSelectBuild = new GuiButton(5, width / 2, height / 2, 60, 20, "Building"));
 		}
 	}
 	
@@ -93,42 +95,29 @@ public class GuiKingdom extends GuiContainer
         int Height = scaledresolution.getScaledHeight(); //TODO
         
         {
+        	mc.renderEngine.bindTexture("/mods/TaleOfKingdoms/textures/guis/GuiKingdom.png");
+        	int l = (width - 320) / 2;
+        	int k = (height - 325) / 2;
+        	drawTexturedModalRect(l, k, 0, 0, 256, 256);
+        }
+        {
         	mc.renderEngine.bindTexture("/mods/TaleOfKingdoms/textures/guis/GuiKingdomBackGround.png");
-        	int l = (width - xSize) / 2;
-        	int k = (height - ySize) / 2;
-        	drawTexturedModalRect(l, k, 0, 0, xSize, ySize);
-        	drawTexturedModalRect(l + xSize, k, 0, 0, xSize, ySize);
-        	drawTexturedModalRect(l - xSize, k, 0, 0, xSize, ySize);
-        	drawTexturedModalRect(l + xSize, k - ySize, 0, 0, xSize, ySize);
-        	drawTexturedModalRect(l, k - ySize, 0, 0, xSize, ySize);
-        	drawTexturedModalRect(l - xSize, k - ySize, 0, 0, xSize, ySize);
-
+        	int l = (width - 320) / 2;
+        	int k = (height - 325) / 2;
+        	drawTexturedModalRect(l + 256, k, 0, 0, 256, 256);
         }
         mc.renderEngine.resetBoundTexture();
         {
         	mc.renderEngine.bindTexture("/mods/TaleOfKingdoms/textures/guis/GuiKingdomInventory.png");
-        	int l = (width - xSize) / 2;
-        	int k = (height - ySize) / 2;
-        	drawTexturedModalRect(l, k + ySize, 0, 0, xSize, ySize);
-        }
-        mc.renderEngine.resetBoundTexture();
-        {
-        	mc.renderEngine.bindTexture("/mods/TaleOfKingdoms/textures/guis/GuiKingdomSlot.png");
-        	int l = (width - xSize) / 2;
-        	int k = (height - ySize) / 2;
-        	drawTexturedModalRect(l + (xSize * 2) - 52, k + ySize - 52, 0, 0, xSize, ySize);
-        	drawTexturedModalRect(l + (xSize * 2) - 52, k + ySize - 88, 0, 0, xSize, ySize);
-        	drawTexturedModalRect(l + (xSize * 2) - 52, k + ySize - 124, 0, 0, xSize, ySize);
+        	int l = (width - 320) / 2;
+        	int k = (height - 325) / 2;
+        	drawTexturedModalRect(l + 62, k + 256, 0, 0, 203, 69);
         }
     }
     
     public void drawGuiContainerForegroundLayer(int i, int j)
     {
-        fontRenderer.drawString((new StringBuilder()).append(GoldKeeper.getGoldTotal(player)).append(" Gold Coins").toString(), 30, 50, 0x404040);
-        fontRenderer.drawString("I Calld bs", 30, 50, 0x404040);
-        fontRenderer.drawString("", 30, 50, 0x404040);
-        fontRenderer.drawString("", 30, 50, 0x404040);
-        fontRenderer.drawString("", 30, 50, 0x404040);
+        fontRenderer.drawString((new StringBuilder()).append("Coins: ").append(GoldKeeper.getGoldTotal(player)).toString(), (width - 320) / 2 - 59, (height - 325) / 2 - 71, Color.RED.getRGB());
     }
     
     @Override

@@ -19,10 +19,9 @@ public class ContainerKingdom extends Container
 	{
 		this.kingdom = tileEntity;
 		bindPlayerInventory(inventory);
-		addSlotToContainer(this.slotSell = new SlotKingdomSell(this, tileEntity, 0, 305, 119));
-		addSlotToContainer(new Slot(tileEntity, 1, 305, 83));		
-		addSlotToContainer(new Slot(tileEntity, 2, 305, 47));
-		
+		addSlotToContainer(this.slotSell = new SlotKingdomSell(this, tileEntity, 0, 202, 120));
+		addSlotToContainer(new Slot(tileEntity, 1, 160, 120));		
+		addSlotToContainer(new Slot(tileEntity, 2, 121, 120));
 	}
 
 	@Override
@@ -35,13 +34,13 @@ public class ContainerKingdom extends Container
 	{
         for (int var4 = 0; var4 < 9; ++var4) 
         {
-            this.addSlotToContainer(new Slot(player_inventory, var4, 4 + var4 * 18, 226));
+            this.addSlotToContainer(new Slot(player_inventory, var4, 11 + var4 * 18, 224));
         }
         for (int var4 = 0; var4 < 3; ++var4)
         {
             for (int var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new Slot(player_inventory, (var5 + (var4 + 1) * 9), 4 + var5 * 18, 168 + var4 * 18));
+                this.addSlotToContainer(new Slot(player_inventory, (var5 + (var4 + 1) * 9), 11 + var5 * 18, 166 + var4 * 18));
             }
         }
 	}

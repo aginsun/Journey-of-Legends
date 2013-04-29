@@ -6,8 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.opengl.GL11;
 
-import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
+import aginsun.taleofkingdoms.api.LevelKeeper;
+import aginsun.taleofkingdoms.api.QuestHandler;
+import aginsun.taleofkingdoms.api.StatKeeper;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class GuiStats extends GuiScreen
@@ -35,10 +36,6 @@ public class GuiStats extends GuiScreen
 		{
 			level.decreaseLevelPoints(player);
 			stats.addStrengthPoints(player, 1);
-			if(level.getLevelPoints(player) == 0)
-			{
-				level.decreaseLevelUps(player);
-			}
 			
 			initGui();
 		}
@@ -46,10 +43,6 @@ public class GuiStats extends GuiScreen
 		{
 			level.decreaseLevelPoints(player);
 			stats.addDexPoints(player, 1);
-			if(level.getLevelPoints(player) == 0)
-			{
-				level.decreaseLevelUps(player);
-			}
 			
 			initGui();
 		}
@@ -57,10 +50,6 @@ public class GuiStats extends GuiScreen
 		{
 			level.decreaseLevelPoints(player);
 			stats.addIntPoints(player, 1);
-			if(level.getLevelPoints(player) == 0)
-			{
-				level.decreaseLevelUps(player);
-			}
 			
 			initGui();
 		}
@@ -68,10 +57,6 @@ public class GuiStats extends GuiScreen
 		{
 			level.decreaseLevelPoints(player);
 			stats.addLukPoints(player, 1);
-			if(level.getLevelPoints(player) == 0)
-			{
-				level.decreaseLevelUps(player);
-			}
 			
 			initGui();
 		}
@@ -81,6 +66,12 @@ public class GuiStats extends GuiScreen
     {
         return false;
     }
+    
+    public void onGuiClosed() 
+    {
+    	QuestHandler.setQuestFinished(player, "TheStart");
+    }
+
     
     public void drawScreen(int i, int j, float f)
 	{

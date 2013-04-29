@@ -9,6 +9,7 @@ import aginsun.taleofkingdoms.core.CommonProxy;
 import aginsun.taleofkingdoms.core.ConfigFileToK;
 import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
 import aginsun.taleofkingdoms.core.handlers.EntityLivingHandler;
+import aginsun.taleofkingdoms.core.handlers.GoldValues;
 import aginsun.taleofkingdoms.core.handlers.LivingAttackEventHandler;
 import aginsun.taleofkingdoms.core.handlers.PacketHandler;
 import aginsun.taleofkingdoms.core.handlers.PickupHandler;
@@ -79,7 +80,9 @@ public class TaleOfKingdoms
 	}
 	
 	@PostInit
-	public void PostInit(FMLPostInitializationEvent event){}
+	public void PostInit(FMLPostInitializationEvent event){
+		GoldValues.setGoldValues();
+	}
 	
 	@ServerStarting
 	public void serverStarting(FMLServerStartingEvent event)

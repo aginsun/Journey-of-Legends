@@ -10,9 +10,9 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.StringTranslate;
 import net.minecraft.world.World;
+import aginsun.taleofkingdoms.api.GoldKeeper;
 import aginsun.taleofkingdoms.client.guis.GuiShopList;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
+import aginsun.taleofkingdoms.core.handlers.GoldValues;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class EntityWeaponKeeper extends EntityCreature
@@ -113,7 +113,7 @@ public class EntityWeaponKeeper extends EntityCreature
                 }
                 if (s != null)
                 {
-                    j = gold1.PriceItem(s);
+                    j = gold1.getGoldValue(s);
                 }
                 String s1 = (new StringBuilder(String.valueOf(item.getUnlocalizedName()))).append(".name").toString();
                 String s2 = st.translateKey(s1);

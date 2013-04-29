@@ -7,9 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
+import aginsun.taleofkingdoms.api.GoldKeeper;
+import aginsun.taleofkingdoms.api.StatKeeper;
+import aginsun.taleofkingdoms.core.handlers.RaceKeeper;
 
 public class ItemDebug extends Item
 {

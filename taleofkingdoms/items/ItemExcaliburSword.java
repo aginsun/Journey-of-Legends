@@ -9,8 +9,8 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.EnumHelper;
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
+import aginsun.taleofkingdoms.api.StatKeeper;
+import aginsun.taleofkingdoms.core.handlers.RaceKeeper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

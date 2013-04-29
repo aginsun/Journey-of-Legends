@@ -6,14 +6,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
-import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
+import aginsun.taleofkingdoms.api.ExperienceKeeper;
+import aginsun.taleofkingdoms.api.GoldKeeper;
+import aginsun.taleofkingdoms.core.handlers.GoldValues;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
@@ -24,9 +22,8 @@ public class TileEntitySell extends TileEntity implements IInventory
     public World world;
     public EntityPlayer player;
     public GoldValues goldvalues;
-    public WorthyKeeper worthy;
+    public ExperienceKeeper experience;
     public Player par1player;
-    public HunterKeeper hunter;
 
 	public TileEntitySell()
 	{
@@ -49,7 +46,7 @@ public class TileEntitySell extends TileEntity implements IInventory
             {
                 Item item = inventory[i].getItem();
                 String s = item.getUnlocalizedName();
-                j = goldvalues.PriceItem(s);
+                j = goldvalues.getGoldValue(s);
                 if(FMLCommonHandler.instance().getEffectiveSide().isServer())
                 	gold.addGold(setPlayerName(player), j);
         		this.par1player = (Player)player;

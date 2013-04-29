@@ -6,37 +6,37 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
-import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
+import aginsun.taleofkingdoms.api.ExperienceKeeper;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class PacketWorthy extends PacketToK
+public class PacketExperience extends PacketToK
 {
-	private int Worthy;
+	private int Experience;
 	private String username;
-	public PacketWorthy() 
+	public PacketExperience() 
 	{
-		super(PacketType.WORTHY, false);
+		super(PacketType.EXPERIENCE, false);
 	}
 	
-	public PacketWorthy(String username, int Worthy)
+	public PacketExperience(String username, int Experience)
 	{
-		super(PacketType.WORTHY, false);
+		super(PacketType.EXPERIENCE, false);
 		this.username = username;
-		this.Worthy = Worthy;
+		this.Experience = Experience;
 	}
 	
 	public void readData(DataInputStream data) throws IOException
 	{
 		this.username = data.readUTF();
-		this.Worthy = data.readInt();
+		this.Experience = data.readInt();
 	}
 	
 	public void writeData(DataOutputStream dos) throws IOException
 	{
 		dos.writeUTF(username);
-		dos.writeInt(Worthy);
+		dos.writeInt(Experience);
 	}
 	
 	public void execute(INetworkManager network, Player player)
@@ -49,6 +49,6 @@ public class PacketWorthy extends PacketToK
 	@SideOnly(Side.CLIENT)
 	public void setWorthy(EntityPlayer player)
 	{
-		WorthyKeeper.setWorthy(player, Worthy);
+		ExperienceKeeper.setExperience(player, Experience);
 	}
 }

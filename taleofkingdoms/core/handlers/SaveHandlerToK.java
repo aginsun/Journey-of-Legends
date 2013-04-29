@@ -2,16 +2,15 @@ package aginsun.taleofkingdoms.core.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.HunterKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
+import aginsun.taleofkingdoms.api.ExperienceKeeper;
+import aginsun.taleofkingdoms.api.GoldKeeper;
+import aginsun.taleofkingdoms.api.LevelKeeper;
+import aginsun.taleofkingdoms.api.QuestHandler;
+import aginsun.taleofkingdoms.api.StatKeeper;
+import aginsun.taleofkingdoms.core.handlers.packets.PacketExperience;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketStats;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
-import aginsun.taleofkingdoms.core.handlers.packets.PacketWorthy;
 import aginsun.taleofkingdoms.items.InitItems;
 import cpw.mods.fml.common.IPlayerTracker;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -23,12 +22,11 @@ public class SaveHandlerToK implements IPlayerTracker
 	private static SaveHandlerToK instance;
 	public static int Worthy;
 	private GoldKeeper gold;
-	private WorthyKeeper worthy;
+	private ExperienceKeeper experience;
 	private StatKeeper stats;
 	private EntityPlayer player;
 	private NBTTagCompound data;
 	public Player par1player;
-	public HunterKeeper hunter;
 	private LevelKeeper level;
 	private RaceKeeper race;
 	
@@ -53,7 +51,7 @@ public class SaveHandlerToK implements IPlayerTracker
 			receiver.dropItem(InitItems.ItemAgBladeID, 1);
 		}
 		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(receiver.username, gold.getGoldTotal(receiver))), par1player);
-		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketWorthy(receiver.username, worthy.getWorthy(receiver))), par1player);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketExperience(receiver.username, experience.getExperience(receiver))), par1player);
 		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketStats(receiver.username, stats.getStrengthPoints(receiver), 
 																										 stats.getDexerityPoints(receiver), 
 																										 stats.getIntelligencePoints(receiver), 
@@ -75,16 +73,16 @@ public class SaveHandlerToK implements IPlayerTracker
 	{
 		data =  player.getEntityData().getCompoundTag(player.PERSISTED_NBT_TAG);
 		data.setInteger("GoldTotal", gold.getGoldTotal(player));
-		data.setInteger("Worthy", worthy.getWorthy(player));
+		data.setInteger("Worthy", experience.getExperience(player));
 		data.setInteger("Strength", stats.getStrengthPoints(player));
 		data.setInteger("DEX", stats.getDexerityPoints(player));
 		data.setInteger("INT", stats.getIntelligencePoints(player));
 		data.setInteger("LUK", stats.getLuckPoints(player));
 		data.setInteger("LVL", stats.getLevel(player));
 		data.setInteger("CurrentLVL", level.getCurrentLevel(player));
-		data.setInteger("LVLUps", level.getLevelUps(player));
 		data.setInteger("LVLPoints", level.getLevelPoints(player));
 		data.setString("Race", race.getClass(player));
+		data.setTag("Quests", QuestHandler.getQuestPlayer(player));
 		player.getEntityData().setCompoundTag(player.PERSISTED_NBT_TAG, data);
 	}
 	
@@ -96,16 +94,16 @@ public class SaveHandlerToK implements IPlayerTracker
 			if(data != null)
 			{
 				gold.setGold(player, data.getInteger("GoldTotal"));
-				worthy.setWorthy(player, data.getInteger("Worthy"));
+				experience.setExperience(player, data.getInteger("Worthy"));
 				stats.setStrengthPoints(player, data.getInteger("Strength"));
 				stats.setDexerityPoints(player, data.getInteger("DEX"));
 				stats.setIntelligencePoints(player, data.getInteger("INT"));
 				stats.setLuckPoints(player, data.getInteger("LUK"));
 				stats.setLevel(player, data.getInteger("LVL"));
 				level.setCurrentLevel(player, data.getInteger("CurrentLVL"));
-				level.setLevelUps(player, data.getInteger("LVLUps"));
 				level.setLevelPoints(player, data.getInteger("LVLPoints"));
 				race.setClass(player, data.getString("Race"));
+				QuestHandler.setQuestPlayer(player, data.getCompoundTag("Quests"));
 			}
 		}
 	}

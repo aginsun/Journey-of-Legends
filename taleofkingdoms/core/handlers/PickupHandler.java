@@ -5,11 +5,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import aginsun.taleofkingdoms.client.guis.GuiRaceSelect;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
+import aginsun.taleofkingdoms.api.ExperienceKeeper;
+import aginsun.taleofkingdoms.api.GoldKeeper;
+import aginsun.taleofkingdoms.api.LevelKeeper;
+import aginsun.taleofkingdoms.api.StatKeeper;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import aginsun.taleofkingdoms.items.InitItems;
@@ -32,17 +31,17 @@ public class PickupHandler
 	            inventoryplayer.consumeInventoryItem(itemstack.itemID);
 	            GoldKeeper.addGold(event.entityPlayer);
 	    		this.par1player = (Player)event.entityPlayer;
-	            WorthyKeeper.addWorthy(event.entityPlayer);
+	            ExperienceKeeper.addExperience(event.entityPlayer);
 	    		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(event.entityPlayer.username, GoldKeeper.getGoldTotal(event.entityPlayer))), par1player);
 	    		checkLevelUps(event.entityPlayer);
 	        }
 		}
 	}
 	
-	public void checkLevelUps(EntityPlayer player)
+	public static void checkLevelUps(EntityPlayer player)
 	{
-		int worthy = WorthyKeeper.getWorthy(player);
-		int lvl = Math.round(worthy / 850);
+		int experience = ExperienceKeeper.getExperience(player);
+		int lvl = Math.round(experience / 850);
 		int CurrentLvl = StatKeeper.getLevel(player);
 		if(++lvl != CurrentLvl)
 		{

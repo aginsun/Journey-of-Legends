@@ -5,12 +5,12 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import aginsun.taleofkingdoms.api.ExperienceKeeper;
+import aginsun.taleofkingdoms.api.GoldKeeper;
+import aginsun.taleofkingdoms.api.StatKeeper;
 import aginsun.taleofkingdoms.client.guis.GuiRaceSelect;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
 import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
+import aginsun.taleofkingdoms.core.handlers.RaceKeeper;
 import aginsun.taleofkingdoms.entities.TileEntityKingdom;
 import cpw.mods.fml.common.FMLCommonHandler;
 
@@ -36,7 +36,7 @@ public class CommandTaleofKingdoms extends CommandBase
 				if(args.length >= 3)
 				{
 					int i = parseIntWithMin(sender, args[2], 1);
-					WorthyKeeper.setWorthy((EntityPlayer)sender, i);
+					ExperienceKeeper.setExperience((EntityPlayer)sender, i);
 				}
 			}
 			if(args[1].matches("Strength"))

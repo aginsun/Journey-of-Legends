@@ -6,8 +6,7 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
+import aginsun.taleofkingdoms.api.StatKeeper;
 import aginsun.taleofkingdoms.items.ItemClaw;
 import aginsun.taleofkingdoms.items.ItemWand;
 

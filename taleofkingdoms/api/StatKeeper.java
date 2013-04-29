@@ -1,9 +1,13 @@
-package aginsun.taleofkingdoms.core.goldSystem;
+package aginsun.taleofkingdoms.api;
 
 import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+/**
+ * WIP: if you want add stats to a player
+ * @author Aginsun
+ */
 public class StatKeeper 
 {
 	public static HashMap<String, Integer> StrengthMap = new HashMap<String, Integer>();

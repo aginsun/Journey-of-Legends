@@ -10,7 +10,7 @@ public enum PacketType
 {
 	TILE(PacketTileUpdate.class),
 	GOLD(PacketGold.class),
-	WORTHY(PacketWorthy.class),
+	EXPERIENCE(PacketExperience.class),
 	STATS(PacketStats.class),
 	LEVEL(PacketCurrentLevel.class),
 	RACE(PacketRace.class);

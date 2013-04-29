@@ -1,4 +1,4 @@
-package aginsun.taleofkingdoms.core.goldSystem;
+package aginsun.taleofkingdoms.core.handlers;
 
 import java.util.HashMap;
 

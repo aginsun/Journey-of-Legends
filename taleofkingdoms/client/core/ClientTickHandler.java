@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.EnumSet;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
@@ -14,11 +13,10 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import aginsun.taleofkingdoms.api.ExperienceKeeper;
+import aginsun.taleofkingdoms.api.GoldKeeper;
+import aginsun.taleofkingdoms.api.StatKeeper;
 import aginsun.taleofkingdoms.client.guis.GuiPriceBar;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.StatKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.WorthyKeeper;
-import aginsun.taleofkingdoms.core.handlers.CommonTickHandler;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -81,13 +79,13 @@ public class ClientTickHandler implements ITickHandler
             DrawCube(guiscreen, i, j);
             
             bar = new GuiPriceBar(0, 12, 26, 95, 12, 1.0F, Color.RED.getRGB());
-            int worthy = WorthyKeeper.getWorthy(player);
+            int worthy = ExperienceKeeper.getExperience(player);
             worthy -= (StatKeeper.getLevel(player) * 850 - 850);
             bar.setBar(worthy / 850.0F);
             bar.drawBar();
             
             mc.fontRenderer.drawString((new StringBuilder()).append("-Level: ").append(StatKeeper.getLevel(player)).append("-").toString(), -mc.fontRenderer.getStringWidth("-Level: 200-") / 2 + 63, 28, Color.ORANGE.getRGB());
-            mc.fontRenderer.drawString((new StringBuilder()).append("Gold: ").append(gold.getGoldTotal(player)).toString(), 0, 10, x);
+            mc.fontRenderer.drawString((new StringBuilder()).append("Gold: ").append(gold.getGoldTotal(player)).toString(), 13, 7, x);
             //mc.fontRenderer.drawString((new StringBuilder()).append("Worthy: ").append(WorthyKeeper.getWorthy(player)).toString(), 0, 20, x);
             
             Tessellator.instance.setColorOpaque_F(1F, 1F, 1F);

@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.opengl.GL11;
 
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
+import aginsun.taleofkingdoms.core.handlers.RaceKeeper;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class GuiRaceSelect extends GuiScreen

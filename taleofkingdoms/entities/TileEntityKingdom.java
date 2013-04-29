@@ -10,8 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
+import aginsun.taleofkingdoms.api.GoldKeeper;
+import aginsun.taleofkingdoms.core.handlers.GoldValues;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -22,8 +22,6 @@ public class TileEntityKingdom extends TileEntity implements IInventory
 {
 	private ItemStack[] inventory;
 	private EntityPlayer player;
-	private HashMap<Item, Integer> ItemList = new HashMap<Item, Integer>();
-	private List<Integer> itemList;
 	private Player par1player;
 	public NBTTagCompound nbttagcompound = new NBTTagCompound();
 	private GoldKeeper gold;
@@ -41,6 +39,11 @@ public class TileEntityKingdom extends TileEntity implements IInventory
 			i++;
 			nbttagcompound.setInteger(this.getStackInSlot(1).getItem().getUnlocalizedName(), i);
 			decrStackSize(1, 1);
+		}
+		if(this.getStackInSlot(2) != null)
+		{
+			String s = getStackInSlot(2).getDisplayName();
+			
 		}
 	}
 	
@@ -60,7 +63,7 @@ public class TileEntityKingdom extends TileEntity implements IInventory
             {
                 Item item = inventory[0].getItem();
                 String s = item.getUnlocalizedName();
-                j = GoldValues.PriceItem(s);
+                j = GoldValues.getGoldValue(s);
                 if(FMLCommonHandler.instance().getEffectiveSide().isServer())
                 	gold.addGold(setPlayerName(player), j);
         		this.par1player = (Player)player;

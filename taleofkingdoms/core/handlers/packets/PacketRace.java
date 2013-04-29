@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
-import aginsun.taleofkingdoms.core.goldSystem.RaceKeeper;
+import aginsun.taleofkingdoms.core.handlers.RaceKeeper;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

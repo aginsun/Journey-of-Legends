@@ -1,6 +1,6 @@
 package aginsun.taleofkingdoms.inventory;
 
-import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
+import aginsun.taleofkingdoms.core.handlers.GoldValues;
 import net.minecraft.inventory.ContainerBeacon;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -19,7 +19,7 @@ public class SlotKingdomSell extends Slot
 
     public boolean isItemValid(ItemStack item)
     {
-    	if(GoldValues.PriceItem(item.getItem().getUnlocalizedName()) != 0)
+    	if(GoldValues.getGoldValue(item.getItem().getUnlocalizedName()) != 0)
     		return true;
     	else
     		return false;

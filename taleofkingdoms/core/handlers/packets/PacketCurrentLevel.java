@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
-import aginsun.taleofkingdoms.core.goldSystem.LevelKeeper;
+import aginsun.taleofkingdoms.api.LevelKeeper;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,7 +15,6 @@ public class PacketCurrentLevel extends PacketToK
 {
 	private String username;
 	private int CurrentLevel;
-	private int LevelUps;
 	private int LevelPoints;
 	
 	public PacketCurrentLevel() 
@@ -23,12 +22,11 @@ public class PacketCurrentLevel extends PacketToK
 		super(PacketType.LEVEL, false);
 	}
 	
-	public PacketCurrentLevel(String username, int CurrentLevel, int LevelUps, int LevelPoints)
+	public PacketCurrentLevel(String username, int CurrentLevel, int LevelPoints)
 	{
 		super(PacketType.LEVEL, false);
 		this.username = username;
 		this.CurrentLevel = CurrentLevel;
-		this.LevelUps = LevelUps;
 		this.LevelPoints = LevelPoints;
 	}
 	
@@ -36,7 +34,6 @@ public class PacketCurrentLevel extends PacketToK
 	{
 		this.username = data.readUTF();
 		this.CurrentLevel = data.readInt();
-		this.LevelUps = data.readInt();
 		this.LevelPoints = data.readInt();
 	}
 	
@@ -44,7 +41,6 @@ public class PacketCurrentLevel extends PacketToK
 	{
 		dos.writeUTF(username);
 		dos.writeInt(CurrentLevel);
-		dos.writeInt(LevelUps);
 		dos.writeInt(LevelPoints);
 	}
 	
@@ -59,7 +55,6 @@ public class PacketCurrentLevel extends PacketToK
 	public void setValues(EntityPlayer player)
 	{
 		LevelKeeper.setCurrentLevel(player, CurrentLevel);
-		LevelKeeper.setLevelUps(player, LevelUps);
 		LevelKeeper.setLevelPoints(player, LevelPoints);
 	}
 }

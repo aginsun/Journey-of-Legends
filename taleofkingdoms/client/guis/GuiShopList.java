@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import aginsun.taleofkingdoms.TaleOfKingdoms;
-import aginsun.taleofkingdoms.core.goldSystem.GoldKeeper;
-import aginsun.taleofkingdoms.core.goldSystem.GoldValues;
+import aginsun.taleofkingdoms.api.GoldKeeper;
+import aginsun.taleofkingdoms.core.handlers.GoldValues;
 import cpw.mods.fml.common.network.Player;
 
 public class GuiShopList extends GuiScreen
@@ -232,7 +232,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item1.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item1.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item1 instanceof ItemFood)
                 {
@@ -252,7 +252,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item2.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item2.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item2 instanceof ItemFood)
                 {
@@ -272,7 +272,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item3.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item3.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item3 instanceof ItemFood)
                 {
@@ -292,7 +292,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item4.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item4.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item4 instanceof ItemFood)
                 {
@@ -312,7 +312,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item5.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item5.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item5 instanceof ItemFood)
                 {
@@ -332,7 +332,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item6.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item6.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item6 instanceof ItemFood)
                 {
@@ -352,7 +352,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item7.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item7.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item7 instanceof ItemFood)
                 {
@@ -372,7 +372,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item8.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item8.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item8 instanceof ItemFood)
                 {
@@ -392,7 +392,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item9.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item9.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item9 instanceof ItemFood)
                 {
@@ -412,7 +412,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item10.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item10.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item10 instanceof ItemFood)
                 {
@@ -432,7 +432,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item11.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item11.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item11 instanceof ItemFood)
                 {
@@ -452,7 +452,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item12.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item12.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item12 instanceof ItemFood)
                 {
@@ -472,7 +472,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item13.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item13.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item13 instanceof ItemFood)
                 {
@@ -492,7 +492,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item14.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item14.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item14 instanceof ItemFood)
                 {
@@ -512,7 +512,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item15.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item15.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item15 instanceof ItemFood)
                 {
@@ -532,7 +532,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item16.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item16.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item16 instanceof ItemFood)
                 {
@@ -556,7 +556,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item17.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item17.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item17 instanceof ItemFood)
                 {
@@ -580,7 +580,7 @@ public class GuiShopList extends GuiScreen
                 {
                     stringoutput = st.translateKey(stringGet);
                 }
-                price = GoldValues.PriceItem(String.valueOf(item18.getUnlocalizedName()));
+                price = GoldValues.getGoldValue(String.valueOf(item18.getUnlocalizedName()));
                 price += (double)price * 0.80000000000000004D;
                 if (item18 instanceof ItemFood)
                 {
@@ -593,7 +593,7 @@ public class GuiShopList extends GuiScreen
             ItemStack itemstack = new ItemStack(itemSelected.intValue(), 1, 0);
             Item item19 = itemstack.getItem();	
             String s = item19.getUnlocalizedName();
-            int i = GoldValues.PriceItem(s);
+            int i = GoldValues.getGoldValue(s);
             i = (int)((double)i + (double)i * 0.80000000000000004D);
             if (item19 instanceof ItemFood)
             {
@@ -616,7 +616,7 @@ public class GuiShopList extends GuiScreen
             ItemStack itemstack1 = new ItemStack(itemSelected.intValue(), 1, 0);
             Item item20 = itemstack1.getItem();
             String s1 = item20.getUnlocalizedName();
-            int j = GoldValues.PriceItem(s1);
+            int j = GoldValues.getGoldValue(s1);
             j = (int)((double)j + (double)j * 0.80000000000000004D);
             if (item20 instanceof ItemFood)
             {
@@ -652,7 +652,7 @@ public class GuiShopList extends GuiScreen
             ItemStack itemstack = new ItemStack(itemSelected.intValue(), 1, 0);
             Item item1 = itemstack.getItem();
             String s = item1.getUnlocalizedName();
-            int i1 = GoldValues.PriceItem(s);
+            int i1 = GoldValues.getGoldValue(s);
             i1 = (int)((double)i1 + (double)i1 * 0.80000000000000004D);
             if (item1 instanceof ItemFood)
             {

@@ -1,9 +1,13 @@
-package aginsun.taleofkingdoms.core.goldSystem;
+package aginsun.taleofkingdoms.api;
 
 import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
-
+/**
+ * addGold and remove gold are the only 2 you should use!
+ * 
+ * @author Aginsun
+ */
 public class GoldKeeper
 {
 	private static HashMap<String, Integer> GoldValues = new HashMap<String, Integer>();
@@ -22,6 +26,11 @@ public class GoldKeeper
 		GoldValues.put(player.username, GoldValue);
 	}
 	
+	
+	/**
+	 * Adds 1 gold coin
+	 * @param player
+	 */
 	public static void addGold(EntityPlayer player)
 	{
 		int i = getGoldTotal(player);
@@ -29,6 +38,13 @@ public class GoldKeeper
 		setGold(player, i);
 	}
 	
+	
+	/**
+	 * Add a specific amount of gold
+	 * 
+	 * @param player
+	 * @param amount
+	 */
 	public static void addGold(EntityPlayer player, int amount)
 	{
 		int i = getGoldTotal(player);
@@ -36,6 +52,11 @@ public class GoldKeeper
 		setGold(player, i);
 	}
 	
+	/**
+	 * Remove a specific amount of gold coins
+	 * @param player
+	 * @param amount
+	 */
 	public static void removeGold(EntityPlayer player, int amount)
 	{
 		int i = getGoldTotal(player);
