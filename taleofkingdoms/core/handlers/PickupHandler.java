@@ -8,6 +8,7 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import aginsun.taleofkingdoms.api.ExperienceKeeper;
 import aginsun.taleofkingdoms.api.GoldKeeper;
 import aginsun.taleofkingdoms.api.LevelKeeper;
+import aginsun.taleofkingdoms.api.QuestHandler;
 import aginsun.taleofkingdoms.api.StatKeeper;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketGold;
 import aginsun.taleofkingdoms.core.handlers.packets.PacketType;
@@ -46,6 +47,8 @@ public class PickupHandler
 		if(++lvl != CurrentLvl)
 		{
 			StatKeeper.setLevel(player, lvl);
+			if(QuestHandler.getQuestStatus(player, "Leveling") != 0 && QuestHandler.getQuestStatus(player, "Leveling") != 3);
+				QuestHandler.setQuestFinished(player, "Leveling");
 			LevelKeeper.addLevelPoints(player, 5);
 			if(FMLCommonHandler.instance().getEffectiveSide().isServer())
 				System.out.println("Player: " + player.username + " Level: " + lvl);

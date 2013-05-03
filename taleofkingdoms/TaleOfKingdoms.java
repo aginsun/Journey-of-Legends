@@ -15,8 +15,10 @@ import aginsun.taleofkingdoms.core.handlers.PacketHandler;
 import aginsun.taleofkingdoms.core.handlers.PickupHandler;
 import aginsun.taleofkingdoms.core.handlers.SaveHandlerToK;
 import aginsun.taleofkingdoms.core.handlers.commands.CommandTaleofKingdoms;
+import aginsun.taleofkingdoms.core.quests.QuestRegistry;
 import aginsun.taleofkingdoms.entities.InitEntities;
 import aginsun.taleofkingdoms.items.InitItems;
+import aginsun.taleofkingdoms.util.Utils;
 import aginsun.taleofkingdoms.worldgen.WorldgenChests;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -37,11 +39,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "TaleOfKingdoms", version = "2.0.0", name = "Tale of Kingdoms 2")
-@NetworkMod(channels = { "TaleOfKingdoms" },clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
+@Mod(modid = Utils.modID, version = Utils.Version, name = Utils.Name)
+@NetworkMod(channels = { Utils.modID },clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TaleOfKingdoms 
 {
-	@Instance ("TaleOfKingdoms")
+	@Instance (Utils.modID)
 	public static TaleOfKingdoms instance = new TaleOfKingdoms();
 	
 	@SidedProxy(clientSide="aginsun.taleofkingdoms.client.core.ClientProxy",serverSide="aginsun.taleofkingdoms.core.CommonProxy")
@@ -68,8 +70,6 @@ public class TaleOfKingdoms
         
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		
-		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
-		
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 		
 		MinecraftForge.EVENT_BUS.register(new LivingAttackEventHandler());
@@ -80,8 +80,11 @@ public class TaleOfKingdoms
 	}
 	
 	@PostInit
-	public void PostInit(FMLPostInitializationEvent event){
+	public void PostInit(FMLPostInitializationEvent event)
+	{
 		GoldValues.setGoldValues();
+		
+		QuestRegistry.InitQuests();
 	}
 	
 	@ServerStarting

@@ -8,6 +8,7 @@ import aginsun.taleofkingdoms.api.QuestHandler;
 import aginsun.taleofkingdoms.client.guis.GuiQuest;
 import aginsun.taleofkingdoms.core.quests.Quest;
 import aginsun.taleofkingdoms.core.quests.QuestGuildMaster;
+import aginsun.taleofkingdoms.core.quests.QuestRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -65,39 +66,14 @@ public class EntityGuildMaster extends EntityCreature
 	{
 		if(canInteractWith(player))
 		{
-			heal(25);
-			quest = new QuestGuildMaster();
-			if(QuestHandler.getQuestStatus(player, "TheStart") == 0 && FMLCommonHandler.instance().getEffectiveSide().isServer())
-				FMLCommonHandler.instance().showGuiScreen(new GuiQuest("TheStart", quest, 1));
-			
-			if(QuestHandler.getQuestStatus(player, "TheStart") == 1 && FMLCommonHandler.instance().getEffectiveSide().isServer())
-				player.addChatMessage("Go on, open up the stat gui by pressing O on your keyboard!");
-			
-			if(QuestHandler.getQuestStatus(player, "TheStart") == 2 && FMLCommonHandler.instance().getEffectiveSide().isServer())
-			{
-				player.addChatMessage(quest.QuestEndLines(player, 1));
-				quest.QuestEndReward(player, 1);
-				QuestHandler.questFinishedReward(player, "TheStart");
-			}
-			
-			if(questStatus(player, "TheStart") == 3 && questStatus(player, "Leveling") == 0 && isServer())
-				FMLCommonHandler.instance().showGuiScreen(new GuiQuest("Leveling", quest, 2));
-			if(questStatus(player, "Leveling") == 1)
-				player.addChatMessage(new StringBuilder().append("Go on, go and level up! you need to kill about ").append(Math.round((850 - ExperienceKeeper.getExperience(player)) / 15)).append("more mobs!").toString());
-			if(questStatus(player, "Leveling") == 2)
-				FMLCommonHandler.instance().showGuiScreen(new GuiQuest("Leveling", quest, 2));
+			if(QuestHandler.getQuestStatus(player, "The beginning of a great adventure") != 3)
+				quest = QuestRegistry.getQuest(1).setPlayer(player);
+			else if(QuestHandler.getQuestStatus(player, "Leveling") != 3)
+				quest = QuestRegistry.getQuest(2).setPlayer(player);
+			else if(QuestHandler.getQuestStatus(player, "") != 3)
+				quest = QuestRegistry.getQuest(3).setPlayer(player);
+			quest.update();
 		}
 		return true;
-	}
-	
-	
-	private int questStatus(EntityPlayer player, String x)
-	{
-		return QuestHandler.getQuestStatus(player, x);
-	}
-	
-	private boolean isServer()
-	{
-		return FMLCommonHandler.instance().getEffectiveSide().isServer();
 	}
 }

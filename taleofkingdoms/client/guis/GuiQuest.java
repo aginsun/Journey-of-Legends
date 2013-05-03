@@ -11,13 +11,13 @@ public class GuiQuest extends GuiScreen
 {
 	private String QuestName;
 	private Quest quest;
-	private int number;
+	private GuiButton guibutton = new GuiButton(3, width / 2, height / 2 + 40, 120, 20, "Finish Quest!");
 	
-	public GuiQuest(String QuestName, Quest quest, int number)
+	public GuiQuest(String QuestName, Quest quest, boolean CanFinishQuest)
 	{
 		this.QuestName = QuestName;
 		this.quest = quest;
-		this.number = number;
+		this.guibutton.enabled = CanFinishQuest;
 	}
 	
 	public void initGui()
@@ -25,7 +25,7 @@ public class GuiQuest extends GuiScreen
 		buttonList.clear();
 		buttonList.add(new GuiButton(1, width / 2, height / 2, 120, 20, "Yes"));
 		buttonList.add(new GuiButton(2, width / 2, height / 2 + 20, 120, 20, "No"));
-		buttonList.add(new GuiButton(3, width / 2, height / 2 + 40, 120, 20, "Finish Quest!"));
+		buttonList.add(guibutton);
 	}
 	
 	public void actionPerformed(GuiButton guibutton)
@@ -33,7 +33,7 @@ public class GuiQuest extends GuiScreen
 		if(guibutton.id == 1)
 		{
 			QuestHandler.setQuestStarted(mc.thePlayer, QuestName);
-			mc.thePlayer.addChatMessage(quest.QuestStartLines(number));
+			mc.thePlayer.addChatMessage(quest.questStartLines(mc.thePlayer));
 			mc.currentScreen = null;
 		}
 		if(guibutton.id == 2)
@@ -41,12 +41,21 @@ public class GuiQuest extends GuiScreen
 		
 		if(guibutton.id == 3)
 		{
-			if(QuestHandler.getQuestStatus(mc.thePlayer, QuestName) == 2)
+			quest.questEndReward(mc.thePlayer);
+			if(quest.questEndLines(mc.thePlayer).contains("-"))
 			{
-				quest.QuestEndReward(mc.thePlayer, number);
+				String[] list = quest.questEndLines(mc.thePlayer).split("-");
+				for(int x = 0; x < list.length; x++)	
+					{mc.thePlayer.addChatMessage(list[x]);}
 				QuestHandler.questFinishedReward(mc.thePlayer, QuestName);
+				mc.currentScreen = null;
 			}
-			mc.currentScreen = null;
+			else
+			{
+				mc.thePlayer.addChatMessage(quest.questEndLines(mc.thePlayer));
+				QuestHandler.questFinishedReward(mc.thePlayer, QuestName);
+				mc.currentScreen = null;
+			}
 		}
 	}
 	

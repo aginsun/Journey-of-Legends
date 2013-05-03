@@ -69,7 +69,7 @@ public class GuiStats extends GuiScreen
     
     public void onGuiClosed() 
     {
-    	QuestHandler.setQuestFinished(player, "TheStart");
+    	QuestHandler.setQuestFinished(player, "The beginning of a great adventure");
     }
 
     

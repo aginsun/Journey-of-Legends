@@ -11,6 +11,8 @@ import aginsun.taleofkingdoms.entities.EntityGuildMember;
 import aginsun.taleofkingdoms.entities.EntityWeaponKeeper;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy
 {
@@ -23,6 +25,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityWeaponKeeper.class, new RenderBiped(new ModelBiped(), 0.4F));
 		
 		KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
+		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 	}
 
 }

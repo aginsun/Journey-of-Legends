@@ -1,12 +1,5 @@
 package aginsun.taleofkingdoms.blocks;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import aginsun.taleofkingdoms.kingdom.KingdomBlock;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +14,7 @@ public class BlockReader extends Block
 	
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
-		File file = new File("FullBlocks.txt");
+		/*File file = new File("FullBlocks.txt");
 		File file1 = new File("RotationalBlocks.txt");
 		BufferedWriter FullBlocks = null;
 		BufferedWriter RotatedBlocks = null;
@@ -46,6 +39,7 @@ public class BlockReader extends Block
 			FullBlocks.close();
 
 		} catch (IOException e){}
+		return true;*/
 		return true;
 	}
 }

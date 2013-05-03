@@ -1,5 +1,5 @@
 package aginsun.taleofkingdoms.kingdom;
 
-public class KingdomStructure {
+public class BlockKingdom {
 
 }

@@ -10,7 +10,6 @@ import aginsun.taleofkingdoms.entities.EntityFarmerKeeper;
 import aginsun.taleofkingdoms.entities.EntityGuildMaster;
 import aginsun.taleofkingdoms.entities.EntityGuildMember;
 import aginsun.taleofkingdoms.entities.EntityWeaponKeeper;
-import aginsun.taleofkingdoms.kingdom.KingdomStructure;
 import aginsun.taleofkingdoms.worldgen.WorldGenGuild;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
@@ -76,7 +75,6 @@ public class CommonTickHandler implements ITickHandler
 		   
 		   if(ks)
 		   {
-			   KingdomStructure.Update();
 			   ks = false;
 		   }
 	   }
