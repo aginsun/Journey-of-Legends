@@ -11,11 +11,33 @@ import net.minecraft.item.ItemStack;
 public abstract class Quest
 {
 	private EntityPlayer player;
-	public int QuestNumber;
+	
+	private int QuestNumber;
+	private int index;
+	private String[] StartLines;
+	private String[] EndLines;
+	private String[] ProgressLines;
+	private String[] QuestName;
+	private int[] RewardXP;
+	private int[] RewardGold;
+	private ItemStack[] itemstack;
 	
 	public Quest(int QuestNumber)
 	{
 		this.QuestNumber = QuestNumber;
+	}
+	
+	public Quest(int QuestNumber, int index, String[] StartLines, String[] EndLines, String[] ProgressLines, String[] QuestName, int[] RewardXP, int[] RewardGold, ItemStack[] itemstack)
+	{
+		this(QuestNumber);
+		this.index = index;
+		this.StartLines = StartLines;
+		this.EndLines = EndLines;
+		this.ProgressLines = ProgressLines;
+		this.QuestName = QuestName;
+		this.RewardXP = RewardXP;
+		this.RewardGold = RewardGold;
+		this.itemstack = itemstack;
 	}
 	
 	public void update()
@@ -56,17 +78,43 @@ public abstract class Quest
 		}
 	}
 		
-	public abstract String questStartLines(EntityPlayer player);
+	public String questStartLines(EntityPlayer player)
+	{
+		return StartLines[index];
+	}
 	
-	public abstract String questEndLines(EntityPlayer player);
-
-	public abstract String questProgressLine(EntityPlayer player);
+	public String questEndLines(EntityPlayer player)
+	{
+		return EndLines[index];
+	}
 	
-	public abstract int questEndRewardXP(EntityPlayer player);
+	public String questProgressLine(EntityPlayer player)
+	{
+		return ProgressLines[index];
+	}
 	
-	public abstract int questEndRewardGold(EntityPlayer player);
+	public int questEndRewardXP(EntityPlayer player)
+	{
+		return RewardXP[index];
+	}
 	
-	public abstract ItemStack questEndRewardItemStacks(EntityPlayer player);
+	public int questEndRewardGold(EntityPlayer player)
+	{
+		return RewardGold[index];
+	}
 	
-	public abstract String getQuestName();
+	public ItemStack questEndRewardItemStacks(EntityPlayer player)
+	{
+		return itemstack[index];
+	}
+	
+	public String getQuestName()
+	{
+		return QuestName[index];
+	}
+	
+	public int getQuestNumber()
+	{
+		return QuestNumber;
+	}
 }

@@ -11,21 +11,25 @@ public class GuiQuest extends GuiScreen
 {
 	private String QuestName;
 	private Quest quest;
-	private GuiButton guibutton = new GuiButton(3, width / 2, height / 2 + 40, 120, 20, "Finish Quest!");
+	private boolean enabled;
 	
 	public GuiQuest(String QuestName, Quest quest, boolean CanFinishQuest)
 	{
 		this.QuestName = QuestName;
 		this.quest = quest;
-		this.guibutton.enabled = CanFinishQuest;
+		this.enabled = CanFinishQuest;
 	}
 	
 	public void initGui()
 	{
 		buttonList.clear();
-		buttonList.add(new GuiButton(1, width / 2, height / 2, 120, 20, "Yes"));
-		buttonList.add(new GuiButton(2, width / 2, height / 2 + 20, 120, 20, "No"));
-		buttonList.add(guibutton);
+		if(!enabled)
+		{
+			buttonList.add(new GuiButton(1, width / 2 - 120, height / 2, 80, 20, "Yes"));
+			buttonList.add(new GuiButton(2, width / 2 + 40, height / 2, 80, 20, "No"));
+		}
+		else
+			buttonList.add(new GuiButton(3, width / 2 - 60, height / 2, 120, 20, "Finish Quest!"));
 	}
 	
 	public void actionPerformed(GuiButton guibutton)
@@ -66,7 +70,8 @@ public class GuiQuest extends GuiScreen
 	
 	public void drawScreen(int i, int k, float f)
 	{
-		drawString(fontRenderer, "Quest Name: " + QuestName, width / 2, 10, Color.PINK.getRGB());
+		drawString(fontRenderer, "Quest Name:", width / 2, height / 2 - 20, Color.PINK.getRGB());
+		drawString(fontRenderer, QuestName, width / 2, height / 2, Color.pink.getRGB());
 		super.drawScreen(i, k, f);
 	}
 }

@@ -18,6 +18,7 @@ import aginsun.taleofkingdoms.core.handlers.commands.CommandTaleofKingdoms;
 import aginsun.taleofkingdoms.core.quests.QuestRegistry;
 import aginsun.taleofkingdoms.entities.InitEntities;
 import aginsun.taleofkingdoms.items.InitItems;
+import aginsun.taleofkingdoms.kingdom.BuildingRegistry;
 import aginsun.taleofkingdoms.util.Utils;
 import aginsun.taleofkingdoms.worldgen.WorldgenChests;
 import cpw.mods.fml.common.Mod;
@@ -83,6 +84,8 @@ public class TaleOfKingdoms
 	public void PostInit(FMLPostInitializationEvent event)
 	{
 		GoldValues.setGoldValues();
+		
+		BuildingRegistry.RegisterBuildings();
 		
 		QuestRegistry.InitQuests();
 	}

@@ -49,6 +49,13 @@ public class QuestHandler
 		questList.put(player.username, nbt);
 	}
 	
+	public static boolean isQuestActive(EntityPlayer player, String questName)
+	{
+		if(getQuestStatus(player, questName) != 3 && getQuestStatus(player, questName) != 0)
+			return true;
+		return false;
+	}
+	
 	public static NBTTagCompound getQuestPlayer(EntityPlayer player)
 	{
 		if(questList.containsKey(player.username))

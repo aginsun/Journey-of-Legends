@@ -69,7 +69,8 @@ public class GuiStats extends GuiScreen
     
     public void onGuiClosed() 
     {
-    	QuestHandler.setQuestFinished(player, "The beginning of a great adventure");
+    	if(QuestHandler.isQuestActive(player, "The beginning of a great adventure"))
+    		QuestHandler.setQuestFinished(player, "The beginning of a great adventure");
     }
 
     

@@ -14,11 +14,14 @@ public class QuestRegistry
 		registerQuest(new QuestGuildMaster(1, 0));
 		registerQuest(new QuestGuildMaster(2, 1));
 		registerQuest(new QuestGuildMaster(3, 2));
+		//registerQuest(new QuestFarmer(4, 0));
+		//registerQuest(new QuestFarmer(5, 1));
+		//registerQuest(new QuestFarmer(6, 2));
 	}
 	
 	public static void registerQuest(Quest quest)
 	{
-		QuestMap.put(quest.QuestNumber, quest);
+		QuestMap.put(quest.getQuestNumber(), quest);
 	}
 	
 	public static Quest getQuest(int QuestNumber)

@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import aginsun.taleofkingdoms.kingdom.KingdomStructure;
+import aginsun.taleofkingdoms.kingdom.RandomBuilding;
 
 public class BlockReader extends Block
 {
@@ -40,6 +42,9 @@ public class BlockReader extends Block
 
 		} catch (IOException e){}
 		return true;*/
-		return true;
+		
+		KingdomStructure structure = new RandomBuilding(0, 0, 0);
+		structure.setLocation(i, j, k);
+		return structure.startBuilding();
 	}
 }
