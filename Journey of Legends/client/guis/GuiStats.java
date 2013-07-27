@@ -9,7 +9,11 @@ import org.lwjgl.opengl.GL11;
 import aginsun.journey.api.LevelKeeper;
 import aginsun.journey.api.QuestHandler;
 import aginsun.journey.api.StatKeeper;
+import aginsun.journey.core.handlers.packets.PacketQuestData;
+import aginsun.journey.core.handlers.packets.PacketStatChange;
+import aginsun.journey.core.handlers.packets.PacketType;
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiStats extends GuiScreen
 {
@@ -21,7 +25,7 @@ public class GuiStats extends GuiScreen
 	{
         buttonList.clear();
 
-		if(level.getLevelPoints(player) > 0)
+		if(level.getSP(player) > 0)
 		{
 			buttonList.add(new GuiButton(1, width / 2 - 20, 15, 120, 20, "Upgrade Strength"));
 			buttonList.add(new GuiButton(2, width / 2 - 20, 75, 120, 20, "Upgrade Dexerity"));
@@ -34,30 +38,22 @@ public class GuiStats extends GuiScreen
 	{
 		if(guibutton.id == 1)
 		{
-			level.decreaseLevelPoints(player);
-			stats.addStrengthPoints(player, 1);
-			
+			PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketStatChange(player.username, "STR", 1)));
 			initGui();
 		}
 		if(guibutton.id == 2)
 		{
-			level.decreaseLevelPoints(player);
-			stats.addDexPoints(player, 1);
-			
+			PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketStatChange(player.username, "DEX", 1)));
 			initGui();
 		}
 		if(guibutton.id == 3)
 		{
-			level.decreaseLevelPoints(player);
-			stats.addIntPoints(player, 1);
-			
+			PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketStatChange(player.username, "INT", 1)));
 			initGui();
 		}
 		if(guibutton.id == 4)
 		{
-			level.decreaseLevelPoints(player);
-			stats.addLukPoints(player, 1);
-			
+			PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketStatChange(player.username, "LUK", 1)));
 			initGui();
 		}
 	}
@@ -69,8 +65,8 @@ public class GuiStats extends GuiScreen
     
     public void onGuiClosed() 
     {
-    	if(QuestHandler.instance().isQuestActive(player, "The beginning of a great adventure"))
-    		QuestHandler.instance().setQuestFinished(player, "The beginning of a great adventure");
+    	if(QuestHandler.instance().getQuestStatusClient(player, "The beginning of a great adventure") == 1)
+    		PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketQuestData(player.username, "The beginning of a great adventure", 2)));
     }
 
     
@@ -86,7 +82,6 @@ public class GuiStats extends GuiScreen
     	drawString(fontRenderer, new StringBuilder("Dexerity: ").append(stats.getDexerityPoints(player)).toString(), width / 2 - 100, 80, 0xffcc00);
     	drawString(fontRenderer, new StringBuilder("Intelligence: ").append(stats.getIntelligencePoints(player)).toString(), width / 2 - 100, 140, 0xffcc00);
     	drawString(fontRenderer, new StringBuilder("Luck: ").append(stats.getLuckPoints(player)).toString(), width / 2 - 100, 200, 0xffcc00);
-    	drawString(fontRenderer, new StringBuilder("Luck: ").append(LevelKeeper.getLevelPoints(player)).toString(), width / 2 - 100, 220, 0xffcc00);
         for (int m = 0; m < buttonList.size(); m++)
         {
             GuiButton guibutton = (GuiButton)buttonList.get(m);

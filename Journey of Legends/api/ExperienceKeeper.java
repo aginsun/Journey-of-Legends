@@ -35,4 +35,13 @@ public class ExperienceKeeper
 		}
 		return ExperienceMap.get(player.username);
 	}
+	
+	public static int getExperience(String username)
+	{
+		if(!ExperienceMap.containsKey(username))
+		{
+			return 0;
+		}
+		return ExperienceMap.get(username);
+	}
 }

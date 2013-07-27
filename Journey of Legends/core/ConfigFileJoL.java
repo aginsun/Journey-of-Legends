@@ -26,12 +26,9 @@ public class ConfigFileJoL
 		InitItems.ItemAgBladeID = config.getItem("Aginsuns Blade", 22127).getInt();
 		InitItems.ItemExcaliburMaceID = config.getItem("Excalibur Mace", 22128).getInt();
 		InitItems.ItemDebugID = config.getItem("Debug Tool ToK2", 22129).getInt();
-		
-		GuildSpawning = config.get("Guild", "Disable Spawning", false).getBoolean(false);
-		xLocation = config.get("Guild", "X location", 0).getInt();
-		yLocation = config.get("Guild", "Y location", 0).getInt();
-		zLocation = config.get("Guild", "Z location", 0).getInt();
-		
+		InitItems.itemRedClawID = config.getItem("RedClaw", 22130).getInt();
+		InitItems.itemShurickenID = config.getItem("Shuricken Star", 22131).getInt();
+
 		config.save();
 	}
 }

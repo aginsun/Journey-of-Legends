@@ -1,11 +1,11 @@
 package aginsun.journey.core.handlers;
 
-import aginsun.journey.api.QuestHandler;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import aginsun.journey.api.QuestHandler;
 
 public class LivingDeathEventHandler
 {

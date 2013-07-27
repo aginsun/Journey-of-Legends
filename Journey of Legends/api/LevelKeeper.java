@@ -4,65 +4,59 @@ import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-
 /**
  * WIP
  * @author Aginsun
  */
 public class LevelKeeper 
 {
-	private static HashMap<String, Integer> CurrentLevelMap = new HashMap<String, Integer>();
-	private static HashMap<String, Integer> LevelUpsMap = new HashMap<String, Integer>();
-	private static HashMap<String, Integer> LevelPointsMap = new HashMap<String, Integer>();
+	private static HashMap<String, Integer> LevelMap = new HashMap<String, Integer>();
+	private static HashMap<String, Integer> StatPointsMap = new HashMap<String, Integer>();
 	
-	public static void setCurrentLevel(EntityPlayer player, int CurrentLevel)
+	public static void setLevel(EntityPlayer player, int amount)
 	{
-		CurrentLevelMap.put(player.username, CurrentLevel);
+		LevelMap.put(player.username, amount);
 	}
 	
-	public static int getCurrentLevel(EntityPlayer player) 
+	public static int getLevel(EntityPlayer player)
 	{
-		if(!CurrentLevelMap.containsKey(player.username))
-		{
-			return 1;
-		}
-		else if(CurrentLevelMap.get(player.username) == 0)
-		{
-			return 1;
-		}
+		if(LevelMap.containsKey(player.username))
+			return LevelMap.get(player.username);
 		else
-		{
-			return CurrentLevelMap.get(player.username);
-		}
-	}
-
-	public static void setLevelPoints(EntityPlayer player, int levelPoints) 
-	{
-		LevelPointsMap.put(player.username, levelPoints);
+			return 1;
 	}
 	
-	public static int getLevelPoints(EntityPlayer player)
+	public static void addLevel(EntityPlayer player)
 	{
-		if(!LevelPointsMap.containsKey(player.username))
-		{
+		int x = getLevel(player);
+		x++;
+		setLevel(player, x);
+	}
+	
+	public static void setSP(EntityPlayer player, int amount)
+	{
+		StatPointsMap.put(player.username, amount);
+	}
+	
+	public static int getSP(EntityPlayer player)
+	{
+		if(StatPointsMap.containsKey(player.username))
+			return StatPointsMap.get(player.username);
+		else
 			return 0;
-		}
-		else
-		{
-			return LevelPointsMap.get(player.username);
-		}
 	}
 	
-	public static void decreaseLevelPoints(EntityPlayer player)
+	public static void addSP(EntityPlayer player, int amount)
 	{
-		int i = getLevelPoints(player);
-		i--;
-		setLevelPoints(player, i);
+		int x = getSP(player);
+		x += amount;
+		setSP(player, x);
 	}
-	public static void addLevelPoints(EntityPlayer player, int amount)
+	
+	public static void decreaseSP(EntityPlayer player, int amount)
 	{
-		int i = getLevelPoints(player);
-		i += amount;
-		setLevelPoints(player, i);
+		int x = getSP(player);
+		x -= amount;
+		setSP(player, x);
 	}
 }

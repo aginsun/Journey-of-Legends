@@ -15,11 +15,17 @@ import org.lwjgl.opengl.GL11;
 
 import aginsun.journey.api.ExperienceKeeper;
 import aginsun.journey.api.GoldKeeper;
-import aginsun.journey.api.StatKeeper;
+import aginsun.journey.api.LevelKeeper;
+import aginsun.journey.api.QuestHandler;
 import aginsun.journey.client.guis.GuiPriceBar;
+import aginsun.journey.client.guis.GuiStartConquest;
+import aginsun.journey.core.handlers.packets.PacketSound;
+import aginsun.journey.core.handlers.packets.PacketType;
+import aginsun.journey.core.questsystem.QuestRegistry;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class ClientTickHandler implements ITickHandler
 {
@@ -67,7 +73,7 @@ public class ClientTickHandler implements ITickHandler
     {
     	mc = FMLClientHandler.instance().getClient();
     	GuiScreen guiscreen = mc.getMinecraft().currentScreen;
-    	if(guiscreen == null || (guiscreen instanceof GuiChat))
+    	if((guiscreen == null || (guiscreen instanceof GuiChat)) && !mc.gameSettings.showDebugInfo)
     	{
     		player = FMLClientHandler.instance().getClient().thePlayer;
     		GoldKeeper gold = new GoldKeeper();
@@ -80,13 +86,12 @@ public class ClientTickHandler implements ITickHandler
             
             bar = new GuiPriceBar(0, 12, 26, 95, 12, 1.0F, Color.RED.getRGB());
             int worthy = ExperienceKeeper.getExperience(player);
-            worthy -= (StatKeeper.getLevel(player) * 850 - 850);
+            worthy -= (LevelKeeper.getLevel(player) * 850 - 850);
             bar.setBar(worthy / 850.0F);
             bar.drawBar();
             
-            mc.fontRenderer.drawString((new StringBuilder()).append("-Level: ").append(StatKeeper.getLevel(player)).append("-").toString(), -mc.fontRenderer.getStringWidth("-Level: 200-") / 2 + 63, 28, Color.ORANGE.getRGB());
+            mc.fontRenderer.drawString((new StringBuilder()).append("-Level: ").append(LevelKeeper.getLevel(player)).append("-").toString(), -mc.fontRenderer.getStringWidth("-Level: 200-") / 2 + 63, 28, Color.ORANGE.getRGB());
             mc.fontRenderer.drawString((new StringBuilder()).append("Gold: ").append(gold.getGoldTotal(player)).toString(), 13, 7, x);
-            //mc.fontRenderer.drawString((new StringBuilder()).append("Worthy: ").append(WorthyKeeper.getWorthy(player)).toString(), 0, 20, x);
             
             Tessellator.instance.setColorOpaque_F(1F, 1F, 1F);
             GL11.glColor4f(1F, 1F, 1F, 1F);
@@ -94,13 +99,6 @@ public class ClientTickHandler implements ITickHandler
     	}
 		return false;
     }
-
-    public void onTickInGUI(GuiScreen guiscreen)
-    {
-            
-	}
-    
-    public void onTickInGame() {}
     
     public boolean DrawCube(GuiScreen guiscreen, int i, int j)
     {
@@ -126,5 +124,19 @@ public class ClientTickHandler implements ITickHandler
         tessellator.addVertexWithUV(10, 0, f6, (float)(j1 + 10) * f4, (float)(k1 + 0) * f5);
         tessellator.draw();
         return true;
+    }
+
+    public void onTickInGUI(GuiScreen guiscreen){}
+    
+    boolean displayed;
+    
+    public void onTickInGame() 
+    {
+    	if(QuestHandler.instance().getQuestStatusClient(mc.thePlayer, QuestRegistry.getQuest(4).getQuestName()) == 0 && !displayed)
+    	{
+    		mc.displayGuiScreen(new GuiStartConquest());
+    		PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketSound(mc.thePlayer.username, 1.0F, 1.0F)));
+    		displayed = true;
+    	}
     }
 }

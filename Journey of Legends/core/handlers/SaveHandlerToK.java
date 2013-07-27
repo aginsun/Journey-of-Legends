@@ -9,9 +9,11 @@ import aginsun.journey.api.QuestHandler;
 import aginsun.journey.api.StatKeeper;
 import aginsun.journey.core.handlers.packets.PacketExperience;
 import aginsun.journey.core.handlers.packets.PacketGold;
-import aginsun.journey.core.handlers.packets.PacketStats;
+import aginsun.journey.core.handlers.packets.PacketQuestDataClient;
+import aginsun.journey.core.handlers.packets.PacketStatsClient;
 import aginsun.journey.core.handlers.packets.PacketType;
-import aginsun.journey.items.InitItems;
+import aginsun.journey.core.questsystem.Quest;
+import aginsun.journey.core.questsystem.QuestRegistry;
 import cpw.mods.fml.common.IPlayerTracker;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
@@ -40,23 +42,19 @@ public class SaveHandlerToK implements IPlayerTracker
 	{
 		this.par1player = (Player)receiver;
 		getData(receiver);
-		/*if(receiver.username.equals("aginsun"))
-		{
-			gold.addGold(receiver, 15000000);
-			stats.setStrengthPoints(receiver, 1500);
-			stats.setDexerityPoints(receiver, 1500);
-			stats.setIntelligencePoints(receiver, 1500);
-			stats.setLuckPoints(receiver, 1500);
-			stats.setLevel(receiver, 200);
-			receiver.dropItem(InitItems.ItemAgBladeID, 1);
-		}*/
 		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketGold(receiver.username, gold.getGoldTotal(receiver))), par1player);
 		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketExperience(receiver.username, experience.getExperience(receiver))), par1player);
-		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketStats(receiver.username, stats.getStrengthPoints(receiver), 
-																										 stats.getDexerityPoints(receiver), 
-																										 stats.getIntelligencePoints(receiver), 
-																										 stats.getLuckPoints(receiver), 
-																										 stats.getLevel(receiver))), par1player);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketStatsClient(receiver.username, stats.getStrengthPoints(receiver), 	
+																											stats.getDexerityPoints(receiver), 
+																											stats.getIntelligencePoints(receiver), 
+																											stats.getLuckPoints(receiver))), par1player);
+				
+				
+		for(int i = 1; i <= QuestRegistry.getMap().size(); i++)
+		{
+			Quest quest = QuestRegistry.getQuest(i).setPlayer(player);
+			PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketQuestDataClient(receiver.username, quest.getQuestName(), QuestHandler.instance().getQuestStatus(receiver, quest.getQuestName()))), par1player);
+		}
 	}
 	
 	@Override
@@ -78,9 +76,8 @@ public class SaveHandlerToK implements IPlayerTracker
 		data.setInteger("DEX", stats.getDexerityPoints(player));
 		data.setInteger("INT", stats.getIntelligencePoints(player));
 		data.setInteger("LUK", stats.getLuckPoints(player));
-		data.setInteger("LVL", stats.getLevel(player));
-		data.setInteger("CurrentLVL", level.getCurrentLevel(player));
-		data.setInteger("LVLPoints", level.getLevelPoints(player));
+		data.setInteger("LVL", LevelKeeper.getLevel(player));
+		data.setInteger("SP", LevelKeeper.getSP(player));
 		data.setString("Race", race.getClass(player));
 		data.setCompoundTag("Quests", QuestHandler.instance().getQuestPlayer(player));
 		player.getEntityData().setCompoundTag(player.PERSISTED_NBT_TAG, data);
@@ -99,10 +96,9 @@ public class SaveHandlerToK implements IPlayerTracker
 				stats.setDexerityPoints(player, data.getInteger("DEX"));
 				stats.setIntelligencePoints(player, data.getInteger("INT"));
 				stats.setLuckPoints(player, data.getInteger("LUK"));
-				stats.setLevel(player, data.getInteger("LVL"));
-				level.setCurrentLevel(player, data.getInteger("CurrentLVL"));
-				level.setLevelPoints(player, data.getInteger("LVLPoints"));
 				race.setClass(player, data.getString("Race"));
+				LevelKeeper.setLevel(player, data.getInteger("LVL"));
+				LevelKeeper.setSP(player, data.getInteger("SP"));
 				QuestHandler.instance().setQuestPlayer(player, data.getCompoundTag("Quests"));
 			}
 		}

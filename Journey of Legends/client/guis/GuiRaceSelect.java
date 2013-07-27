@@ -29,10 +29,10 @@ public class GuiRaceSelect extends GuiScreen
 	{
 		buttonList.clear();
 		
-        buttonList.add(new GuiButton(1, width / 2 - 20, 15, 120, 20, "Warrior"));
-        buttonList.add(new GuiButton(2, width / 2 - 20, 35, 120, 20, "Hunter"));
-        buttonList.add(new GuiButton(3, width / 2 - 20, 55, 120, 20, "Mage"));
-        buttonList.add(new GuiButton(4, width / 2 - 20, 75, 120, 20, "Thief"));
+        buttonList.add(new GuiButtonShop(this, 1, width / 2 - 20, 15, 120, 20, "Warrior"));
+        buttonList.add(new GuiButtonShop(this, 2, width / 2 - 20, 35, 120, 20, "Hunter"));
+        buttonList.add(new GuiButtonShop(this, 3, width / 2 - 20, 55, 120, 20, "Mage"));
+        buttonList.add(new GuiButtonShop(this, 4, width / 2 - 20, 75, 120, 20, "Thief"));
         
         if(buttonSelected > 0)
         {
@@ -63,6 +63,7 @@ public class GuiRaceSelect extends GuiScreen
 				race.setClass(player, "Thief");
 			
 			buttonSelected = 0;
+			mc.currentScreen = null;
 		}
 		if(guibutton.id == 6)
 			buttonSelected = 0;

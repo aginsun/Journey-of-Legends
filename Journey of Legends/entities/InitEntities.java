@@ -9,7 +9,6 @@ public class InitEntities
 	public static void Init()
 	{
 		GameRegistry.registerTileEntity(TileEntitySell.class, "TeSell");
-		GameRegistry.registerTileEntity(TileEntityKingdom.class, "TeKingdom");
 		
 		EntityRegistry.registerGlobalEntityID(EntityGuildMaster.class, "GuildMaster", 215, 255, 255);
 		EntityRegistry.registerModEntity(EntityGuildMaster.class, "GuildMaster", 215, JourneyofLegends.instance, 250, 5, false);
@@ -25,5 +24,7 @@ public class InitEntities
 		
 		EntityRegistry.registerGlobalEntityID(EntityWeaponKeeper.class, "WeaponKeeper", 219, 145, 122);
 		EntityRegistry.registerModEntity(EntityWeaponKeeper.class, "WeaponKeeper", 219, JourneyofLegends.instance, 250, 5, false);
+		
+		EntityRegistry.registerModEntity(EntityShuricken.class, "ShurickenStar", 220, JourneyofLegends.instance, 250, 1, false);
 	}
 }

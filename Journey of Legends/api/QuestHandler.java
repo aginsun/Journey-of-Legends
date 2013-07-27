@@ -1,19 +1,15 @@
 package aginsun.journey.api;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-
-import aginsun.journey.core.handlers.SaveHandlerToK;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import aginsun.journey.core.handlers.packets.PacketQuestDataClient;
+import aginsun.journey.core.handlers.packets.PacketType;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 /**
  * WIP: QuestHandler: 1 == QuestStarted, 2 == QuestFinished, 3 == QuestFinished + reward!
  * @author Aginsun
@@ -22,11 +18,10 @@ import net.minecraft.nbt.NBTTagList;
 public class QuestHandler
 {
 	private HashMap<String, NBTTagCompound> questList = new HashMap<String, NBTTagCompound>();
+	private HashMap<String, HashMap<String, Integer>> questProgress = new HashMap<String, HashMap<String, Integer>>();
 	private static QuestHandler instance = new QuestHandler();
 	
-	public QuestHandler()
-	{
-	}
+	public QuestHandler(){}
 	
 	public static QuestHandler instance()
 	{
@@ -36,18 +31,22 @@ public class QuestHandler
 	public int getQuestStatus(EntityPlayer player, String QuestName)
 	{
 		NBTTagCompound nbt = getQuestPlayer(player);
-		if(nbt != null)
-		{
-			int x = nbt.getInteger(QuestName);
-			return x;
-		}
-		return 0;
+		return nbt.getInteger(QuestName);
+	}
+	
+	public void setQuestStatus(EntityPlayer player, String questName, int questStatus)
+	{
+		NBTTagCompound nbt = getQuestPlayer(player);
+		nbt.setInteger(questName, questStatus);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketQuestDataClient(player.username, questName, questStatus)), (Player)player);
+		setQuestPlayer(player, nbt);
 	}
 	
 	public void setQuestStarted(EntityPlayer player, String quest)
 	{
 		NBTTagCompound nbt = getQuestPlayer(player);
 		nbt.setInteger(quest, 1);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketQuestDataClient(player.username, quest, 1)), (Player)player);
 		setQuestPlayer(player, nbt);
 	}
 	
@@ -55,6 +54,7 @@ public class QuestHandler
 	{
 		NBTTagCompound nbt = getQuestPlayer(player);
 		nbt.setInteger(quest, 2);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketQuestDataClient(player.username, quest, 2)), (Player)player);
 		setQuestPlayer(player, nbt);
 	}
 	
@@ -62,14 +62,13 @@ public class QuestHandler
 	{
 		NBTTagCompound nbt = getQuestPlayer(player);
 		nbt.setInteger(quest, 3);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketQuestDataClient(player.username, quest, 3)), (Player)player);
 		setQuestPlayer(player, nbt);
 	}
 	
 	public void setQuestPlayer(EntityPlayer player, NBTTagCompound nbt)
 	{
 		System.out.println("Added player: " + player.username + " to the QuestMap");
-		if(nbt == null)
-			System.out.println("nbt zero?");
 		getMap().put(player.username, nbt);
 	}
 	
@@ -93,5 +92,39 @@ public class QuestHandler
 	public HashMap<String, NBTTagCompound> getMap()
 	{
 		return questList;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void setQuestStatusClient(EntityPlayer player, String questName, int questStatus) 
+	{
+		HashMap<String, Integer> map = questProgress.get(player.username);
+		if(map == null)
+			map = new HashMap<String, Integer>();
+		map.put(questName, questStatus);
+		questProgress.put(player.username, map);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public int getQuestStatusClient(EntityPlayer player, String questName)
+	{
+		HashMap<String, Integer> map;
+		if(questProgress.containsKey(player.username))
+		{
+			map = questProgress.get(player.username);
+		}
+		else
+			map = new HashMap<String, Integer>();
+		
+		if(map.containsKey(questName))
+			return map.get(questName);
+		return 0;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public boolean isQuestActiveClient(EntityPlayer player, String questName)
+	{
+		if(getQuestStatusClient(player, questName) != 3 && getQuestStatusClient(player, questName) != 0)
+			return true;
+		return false;
 	}
 }

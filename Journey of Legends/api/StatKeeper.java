@@ -3,6 +3,10 @@ package aginsun.journey.api;
 import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import aginsun.journey.core.handlers.packets.PacketStatsClient;
+import aginsun.journey.core.handlers.packets.PacketType;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 /**
  * WIP: if you want add stats to a player
@@ -14,7 +18,6 @@ public class StatKeeper
 	public static HashMap<String, Integer> DexeterityMap = new HashMap<String, Integer>();
 	public static HashMap<String, Integer> IntelligenceMap = new HashMap<String, Integer>();
 	public static HashMap<String, Integer> LuckMap = new HashMap<String, Integer>();
-	public static HashMap<String, Integer> LevelMap = new HashMap<String, Integer>();
 	
 	public static int getStrengthPoints(EntityPlayer player)
 	{
@@ -76,21 +79,6 @@ public class StatKeeper
 			return LuckMap.get(player.username);
 		}
 	}
-	public static int getLevel(EntityPlayer player)
-	{
-		if(!LevelMap.containsKey(player.username))
-		{
-			return 1;
-		}
-		else if(LevelMap.get(player.username) == 0)
-		{
-			return 1;
-		}
-		else
-		{
-			return LevelMap.get(player.username);
-		}
-	}
 	
 	public static void setStrengthPoints(EntityPlayer player, int amount)
 	{
@@ -108,39 +96,33 @@ public class StatKeeper
 	{
 		LuckMap.put(player.username, amount);
 	}
-	public static void setLevel(EntityPlayer player, int amount)
-	{
-		LevelMap.put(player.username, amount);
-	}
 	
 	public static void addStrengthPoints(EntityPlayer player, int amount) 
 	{
 		int i = getStrengthPoints(player);
 		i += amount;
 		setStrengthPoints(player, i);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketStatsClient(player.username, StatKeeper.getStrengthPoints(player), StatKeeper.getDexerityPoints(player), StatKeeper.getIntelligencePoints(player), StatKeeper.getLuckPoints(player))), (Player)player);
 	}
 	public static void addDexPoints(EntityPlayer player, int amount)
 	{
 		int j = getDexerityPoints(player);
 		j += amount;
 		setDexerityPoints(player, j);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketStatsClient(player.username, StatKeeper.getStrengthPoints(player), StatKeeper.getDexerityPoints(player), StatKeeper.getIntelligencePoints(player), StatKeeper.getLuckPoints(player))), (Player)player);
 	}
 	public static void addIntPoints(EntityPlayer player, int amount)
 	{
 		int j = getIntelligencePoints(player);
 		j += amount;
 		setIntelligencePoints(player, j);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketStatsClient(player.username, StatKeeper.getStrengthPoints(player), StatKeeper.getDexerityPoints(player), StatKeeper.getIntelligencePoints(player), StatKeeper.getLuckPoints(player))), (Player)player);
 	}	
 	public static void addLukPoints(EntityPlayer player, int amount)
 	{
 		int j = getLuckPoints(player);
 		j += amount;
 		setLuckPoints(player, j);
-	}	
-	public static void addLvlPoints(EntityPlayer player, int amount)
-	{
-		int j = getLevel(player);
-		j += amount;
-		setLevel(player, j);
+		PacketDispatcher.sendPacketToPlayer(PacketType.populatePacket(new PacketStatsClient(player.username, StatKeeper.getStrengthPoints(player), StatKeeper.getDexerityPoints(player), StatKeeper.getIntelligencePoints(player), StatKeeper.getLuckPoints(player))), (Player)player);
 	}
 }

@@ -3,19 +3,21 @@ package aginsun.journey.core.handlers.packets;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
-import aginsun.journey.util.Utils;
-
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import aginsun.journey.util.Utils;
 
 public enum PacketType 
 {
-	TILE(PacketTileUpdate.class),
 	GOLD(PacketGold.class),
 	EXPERIENCE(PacketExperience.class),
-	STATS(PacketStats.class),
-	LEVEL(PacketCurrentLevel.class),
-	RACE(PacketRace.class);
+	STATS(PacketStatsClient.class),
+	STATCHANGE(PacketStatChange.class),
+	RACE(PacketRace.class), 
+	QUESTDATA(PacketQuestData.class),
+	QUESTDATACLIENT(PacketQuestDataClient.class),
+	LEVEL(PacketLevel.class),
+	SOUND(PacketSound.class);
 	
 	private Class<? extends PacketJoL> clazz;
 	

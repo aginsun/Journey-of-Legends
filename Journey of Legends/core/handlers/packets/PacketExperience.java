@@ -8,8 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import aginsun.journey.api.ExperienceKeeper;
 import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class PacketExperience extends PacketJoL
 {
@@ -43,12 +41,6 @@ public class PacketExperience extends PacketJoL
 	{
 		EntityPlayer thePlayer = (EntityPlayer)player;
 		
-		setWorthy(thePlayer);	
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void setWorthy(EntityPlayer player)
-	{
-		ExperienceKeeper.setExperience(player, Experience);
+		ExperienceKeeper.setExperience(thePlayer, Experience);
 	}
 }

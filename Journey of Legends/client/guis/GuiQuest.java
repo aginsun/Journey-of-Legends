@@ -2,10 +2,12 @@ package aginsun.journey.client.guis;
 
 import java.awt.Color;
 
-import aginsun.journey.api.QuestHandler;
-import aginsun.journey.core.quests.Quest;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import aginsun.journey.core.handlers.packets.PacketQuestData;
+import aginsun.journey.core.handlers.packets.PacketType;
+import aginsun.journey.core.questsystem.Quest;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiQuest extends GuiScreen
 {
@@ -36,7 +38,7 @@ public class GuiQuest extends GuiScreen
 	{
 		if(guibutton.id == 1)
 		{
-			QuestHandler.instance().setQuestStarted(mc.thePlayer, QuestName);
+			PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketQuestData(mc.thePlayer.username, quest.getQuestName(), 1)));
 			mc.thePlayer.addChatMessage(quest.questStartLines(mc.thePlayer));
 			mc.currentScreen = null;
 		}
@@ -51,13 +53,13 @@ public class GuiQuest extends GuiScreen
 				String[] list = quest.questEndLines(mc.thePlayer).split("-");
 				for(int x = 0; x < list.length; x++)	
 					{mc.thePlayer.addChatMessage(list[x]);}
-				QuestHandler.instance().questFinishedReward(mc.thePlayer, QuestName);
+				PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketQuestData(mc.thePlayer.username, quest.getQuestName(), 3)));
 				mc.currentScreen = null;
 			}
 			else
 			{
 				mc.thePlayer.addChatMessage(quest.questEndLines(mc.thePlayer));
-				QuestHandler.instance().questFinishedReward(mc.thePlayer, QuestName);
+				PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketQuestData(mc.thePlayer.username, quest.getQuestName(), 3)));
 				mc.currentScreen = null;
 			}
 		}
@@ -70,8 +72,22 @@ public class GuiQuest extends GuiScreen
 	
 	public void drawScreen(int i, int k, float f)
 	{
-		drawString(fontRenderer, "Quest Name:", width / 2, height / 2 - 20, Color.PINK.getRGB());
-		drawString(fontRenderer, QuestName, width / 2, height / 2, Color.pink.getRGB());
+		drawDefaultBackground();
+		drawString(fontRenderer, "Quest Name: " + quest.getQuestName(), width / 2 - mc.fontRenderer.getStringWidth("Quest Name: " + quest.getQuestName()) / 2, height / 2 - 20, Color.RED.getRGB());
+		drawString(fontRenderer, "Quest Discription", width / 2 - mc.fontRenderer.getStringWidth("Quest Discription") / 2, height / 2 + 30, Color.MAGENTA.getRGB());
+		System.out.println(quest.getQuestName());
+		String[] questString = quest.getQuestDiscription();
+		if(questString.length >= 1)
+		{
+			drawString(fontRenderer, questString[0], width / 2 - mc.fontRenderer.getStringWidth(questString[0]) / 2, height / 2 + 40, Color.RED.getRGB());
+			if(questString.length >= 2)
+			{
+				drawString(fontRenderer, questString[1], width / 2 - mc.fontRenderer.getStringWidth(questString[1]) / 2, height / 2 + 50, Color.RED.getRGB());
+				if(questString.length >= 3)
+					drawString(fontRenderer, questString[2], width / 2 - mc.fontRenderer.getStringWidth(questString[2]) / 2, height / 2 + 60, Color.RED.getRGB());
+			}
+
+		}
 		super.drawScreen(i, k, f);
 	}
 }

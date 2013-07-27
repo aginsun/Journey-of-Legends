@@ -14,7 +14,7 @@ import aginsun.journey.core.handlers.PacketHandler;
 import aginsun.journey.core.handlers.PickupHandler;
 import aginsun.journey.core.handlers.SaveHandlerToK;
 import aginsun.journey.core.handlers.commands.CommandJourneyofLegends;
-import aginsun.journey.core.quests.QuestRegistry;
+import aginsun.journey.core.questsystem.QuestRegistry;
 import aginsun.journey.entities.InitEntities;
 import aginsun.journey.items.InitItems;
 import aginsun.journey.util.Utils;
@@ -56,9 +56,7 @@ public class JourneyofLegends
 	
 	@Init
 	public void load(FMLInitializationEvent event)
-	{
-		proxy.RegisterRenderers();
-				
+	{			
 		InitEntities.Init();
 		
 		InitBlocks.Init();
@@ -75,12 +73,16 @@ public class JourneyofLegends
 		
 		MinecraftForge.EVENT_BUS.register(new LivingDeathEventHandler());
 		
+		proxy.RegisterRenderers();
+		
 		WorldgenChests.Init();
 	}
 	
 	@PostInit
 	public void PostInit(FMLPostInitializationEvent event)
 	{
+		proxy.registerPostInit();
+		
 		GoldValues.setGoldValues();
 				
 		QuestRegistry.InitQuests();

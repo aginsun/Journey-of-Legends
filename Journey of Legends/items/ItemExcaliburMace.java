@@ -3,18 +3,15 @@ package aginsun.journey.items;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.EnumHelper;
+import aginsun.journey.api.LevelKeeper;
 import aginsun.journey.api.StatKeeper;
 import aginsun.journey.core.handlers.RaceKeeper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemExcaliburMace extends ItemSword
+public class ItemExcaliburMace extends ItemJourneySword
 {
 	private EntityPlayer player;
 	private StatKeeper stats;
@@ -23,28 +20,20 @@ public class ItemExcaliburMace extends ItemSword
 	
 	public ItemExcaliburMace(int par1) 
 	{
-		super(par1, EnumToolMaterial.EMERALD);
+		super(par1, "Ex1", 2000, 5, new String[]{"Warrior", "Mage"}, 30);
 		this.maxStackSize = 1;
 		this.weaponDamage = 5;
 		this.setMaxDamage(-1);
 		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
     
-    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
-    {
-    	if(stats.getLevel(player) >= 30 && (RaceKeeper.getClass(player).equals("Warrior") || RaceKeeper.getClass(player).equals("Mage")))
-    		return false;
-    	else
-    		return true;
-    }
-    
     public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4) 
     {
     	list.add(1, "Level Required: 30");
     	list.add(2, "Class Required: Warrior/Mage");
-    	if(RaceKeeper.getClass(player).equals("Warrior") && stats.getLevel(player) >= 30)
+    	if(RaceKeeper.getClass(player).equals("Warrior") && LevelKeeper.getLevel(player) >= 30)
     		list.add(3, "Damage Dealt: " + ((StatKeeper.getStrengthPoints(player) / 4) + weaponDamage));
-    	else if(RaceKeeper.getClass(player).equals("Mage") && stats.getLevel(player) >= 30)
+    	else if(RaceKeeper.getClass(player).equals("Mage") && LevelKeeper.getLevel(player) >= 30)
     		list.add(3, "Damage Dealt: " + ((StatKeeper.getIntelligencePoints(player) / 4) + weaponDamage));
     	else
     		list.add(3, "Damage Dealt: 0");

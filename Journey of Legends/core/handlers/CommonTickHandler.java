@@ -3,18 +3,18 @@ package aginsun.journey.core.handlers;
 import java.util.EnumSet;
 
 import net.minecraft.world.World;
-import aginsun.journey.core.ConfigFileJoL;
+import aginsun.journey.worldgen.WorldGenStart;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
 public class CommonTickHandler implements ITickHandler
 {
+	public boolean buildingsCreated;
 	private World world;
-	boolean dataRead;
-	public ConfigFileJoL x;
-	public WorldSaveToKHandler td;
-	public static int CreateGuild;
-	public static boolean ks;
+	private boolean dataRead;
+	public WorldSaveToKHandler saveHandler;
+
 	
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {}
@@ -40,6 +40,18 @@ public class CommonTickHandler implements ITickHandler
 	    
    public void onTickInGame()
    {
-
+	   if(!dataRead)
+	   {
+		   saveHandler.readData();
+		   dataRead = true;
+	   }
+	   if(!buildingsCreated && dataRead)
+	   {
+		   world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
+		   WorldGenStart worldgen = new WorldGenStart(world, world.getSpawnPoint().posX, world.getSpawnPoint().posY, world.getSpawnPoint().posZ);
+		   buildingsCreated = worldgen.createPart1();
+		   saveHandler.writeData();
+		   buildingsCreated = true;
+	   }
    }
 }

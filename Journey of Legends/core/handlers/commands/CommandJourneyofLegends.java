@@ -1,18 +1,16 @@
 package aginsun.journey.core.handlers.commands;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import aginsun.journey.api.ExperienceKeeper;
 import aginsun.journey.api.GoldKeeper;
 import aginsun.journey.api.StatKeeper;
-import aginsun.journey.client.guis.GuiQuestActive;
-import aginsun.journey.client.guis.GuiRaceSelect;
-import aginsun.journey.core.handlers.CommonTickHandler;
-import aginsun.journey.core.handlers.RaceKeeper;
-import aginsun.journey.entities.TileEntityKingdom;
+import aginsun.journey.party.PartyHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class CommandJourneyofLegends extends CommandBase
@@ -20,6 +18,12 @@ public class CommandJourneyofLegends extends CommandBase
 	private GoldKeeper gold;
 	private StatKeeper stats;
 	private World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
+	
+	@Override
+    public int getRequiredPermissionLevel()
+    {
+        return 1;
+    }
 	
 	@Override
 	public String getCommandName() 
@@ -30,71 +34,72 @@ public class CommandJourneyofLegends extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) 
 	{
-		if(args[0].matches("stats"))
+		if(!(sender instanceof EntityPlayer))
 		{
-			if(args[1].matches("Worthy"))
-			{
-				if(args.length >= 3)
-				{
-					int i = parseIntWithMin(sender, args[2], 1);
-					ExperienceKeeper.setExperience((EntityPlayer)sender, i);
-				}
-			}
-			if(args[1].matches("Strength"))
-			{
-				if(args.length >= 3)
-				{
-					int i = parseIntWithMin(sender, args[2], 1);
-					stats.setStrengthPoints((EntityPlayer)sender, i);
-				}
-			}
-			if(args[1].matches("Dexerity"))
-			{
-				if(args.length >= 3)
-				{
-					int i = parseIntWithMin(sender, args[2], 1);
-					stats.setDexerityPoints((EntityPlayer)sender, i);
-				}
-			}
-			if(args[1].matches("Intelligence"))
-			{
-				if(args.length >= 3)
-				{
-					int i = parseIntWithMin(sender, args[2], 1);
-					stats.setIntelligencePoints((EntityPlayer)sender, i);
-				}
-			}
+			System.out.println("[Journey of Legends] Command only executeable by players");
+			return;
 		}
 		
-		if(args[0].matches("TileEntityCheck"))
+		if(args[0].matches("party"))
 		{
-			int x = parseInt(sender, args[1]);
-			int y = parseInt(sender, args[2]);
-			int z = parseInt(sender, args[3]);
-			TileEntityKingdom tileentity = (TileEntityKingdom)world.getBlockTileEntity(x, y, z);
-			int BlockID = parseIntWithMin(sender, args[4], 1);
-			int MetaData = 0;
-			if(args.length >= 5)
+			if(args[1].matches("create"))
 			{
-				MetaData = parseInt(sender, args[5]);
+				if(args.length >= 4)
+				{
+					String partyName = args[2];
+					String color = args[3];
+					Color partyColor;
+					if(color.equals("red"))
+						partyColor = Color.RED;
+					else if(color.equals("blue"))
+						partyColor = Color.BLUE;
+					else if(color.equals("green"))
+						partyColor = Color.GREEN;
+					else
+						partyColor = Color.BLACK;
+					List<String> usernames = new ArrayList<String>();
+					usernames.add(sender.getCommandSenderName());
+					PartyHandler.getInstance().makeParty(partyName, usernames, partyColor, sender.getCommandSenderName());
+				}
+				else
+					sender.sendChatToPlayer("Please enter the partyname.");
 			}
-			ItemStack item = new ItemStack(BlockID, 1, MetaData);
-			int LALA = tileentity.nbttagcompound.getInteger(item.getItem().getUnlocalizedName());
-			sender.sendChatToPlayer(new StringBuilder().append(LALA).toString());
-		}
-		
-		if(args[0].matches("Reset"))
-		{
-			RaceKeeper.Race.clear();
-		}
-		if(args[0].matches("guis"))
-		{
-			if(args[1].matches("Race"))
+			else if(args[1].matches("disband"))
 			{
-				FMLCommonHandler.instance().showGuiScreen(new GuiRaceSelect());
+				if(PartyHandler.getInstance().isPlayerInParty(sender.getCommandSenderName()))
+				{
+					if(args.length >= 3)
+						PartyHandler.getInstance().disbandParty(args[2]);
+					else
+						sender.sendChatToPlayer("Please enter the partyname.");
+				}
+				else
+					sender.sendChatToPlayer("You have to be in a party to disband it.");
 			}
-			if(args[1].matches("things"))
-				FMLCommonHandler.instance().showGuiScreen(new GuiQuestActive((EntityPlayer) sender));
+			else if(args[1].matches("addPlayer"))
+			{
+				if(args.length >= 4)
+					PartyHandler.getInstance().addPlayerToParty(args[3], args[2]);
+				else
+					sender.sendChatToPlayer("Please enter the partyname and/or username");
+			}
+			else if(args[1].matches("removePlayer"))
+			{
+				if(args.length >= 4)
+					PartyHandler.getInstance().removePlayerFromParty(args[3], args[2]);
+				else
+					sender.sendChatToPlayer("Please enter the partyname and/or username");
+			}
+		}
+		else if(args[0].matches("help"))
+		{
+			sender.sendChatToPlayer("================================");
+			sender.sendChatToPlayer("Journey of Legends Command help");
+			sender.sendChatToPlayer("================================");
+			sender.sendChatToPlayer("/JourneyofLegends create <partyName> <color>");
+			sender.sendChatToPlayer("/JourneyofLegends disband <partyName>");
+			sender.sendChatToPlayer("/JourneyofLegends addPlayer <partyName> <usernamePlayer>");
+			sender.sendChatToPlayer("/JourneyofLegends removePlayer <partyName> <usernamePlayer>");
 		}
 	}
 }

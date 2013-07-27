@@ -8,8 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import aginsun.journey.api.GoldKeeper;
 import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class PacketGold extends PacketJoL
 {
@@ -45,13 +43,6 @@ public class PacketGold extends PacketJoL
 	{
 		EntityPlayer thePlayer = (EntityPlayer)player;
 		
-		setValues(thePlayer);
-		
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void setValues(EntityPlayer player)
-	{
-		GoldKeeper.setGold(player, GoldValue);
+		GoldKeeper.setGold(thePlayer, GoldValue);	
 	}
 }

@@ -20,6 +20,7 @@ public class GuiButtonShop extends GuiButton
     private Integer ClassSelected;
     private String name;
     protected int width;
+    private String race;
     protected int height;
     public int xPosition;
     public int yPosition;
@@ -49,13 +50,12 @@ public class GuiButtonShop extends GuiButton
         displayString = s;
     }
 
-    /*public GuiButtonShop(Item item1, GuiStockList guistocklist, int i, int j, int k, int l, int i1, String s)
+    public GuiButtonShop(GuiRaceSelect gui, int i, int j, int k, int l, int i1, String s)
     {
         super(i, j, k, 200, 20, s);
         isSword = false;
         selected = 0;
-        gui2 = guistocklist;
-        item = item1;
+        gui1 = gui;
         width = 200;
         height = 20;
         enabled = true;
@@ -67,7 +67,7 @@ public class GuiButtonShop extends GuiButton
         height = i1;
         displayString = s;
     }
-
+    /*
     public GuiButtonShop(int i, GuiTOK guitok, int j, int k, int l, int i1, int j1, String s, boolean flag)
     {
         super(j, k, l, 200, 20, s);
@@ -144,6 +144,19 @@ public class GuiButtonShop extends GuiButton
                 k = 1;
             }
         }
+        
+        if(gui1 != null)
+        {
+        	if(gui1.buttonSelected == id)
+        	{
+        		k = 2;
+        	}
+        	else
+        	{
+        		k = 1;
+        	}
+        }
+        
         /*
         if (gui3 != null)
         {

@@ -3,13 +3,14 @@ package aginsun.journey.entities;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import aginsun.journey.api.ExperienceKeeper;
 import aginsun.journey.api.QuestHandler;
 import aginsun.journey.client.guis.GuiQuest;
-import aginsun.journey.core.quests.Quest;
-import aginsun.journey.core.quests.QuestGuildMaster;
-import aginsun.journey.core.quests.QuestRegistry;
+import aginsun.journey.core.handlers.packets.PacketQuestData;
+import aginsun.journey.core.handlers.packets.PacketType;
+import aginsun.journey.core.questsystem.Quest;
+import aginsun.journey.core.questsystem.QuestRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -66,13 +67,23 @@ public class EntityGuildMaster extends EntityCreature
 	{
 		if(canInteractWith(player))
 		{
-			if(QuestHandler.instance().getQuestStatus(player, "The beginning of a great adventure") != 3)
+			if(QuestHandler.instance().isQuestActiveClient(player, QuestRegistry.getQuest(4).setPlayer(player).getQuestName()))
+			{
+				quest = QuestRegistry.getQuest(4).setPlayer(player);
+				PacketDispatcher.sendPacketToServer(PacketType.populatePacket(new PacketQuestData(player.username, quest.getQuestName(), 2)));
+				FMLCommonHandler.instance().showGuiScreen(new GuiQuest(quest.getQuestName(), quest, true));
+				return true;
+			}
+			if(QuestHandler.instance().getQuestStatus(player, "The beginning of a great adventure")  != 3)
 				quest = QuestRegistry.getQuest(1).setPlayer(player);
+			else if(QuestHandler.instance().getQuestStatus(player, "Hunting")  != 3)
+				quest = QuestRegistry.getQuest(3).setPlayer(player);
 			else if(QuestHandler.instance().getQuestStatus(player, "Leveling") != 3)
 				quest = QuestRegistry.getQuest(2).setPlayer(player);
-			else if(QuestHandler.instance().getQuestStatus(player, "") != 3)
-				quest = QuestRegistry.getQuest(3).setPlayer(player);
-			quest.update();
+			else if(QuestHandler.instance().getQuestStatus(player, "Progression")  != 3)
+				quest = QuestRegistry.getQuest(5).setPlayer(player);
+			if(quest != null)
+				quest.update();
 		}
 		return true;
 	}

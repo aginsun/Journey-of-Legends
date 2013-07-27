@@ -42,7 +42,8 @@ public abstract class Quest
 	
 	public void update()
 	{
-		int QuestStatus = QuestHandler.instance().getQuestStatus(player, getQuestName());
+		int QuestStatus = QuestHandler.instance().getQuestStatusClient(player, getQuestName());
+		System.out.println("QuestStatus: " + QuestStatus);
 		QuestType questtype = getQuestType();
 		
 		if(QuestStatus == 0 && (questtype == QuestType.HUNTING || questtype == QuestType.STUFF))
@@ -55,8 +56,7 @@ public abstract class Quest
 		}
 		if(QuestStatus == 1)
 		{
-			if(!player.worldObj.isRemote)
-				player.addChatMessage(this.questProgressLine(player));
+			player.addChatMessage(this.questProgressLine(player));
 		}
 		if(QuestStatus == 2 && (questtype == QuestType.HUNTING || questtype == QuestType.STUFF))
 		{
@@ -64,8 +64,7 @@ public abstract class Quest
 		}
 		else
 		{
-			if(!player.worldObj.isRemote)
-				player.addChatMessage(this.standardLine());
+			player.addChatMessage(this.standardLine());
 		}
 	}
 	

@@ -32,11 +32,10 @@ public class ItemDebug extends Item
 	public void addInformation(ItemStack item, EntityPlayer player, List list, boolean par1)
 	{
 		list.add(1, "Current Class: " + RaceKeeper.getClass(player));
-		list.add(2, "Current Level: " + StatKeeper.getLevel(player));
-		list.add(3, "Current STR: " + StatKeeper.getStrengthPoints(player));
-		list.add(4, "Current DEX: " + StatKeeper.getDexerityPoints(player));
-		list.add(5, "Current INT: " + StatKeeper.getIntelligencePoints(player));
-		list.add(6, "Current LUK: " + StatKeeper.getLuckPoints(player));
-		list.add(7, "Current Gold: " + GoldKeeper.getGoldTotal(player));
+		list.add(2, "Current STR: " + StatKeeper.getStrengthPoints(player));
+		list.add(3, "Current DEX: " + StatKeeper.getDexerityPoints(player));
+		list.add(4, "Current INT: " + StatKeeper.getIntelligencePoints(player));
+		list.add(5, "Current LUK: " + StatKeeper.getLuckPoints(player));
+		list.add(6, "Current Gold: " + GoldKeeper.getGoldTotal(player));
 	}
 }

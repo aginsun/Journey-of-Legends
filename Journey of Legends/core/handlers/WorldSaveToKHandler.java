@@ -13,14 +13,13 @@ public class WorldSaveToKHandler
 {
 	private static World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
 	private static CommonTickHandler x;
-	public static int tdd;
 	public static File file = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation();
 	
 	public static void writeData()
 	{
 		try
 		{
-			File file = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation()).append("\\").append("KingdomModSave.dat").toString());
+			File file = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation()).append("/").append("KingdomModSave.dat").toString());
 			if(!file.exists())
 			{
 				file.createNewFile();
@@ -28,7 +27,7 @@ public class WorldSaveToKHandler
 			FileOutputStream fileoutputstream = new FileOutputStream(file);
 			NBTTagCompound nbttagcompound = new NBTTagCompound();
 			
-			nbttagcompound.setInteger("WorldGenGuild", tdd);
+			nbttagcompound.setBoolean("BuildingsCreated", x.buildingsCreated);
 
 			CompressedStreamTools.writeCompressed(nbttagcompound, fileoutputstream);
 			fileoutputstream.close();
@@ -43,7 +42,7 @@ public class WorldSaveToKHandler
 	{
 	    try
         {
-			File file = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation()).append("\\").append("KingdomModSave.dat").toString());
+			File file = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0).getChunkSaveLocation()).append("/").append("KingdomModSave.dat").toString());
         	if(!file.exists())
         	{
         		return;
@@ -52,9 +51,9 @@ public class WorldSaveToKHandler
         	FileInputStream fileinputstream = new FileInputStream(file);
         	NBTTagCompound nbt = CompressedStreamTools.readCompressed(fileinputstream);
         	
-        	if(nbt.hasKey("WorldGenGuild"))
+        	if(nbt.hasKey("BuildingsCreated"))
         	{
-        		tdd = nbt.getInteger("WorldGenGuild");
+        		x.buildingsCreated = nbt.getBoolean("BuildingsCreated");
         	}
         	
     		fileinputstream.close();

@@ -8,7 +8,7 @@ import java.io.IOException;
 import net.minecraft.network.INetworkManager;
 import cpw.mods.fml.common.network.Player;
 
-public class PacketJoL 
+public abstract class PacketJoL 
 {
 	public PacketType packetType;
 	public boolean isChunkDataPacket;
@@ -44,11 +44,11 @@ public class PacketJoL
         }
     }
 	
-	public void readData(DataInputStream data) throws IOException{}
+	public abstract void readData(DataInputStream data) throws IOException;
 	
-	public void writeData(DataOutputStream dos) throws IOException{}
+	public abstract void writeData(DataOutputStream dos) throws IOException;
 	
-	public void execute(INetworkManager network, Player player){}
+	public abstract void execute(INetworkManager network, Player player);
 	
 	public void setKey(int key){}
 }

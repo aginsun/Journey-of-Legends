@@ -7,10 +7,7 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import aginsun.journey.api.QuestHandler;
-import aginsun.journey.core.handlers.RaceKeeper;
 import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class PacketQuestData extends PacketJoL
 {

@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import aginsun.journey.blocks.InitBlocks;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class WorldGenGuild

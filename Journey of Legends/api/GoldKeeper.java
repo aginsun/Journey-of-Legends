@@ -21,6 +21,15 @@ public class GoldKeeper
 		return GoldValues.get(player.username);
 	}
 	
+	public static int getGoldTotal(String username)
+	{
+		if(!GoldValues.containsKey(username))
+		{
+			return 0;
+		}
+		return GoldValues.get(username);
+	}
+	
 	public static void setGold(EntityPlayer player, int GoldValue)
 	{
 		GoldValues.put(player.username, GoldValue);
@@ -38,6 +47,12 @@ public class GoldKeeper
 		setGold(player, i);
 	}
 	
+	public static void addGold(String username, int amount)
+	{
+		int i = GoldValues.get(username);
+		i += amount;
+		GoldValues.put(username, i);
+	}
 	
 	/**
 	 * Add a specific amount of gold

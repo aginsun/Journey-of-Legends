@@ -1,7 +1,7 @@
 package aginsun.journey.items;
 
-import aginsun.journey.util.Utils;
 import net.minecraft.item.Item;
+import aginsun.journey.util.Utils;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class InitItems 
@@ -23,14 +23,21 @@ public class InitItems
 	public static Item ItemDebug;
 	public static int ItemDebugID;
 	
+	public static Item itemShuricken;
+	public static int itemShurickenID;
+	
+	public static Item itemRedClaw;
+	public static int itemRedClawID;
+	
 	public static void Init()
 	{
 		ItemCoins = new ItemCoins(ItemCoinsID).setUnlocalizedName(ModID+":"+"Coins");
-		ItemExcalibur = new ItemExcaliburSword(ItemExcaliburID).setUnlocalizedName(ModID+":"+"ExcaliburSword");
+		ItemExcalibur = new ItemExcaliburSword(ItemExcaliburID).setUnlocalizedName(ModID+":"+"Sword15");
 		ItemAgBlade = new ItemAgBlade(ItemAgBladeID).setUnlocalizedName(ModID+":"+"AginsunsBlade");
 		ItemExcaliburMace = new ItemExcaliburMace(ItemExcaliburMaceID).setUnlocalizedName(ModID+":"+"ExcaliburMace");
 		ItemDebug = new ItemDebug(ItemDebugID).setUnlocalizedName(ModID+":"+"DebugToK");
-		
+		itemRedClaw = new ItemRedClaw(itemRedClawID).setUnlocalizedName(ModID+":redClaw");
+		itemShuricken = new ItemShuricken(itemShurickenID).setUnlocalizedName(ModID+":shurickenStar");
 		languageRegisterers();
 	}
 	
@@ -41,5 +48,7 @@ public class InitItems
 		LanguageRegistry.addName(ItemAgBlade, "Aginsuns Blade");
 		LanguageRegistry.addName(ItemExcaliburMace, "Excalibur Mace");
 		LanguageRegistry.addName(ItemDebug, "Debug Tool ToK2");
+		LanguageRegistry.addName(itemRedClaw, "Red Claw");
+		LanguageRegistry.addName(itemShuricken, "Shuricken Star");
 	}
 }

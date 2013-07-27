@@ -24,8 +24,9 @@ public class GoldValues
 	public static void setGoldValues()
 	{
 		goldValues.clear();
-		InputStream input = JourneyofLegends.class.getResourceAsStream("/mods/TaleOfKingdoms/GoldValues.txt");
-		try{
+		InputStream input = JourneyofLegends.class.getResourceAsStream("/mods/JourneyOfLegends/GoldValues.txt");
+		try
+		{
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));
 			String gold = null;
 			while((gold = bufferedReader.readLine()) != null)
@@ -35,7 +36,7 @@ public class GoldValues
 				goldValues.put(values[0], Integer.parseInt(values[1]));
 				System.out.printf("Set %s with goldvalue %s \n", values[0], values[1]);
 			}
-		}catch(Exception e){}
+		}catch(Exception e){ e.printStackTrace();}
 	}
 	
 	public static int getGoldValue(String s)

@@ -7,7 +7,9 @@ import net.minecraft.item.ItemSword;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import aginsun.journey.api.StatKeeper;
+import aginsun.journey.entities.EntityShuricken;
 import aginsun.journey.items.ItemClaw;
+import aginsun.journey.items.ItemExcaliburMace;
 import aginsun.journey.items.ItemWand;
 
 public class LivingAttackEventHandler 
@@ -43,6 +45,10 @@ public class LivingAttackEventHandler
 					{
 						event.ammount += Math.round(stats.getIntelligencePoints(player) / 4);
 					}
+					else if((player.inventory.getCurrentItem().getItem() instanceof ItemExcaliburMace))
+					{
+						event.ammount += Math.round(stats.getIntelligencePoints(player) / 4);
+					}
 				}
 				if(race.getClass(player).equals("Thief"))
 				{
@@ -68,5 +74,18 @@ public class LivingAttackEventHandler
                 }
             }
         }
+		
+		if(event.source.getSourceOfDamage() instanceof EntityShuricken)
+		{
+			if(((EntityShuricken) event.source.getSourceOfDamage()).getThrower() != null)
+			{
+				if(((EntityShuricken) event.source.getSourceOfDamage()).getThrower() instanceof EntityPlayer)
+				{
+					EntityPlayer player = (EntityPlayer) ((EntityShuricken) event.source.getSourceOfDamage()).getThrower();
+					if(race.getClass(player).equals("Thief"))
+						event.ammount += Math.round(StatKeeper.getLuckPoints(player) / 8);
+				}
+			}
+		}
 	}
 }
