@@ -1,0 +1,19 @@
+[
+{
+  "modid": "JourneyOfLegends",
+  "name": "Journey of Legends: The Start",
+  "description": "",
+  "version": "0.0.1A",
+  "credits": "Vazkii",
+  "logoFile": "",
+  "mcversion": "1.5.2",
+  "url": "",
+  "updateUrl": "",
+  "authors": [ "Aginsun" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]
