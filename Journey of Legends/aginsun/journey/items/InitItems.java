@@ -31,13 +31,13 @@ public class InitItems
 	
 	public static void Init()
 	{
-		ItemCoins = new ItemCoins(ItemCoinsID).setUnlocalizedName(ModID+":"+"Coins");
-		ItemExcalibur = new ItemExcaliburSword(ItemExcaliburID).setUnlocalizedName(ModID+":"+"Sword15");
-		ItemAgBlade = new ItemAgBlade(ItemAgBladeID).setUnlocalizedName(ModID+":"+"AginsunsBlade");
-		ItemExcaliburMace = new ItemExcaliburMace(ItemExcaliburMaceID).setUnlocalizedName(ModID+":"+"ExcaliburMace");
-		ItemDebug = new ItemDebug(ItemDebugID).setUnlocalizedName(ModID+":"+"DebugToK");
-		itemRedClaw = new ItemRedClaw(itemRedClawID).setUnlocalizedName(ModID+":redClaw");
-		itemShuricken = new ItemShuricken(itemShurickenID).setUnlocalizedName(ModID+":shurickenStar");
+		ItemCoins = new ItemCoins(ItemCoinsID).setUnlocalizedName("Coins").func_111206_d(ModID + ":coins");
+		ItemExcalibur = new ItemExcaliburSword(ItemExcaliburID).setUnlocalizedName("Excalibur").func_111206_d(ModID+":"+"Sword15");
+		ItemAgBlade = new ItemAgBlade(ItemAgBladeID).setUnlocalizedName("AgBlade").func_111206_d(ModID+":"+"AginsunsBlade");
+		ItemExcaliburMace = new ItemExcaliburMace(ItemExcaliburMaceID).setUnlocalizedName("ExMace").func_111206_d(ModID+":"+"ExcaliburMace");
+		ItemDebug = new ItemDebug(ItemDebugID).setUnlocalizedName("Debug").func_111206_d(ModID+":"+"DebugToK");
+		itemRedClaw = new ItemRedClaw(itemRedClawID).setUnlocalizedName("RedClaw").func_111206_d(ModID+":redClaw");
+		itemShuricken = new ItemShuricken(itemShurickenID).setUnlocalizedName("shurickenStar").func_111206_d(ModID+":shurickenStar");
 		languageRegisterers();
 	}
 	

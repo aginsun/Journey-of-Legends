@@ -24,7 +24,7 @@ public class GoldValues
 	public static void setGoldValues()
 	{
 		goldValues.clear();
-		InputStream input = JourneyofLegends.class.getResourceAsStream("/mods/JourneyOfLegends/GoldValues.txt");
+		InputStream input = JourneyofLegends.class.getResourceAsStream("/assets/journeyoflegends/textures/utils/GoldValues.txt");
 		try
 		{
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));

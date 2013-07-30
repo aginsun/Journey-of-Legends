@@ -41,6 +41,6 @@ public class BlockSell extends BlockContainer
     @Override
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("MineStory:BlockSell");
+        this.blockIcon = par1IconRegister.registerIcon("journeyoflegends:SellBlock");
     }
 }
