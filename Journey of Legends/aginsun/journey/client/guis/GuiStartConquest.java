@@ -4,10 +4,10 @@ import java.awt.Color;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import aginsun.journey.core.handlers.packets.PacketQuestData;
-import aginsun.journey.core.handlers.packets.PacketType;
-import aginsun.journey.core.questsystem.Quest;
-import aginsun.journey.core.questsystem.QuestRegistry;
+import aginsun.journey.universal.handlers.QuestRegistry;
+import aginsun.journey.universal.packets.PacketQuestData;
+import aginsun.journey.universal.packets.PacketType;
+import aginsun.journey.universal.utils.Quest;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiStartConquest extends GuiScreen

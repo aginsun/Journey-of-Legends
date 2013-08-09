@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import aginsun.journey.api.QuestHandler;
-import aginsun.journey.core.questsystem.Quest;
-import aginsun.journey.core.questsystem.QuestRegistry;
+import aginsun.journey.server.api.QuestHandler;
+import aginsun.journey.universal.handlers.QuestRegistry;
+import aginsun.journey.universal.utils.Quest;
 
 
 

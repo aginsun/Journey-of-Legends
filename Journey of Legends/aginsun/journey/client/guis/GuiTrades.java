@@ -2,16 +2,17 @@ package aginsun.journey.client.guis;
 
 import java.util.ArrayList;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import aginsun.journey.api.GoldKeeper;
-import aginsun.journey.trading.Trade;
-import aginsun.journey.trading.TradingHandler;
-import aginsun.journey.trading.Trade.EnumType;
+
+import org.lwjgl.opengl.GL11;
+
+import aginsun.journey.server.api.GoldKeeper;
+import aginsun.journey.server.handlers.TradingHandler;
+import aginsun.journey.universal.utils.Trade;
+import aginsun.journey.universal.utils.Trade.EnumType;
 
 public class GuiTrades extends GuiScreen
 {

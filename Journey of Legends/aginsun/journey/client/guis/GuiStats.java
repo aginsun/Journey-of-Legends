@@ -7,12 +7,12 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import aginsun.journey.api.LevelKeeper;
-import aginsun.journey.api.QuestHandler;
-import aginsun.journey.api.StatKeeper;
-import aginsun.journey.core.handlers.packets.PacketQuestData;
-import aginsun.journey.core.handlers.packets.PacketStatChange;
-import aginsun.journey.core.handlers.packets.PacketType;
+import aginsun.journey.server.api.LevelKeeper;
+import aginsun.journey.server.api.QuestHandler;
+import aginsun.journey.server.api.StatKeeper;
+import aginsun.journey.universal.packets.PacketQuestData;
+import aginsun.journey.universal.packets.PacketStatChange;
+import aginsun.journey.universal.packets.PacketType;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 

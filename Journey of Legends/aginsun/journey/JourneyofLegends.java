@@ -2,31 +2,26 @@ package aginsun.journey;
 
 import net.minecraft.command.CommandHandler;
 import net.minecraftforge.common.MinecraftForge;
-import aginsun.journey.blocks.InitBlocks;
-import aginsun.journey.core.CommonProxy;
-import aginsun.journey.core.ConfigFileJoL;
-import aginsun.journey.core.handlers.CommonTickHandler;
-import aginsun.journey.core.handlers.EntityLivingHandler;
-import aginsun.journey.core.handlers.GoldValues;
-import aginsun.journey.core.handlers.LivingAttackEventHandler;
-import aginsun.journey.core.handlers.LivingDeathEventHandler;
-import aginsun.journey.core.handlers.PacketHandler;
-import aginsun.journey.core.handlers.PickupHandler;
-import aginsun.journey.core.handlers.SaveHandlerToK;
-import aginsun.journey.core.handlers.commands.CommandJourneyofLegends;
-import aginsun.journey.core.questsystem.QuestRegistry;
-import aginsun.journey.entities.InitEntities;
-import aginsun.journey.items.InitItems;
-import aginsun.journey.util.Utils;
-import aginsun.journey.worldgen.WorldgenChests;
+import aginsun.journey.server.CommonProxy;
+import aginsun.journey.server.handlers.CommonTickHandler;
+import aginsun.journey.server.handlers.SaveHandler;
+import aginsun.journey.universal.ConfigFileJoL;
+import aginsun.journey.universal.blocks.InitBlocks;
+import aginsun.journey.universal.entities.InitEntities;
+import aginsun.journey.universal.handlers.CommandJoLHandler;
+import aginsun.journey.universal.handlers.EntityLivingHandler;
+import aginsun.journey.universal.handlers.GoldValueHandler;
+import aginsun.journey.universal.handlers.LivingAttackEventHandler;
+import aginsun.journey.universal.handlers.LivingDeathEventHandler;
+import aginsun.journey.universal.handlers.PacketHandler;
+import aginsun.journey.universal.handlers.PickupHandler;
+import aginsun.journey.universal.handlers.QuestRegistry;
+import aginsun.journey.universal.items.InitItems;
+import aginsun.journey.universal.utils.Utils;
+import aginsun.journey.universal.worldgen.WorldgenChests;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarted;
-import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -84,7 +79,7 @@ public class JourneyofLegends
 	{
 		proxy.registerPostInit();
 		
-		GoldValues.setGoldValues();
+		GoldValueHandler.setGoldValues();
 				
 		QuestRegistry.InitQuests();
 	}
@@ -93,13 +88,13 @@ public class JourneyofLegends
 	public void serverStarting(FMLServerStartingEvent event)
 	{		
 		CommandHandler commandManager = (CommandHandler)event.getServer().getCommandManager();
-		commandManager.registerCommand(new CommandJourneyofLegends());
+		commandManager.registerCommand(new CommandJoLHandler());
 	}
 	
 	@EventHandler
 	public void serverStarted(FMLServerStartedEvent event)
 	{
-		GameRegistry.registerPlayerTracker(new SaveHandlerToK());
+		GameRegistry.registerPlayerTracker(new SaveHandler());
 		GameRegistry.registerPickupHandler(new PickupHandler());
 	}
 }

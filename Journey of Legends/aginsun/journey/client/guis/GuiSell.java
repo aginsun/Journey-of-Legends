@@ -8,9 +8,9 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import aginsun.journey.api.GoldKeeper;
-import aginsun.journey.entities.TileEntitySell;
-import aginsun.journey.inventory.ContainerSell;
+import aginsun.journey.server.api.GoldKeeper;
+import aginsun.journey.universal.entities.TileEntitySell;
+import aginsun.journey.universal.inventory.ContainerSell;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class GuiSell extends GuiContainer

@@ -2,7 +2,7 @@ package aginsun.journey.client.guis;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import aginsun.journey.core.questsystem.Quest;
+import aginsun.journey.universal.utils.Quest;
 
 public class GuiQuestProgress extends GuiScreen 
 {
